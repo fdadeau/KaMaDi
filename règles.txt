@@ -1,5 +1,5 @@
-
-Définie les règles de jeu de la première version de ShamanDefense
+ï»¿
+DÃ©finie les rÃ¨gles de jeu de ShamanDefense
 
 ******************
 ***** Partie *****
@@ -9,28 +9,28 @@ La partie se termine :
 	-> Lorsque que le rituel du shaman est terminer -> VICTOIRE
 	
 *** Rituel ***
--> L'avancée du rituel du shaman est representer par une jauge, dès qu'elle est rempli le rituel est terminer et le joueur à gagner le niveau
--> La jauge de rituel se remplis plus ou moins vite selon le nombre de perso placés proche du shaman ( Representer sous forme d'un pintacle )
+-> L'avancÃ©e du rituel du shaman est representer par une jauge, dÃ¨s qu'elle est rempli le rituel est terminer et le joueur Ã  gagner le niveau
+-> La jauge de rituel se remplis plus ou moins vite selon le nombre de perso placÃ©s proche du shaman ( Representer sous forme d'un pintacle )
 	
 *** Ennemis ***
--> Les ennemis apparaissent à la gauche de l'écran et se deplacent directement vers la position du Shaman
--> Si un perso se trouve devant un ennemis, ils combattent jusqu'a l'un des deux soit tué, si le perso est tué l'attaquant reprend sa route vers le Shaman
--> ( A FAIRE : Codifier comportement des ennemis à distance )
+-> Les ennemis apparaissent Ã  la gauche de l'Ã©cran et se deplacent directement vers la position du Shaman
+-> Si un perso se trouve devant un ennemis, ils combattent jusqu'a l'un des deux soit tuÃ©, si le perso est tuÃ© l'attaquant reprend sa route vers le Shaman
+-> ( A FAIRE : Codifier comportement des ennemis Ã  distance )
 
 *** Actions du Joueur ***
--> Le joueur click sur un perso pour le selectionné, puis click une seconde voit pour choisir sa position
+-> Le joueur click sur un perso pour le selectionnÃ©, puis click une seconde voit pour choisir sa position
 -> 
 
 *** Affichage ***
--> Ennemis = carré rouge
--> Shaman : carré noir
--> Perso : carré bleu
--> Ennemis Distance : carré violet
--> Perso Distance : carré vert
+-> Ennemis = carrÃ© rouge
+-> Shaman : carrÃ© noir
+-> Perso : carrÃ© bleu
+-> Ennemis Distance : carrÃ© violet
+-> Perso Distance : carrÃ© vert
 
 
 *****************
-***** Idées *****
+***** IdÃ©es *****
 *****************
 -> 
 -> 
