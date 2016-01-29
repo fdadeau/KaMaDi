@@ -1,0 +1,40 @@
+﻿
+Définie les règles de jeu de ShamanDefense
+
+******************
+***** Partie *****
+******************
+La partie se termine :
+	-> Lorsque qu'un ennemis entre dans la zone critique -> DEFAITE
+	-> Lorsque que le rituel du shaman est terminer -> VICTOIRE
+	
+*** Rituel ***
+-> L'avancée du rituel du shaman est representer par une jauge, dès qu'elle est rempli le rituel est terminer et le joueur à gagner le niveau
+-> La jauge de rituel se remplis plus ou moins vite selon le nombre de perso placés proche du shaman ( Representer sous forme d'un pintacle )
+	
+*** Ennemis ***
+-> Les ennemis apparaissent à la gauche de l'écran et se deplacent directement vers la position du Shaman
+-> Si un perso se trouve devant un ennemis, ils combattent jusqu'a l'un des deux soit tué, si le perso est tué l'attaquant reprend sa route vers le Shaman
+-> ( A FAIRE : Codifier comportement des ennemis à distance )
+
+*** Actions du Joueur ***
+-> Le joueur click sur un perso pour le selectionné, puis click une seconde voit pour choisir sa position
+-> 
+
+*** Affichage ***
+-> Ennemis = carré rouge
+-> Shaman : carré noir
+-> Perso : carré bleu
+-> Ennemis Distance : carré violet
+-> Perso Distance : carré vert
+
+
+*****************
+***** Idées *****
+*****************
+-> 
+-> 
+-> 
+-> 
+-> 
+-> 
