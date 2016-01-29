@@ -2,7 +2,7 @@
  *  
  */
 
-(function () {
+//(function () {
 
     var CVS_HEIGHT;
     var CVS_WIDTH;
@@ -11,13 +11,13 @@
     
     var mouse_position = {
         x: null,
-        y: null,
-        raz: function () { this.x = null && this.y = null }
+        y: null
     };
+    mouse_position.raz = function () { this.x = null; this.y = null; };
     
     var game;
 
-    init = function() {
+    var init = function() {
 
         cvs = document.getElementById("cvs");
         cvs.onclick = captureMouseClick;
@@ -77,4 +77,4 @@
 
     };
 
-})();
+//})();

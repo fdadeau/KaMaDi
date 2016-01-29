@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 var Game = (function () {
     
     function Game(context) {
@@ -28,7 +28,7 @@ var Game = (function () {
         
     };
     
-    Game.prototype.update = function (mousePosition) {
+    Game.prototype.update = function (time, mousePosition) {
         if (mousePosition.x !== null) {
             console.log(mousePosition);
             mousePosition.raz();
