@@ -10,7 +10,7 @@ function Ennemy(_game, _x, _y) {
     this.width = 20;
     this.height = 20;
     
-    this.life = game.gameRules.ennemies.life.get();
+    this.life = this.game.gameRules.ennemies.life.get();
 
 }
 
