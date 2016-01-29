@@ -5,7 +5,8 @@ var Application = function () {
         CVS_WIDTH,
         cvs,
         ctx,
-        game;
+        game,
+        gameTime;
 
     this.mouse_position = {
             x: null,
@@ -20,6 +21,8 @@ var Application = function () {
         ctx = cvs.getContext("2d");
         CVS_HEIGHT = cvs.height = window.innerHeight - 10;
         CVS_WIDTH = cvs.width = window.innerWidth - 10;
+
+        gameTime = new GameTime();
 
         game = new Game(ctx);
         game.init().start();
@@ -37,15 +40,15 @@ var Application = function () {
     })();
 
     this.boucleDeJeu = function() {
-        var currentDate = Date.now();
         requestAnimFrame(this.boucleDeJeu.bind(this));
-        this.update(currentDate);
+        this.update();
         this.render();
     };
 
 
-    this.update = function(d) { 
-        game.update(d, this.mouse_position);
+    this.update = function() { 
+        gameTime.update();
+        game.update(gameTime, this.mouse_position);
     };
 
     this.render = function() {

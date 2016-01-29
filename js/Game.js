@@ -31,6 +31,7 @@ var Game = (function () {
     Game.prototype.update = function (time, mousePosition) {
         if (mousePosition.x !== null) {
             console.log(mousePosition);
+            console.log(time);
             mousePosition.raz();
         }
     };
