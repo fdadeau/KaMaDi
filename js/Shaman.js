@@ -24,19 +24,15 @@ function Shaman(_g) {
         lastUpdate = 0;
     }
     
-    var lastUpdate = 0;
     // Mise à jour du shaman
-    this.update = function(d) {
+    this.update = function(time) {
         if (game.allCharactersInPosition()) {
-            if (lastUpdate > 0) {
-                currentLoadingTime += d - lastUpdate;
-                if (currentLoadingTime >= loadingTime) {
-                    game.endLevel();
-                    this.reset();
-                }
+            currentLoadingTime += time.tick;
+            if (currentLoadingTime >= loadingTime) {
+                game.endLevel();
+                this.reset();
             }
         }
-        lastUpdate = d;
     }
     
     // Affichage du shaman

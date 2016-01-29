@@ -5,8 +5,14 @@ var Game = (function () {
         console.log("Game::()");
         this.initialized = false;
         this.context = context;
+        this.width = null;
+        this.height = null;
         this.gameRules = new GameRules();
         this.shaman = new Shaman(this); 
+        // set of ennemies
+        this.ennemies = [];
+        // last ennemy creation
+        this.lastEnnemyCreation = null;
     }
     
     Game.prototype.init = function () {
@@ -37,10 +43,24 @@ var Game = (function () {
             mousePosition.raz();
         }
         this.shaman.update(time);
+        if (!this.lastEnnemyCreation || this.lastEnnemyCreation.time > this.gameRules.ennemies.delay.get()) {
+            for (var i=this.ennemies.length; i < this.gameRules.ennemies.nbEnnemiesByWave.get(); i++) {
+                var posX = (this.width + 40 + Math.random()*200) | 0; // ??
+                var posY = this.height * Math.random() | 0; 
+                this.ennemies[i] = new Ennemy(this, posX, posY);  
+            }
+            for (var i in this.ennemies) {
+                this.ennemies[i].update(time);
+            }
+            this.lastEnnemyCreation = time;
+        } 
     };
     
     Game.prototype.render = function () {
         this.shaman.render();
+        for (var i in this.ennemies) {
+            this.ennemies[i].render();
+        }
     };
     
     

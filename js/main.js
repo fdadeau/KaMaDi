@@ -25,6 +25,8 @@ var Application = function () {
         gameTime = new GameTime();
 
         game = new Game(ctx);
+        game.width = CVS_WIDTH;
+        game.height = CVS_HEIGHT;
         game.init().start();
 
         this.boucleDeJeu();
