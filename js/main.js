@@ -11,9 +11,7 @@ var ctx;
 init = function() {
 
     cvs = document.getElementById("cvs");
-    cvs.onmousemove = captureMouseMove;
-    cvs.onmousedown = function(e) { /* TODO */ }
-    cvs.onmouseup = function(e) { /* TODO */ }
+    cvs.onclick = captureMouseClick;
     ctx = cvs.getContext("2d");
     CVS_HEIGHT = cvs.height = window.innerHeight - 10;
     CVS_WIDTH = cvs.width = window.innerWidth - 10;
@@ -49,7 +47,7 @@ render = function() {
 
 }
 
-captureMouseMove = function(event) {
+captureMouseClick = function(event) {
     // gets the click coordinates
 	if (event.x != undefined && event.y != undefined) {
 		x = event.x;
@@ -62,7 +60,8 @@ captureMouseMove = function(event) {
 	x -= cvs.offsetLeft; 
 	y -= cvs.offsetTop;
 	 
-    alert ("clic on (" + x + "," + y + ")");
+    alert("click on (" + x + ","+ y + ")");
+    
     // TODO
 }
     
