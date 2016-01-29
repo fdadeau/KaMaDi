@@ -5,6 +5,8 @@ var Game = (function () {
         console.log("Game::()");
         this.initialized = false;
         this.context = context;
+        this.gameRules = new GameRules()
+        this.shaman = new Shaman(this); 
     }
     
     Game.prototype.init = function () {
@@ -33,11 +35,15 @@ var Game = (function () {
             console.log(mousePosition);
             mousePosition.raz();
         }
+        this.shaman.update();
     };
     
     Game.prototype.render = function () {
-        
+        this.shaman.render();
     };
+    
+    
+    Game.prototype.allCharactersInPosition = function() { return true; } // TODO modify 
     
     return Game;
 })();
