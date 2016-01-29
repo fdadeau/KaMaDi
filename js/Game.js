@@ -5,7 +5,7 @@ var Game = (function () {
         console.log("Game::()");
         this.initialized = false;
         this.context = context;
-        this.gameRules = new GameRules()
+        this.gameRules = new GameRules();
         this.shaman = new Shaman(this); 
     }
     
@@ -44,7 +44,7 @@ var Game = (function () {
     };
     
     
-    Game.prototype.allCharactersInPosition = function() { return true; } // TODO modify 
+    Game.prototype.allCharactersInPosition = function() { return true; }; // TODO modify 
     
     return Game;
 })();
