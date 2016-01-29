@@ -1,26 +1,22 @@
-/**
- *  
- */
-
-//(function () {
-
-    var CVS_HEIGHT;
-    var CVS_WIDTH;
-    var cvs;
-    var ctx;
+"use strict";
+var Application = function () {
     
-    var mouse_position = {
-        x: null,
-        y: null
-    };
-    mouse_position.raz = function () { this.x = null; this.y = null; };
-    
-    var game;
+    var CVS_HEIGHT,
+        CVS_WIDTH,
+        cvs,
+        ctx,
+        game;
 
-    var init = function() {
+    this.mouse_position = {
+            x: null,
+            y: null,
+            raz: function () { this.x = null; this.y = null; }
+        };
+        
+    this.init = function() {
 
         cvs = document.getElementById("cvs");
-        cvs.onclick = captureMouseClick;
+        cvs.onclick = this.captureMouseClick.bind(this);
         ctx = cvs.getContext("2d");
         CVS_HEIGHT = cvs.height = window.innerHeight - 10;
         CVS_WIDTH = cvs.width = window.innerWidth - 10;
@@ -28,10 +24,10 @@
         game = new Game(ctx);
         game.init().start();
 
-        boucleDeJeu();
+        this.boucleDeJeu();
     };
 
-    window.requestAnimFrame = (function(){
+    var requestAnimFrame = (function(){
       return  window.requestAnimationFrame       ||
               window.webkitRequestAnimationFrame ||
               window.mozRequestAnimationFrame    ||
@@ -40,27 +36,28 @@
               };
     })();
 
-
-    boucleDeJeu = function() {
-        currentDate = Date.now();
-        requestAnimFrame(boucleDeJeu);
-        update(currentDate);
-        render();
+    this.boucleDeJeu = function() {
+        var currentDate = Date.now();
+        requestAnimFrame(this.boucleDeJeu.bind(this));
+        this.update(currentDate);
+        this.render();
     };
 
 
-    update = function(d) { 
-        game.update(d, mouse_position);
+    this.update = function(d) { 
+        game.update(d, this.mouse_position);
     };
 
-    render = function() {
+    this.render = function() {
         ctx.clearRect(0, 0, CVS_WIDTH, CVS_HEIGHT);
         game.render();
     };
 
-    captureMouseClick = function(event) {
+    this.captureMouseClick = function(event) {
         
         // gets the click coordinates
+        var x, y;
+        
         if (event.x != undefined && event.y != undefined) {
                 x = event.x;
                 y = event.y;
@@ -72,9 +69,9 @@
         x -= cvs.offsetLeft; 
         y -= cvs.offsetTop;
 
-        mouse_position.x = x;
-        mouse_position.y = y;
+        this.mouse_position.x = x;
+        this.mouse_position.y = y;
 
     };
 
-//})();
+};
