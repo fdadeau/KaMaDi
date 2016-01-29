@@ -28,18 +28,23 @@ function Shaman(_g) {
     // Mise à jour du shaman
     this.update = function(d) {
         if (game.allCharactersInPosition()) {
-            if (this.lastUpdate > 0) {
+            if (lastUpdate > 0) {
                 currentLoadingTime += d - lastUpdate;
+                if (currentLoadingTime >= loadingTime) {
+                    game.endLevel();
+                    this.reset();
+                }
             }
         }
         lastUpdate = d;
     }
     
     // Affichage du shaman
-    this.render = function(ctx) {
-        fillStyle = "#000000";
+    this.render = function() {
+        game.context.fillStyle = "#000000";
         game.context.fillRect(x - width/2|0, y - height/2 | 0, width, height);
-        fillStyle = 
+        game.context.fillStyle = "#FF5555";
+        game.context.fillRect(x - width/2|0, (y - height/2 | 0) - 10, width * currentLoadingTime / loadingTime | 0, 5);
     }
     
 }

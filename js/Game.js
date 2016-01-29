@@ -36,7 +36,7 @@ var Game = (function () {
             console.log(time);
             mousePosition.raz();
         }
-        this.shaman.update();
+        this.shaman.update(time);
     };
     
     Game.prototype.render = function () {
@@ -45,6 +45,7 @@ var Game = (function () {
     
     
     Game.prototype.allCharactersInPosition = function() { return true; }; // TODO modify 
+    Game.prototype.endLevel = function() { alert("Fin du niveau"); }; // TODO modify 
     
     return Game;
 })();
