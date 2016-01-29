@@ -26,7 +26,7 @@
         CVS_WIDTH = cvs.width = window.innerWidth - 10;
 
         game = new Game(ctx);
-        game.init();
+        game.init().start();
 
         boucleDeJeu();
     };
