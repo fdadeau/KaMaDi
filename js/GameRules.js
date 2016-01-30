@@ -6,7 +6,7 @@ function GameRules() {
     this.shaman = {
         // temps de recharge
         loadingTime: { 
-            value: 20 * 1000,
+            value: 30 * 1000,
             get: function() { return this.value; } 
         },
         // points de vie
@@ -33,7 +33,7 @@ function GameRules() {
             get: function(index) { return this.value[index]; }
         },
         speed: {
-            value: [ 0.4, 0.4 ],
+            value: [ 0.6, 0.6 ],
             get: function(index) { return this.value[index]; }
         },
         escapSpeed: {
@@ -49,7 +49,7 @@ function GameRules() {
             get: function(index) { return this.value[index]; }
         },
         attackDamage: {
-            value: [ 2, 1 ],
+            value: [ 6, 3 ],
             get: function(index) { return this.value[index]; }
         },
         attackRange: {
@@ -69,7 +69,7 @@ function GameRules() {
             get: function() { return this.value; }
         },
         timeStun: {
-           value: 1000 * 10,
+           value: 1000 * 15,
            get: function() { return this.value; }  
         },
         speed: {
@@ -85,7 +85,7 @@ function GameRules() {
             get: function() { return this.value; }
         },
         attackDamage: {
-            value: 4,
+            value: 6,
             get: function() { return this.value; }
         },
         attackSpeed: {
