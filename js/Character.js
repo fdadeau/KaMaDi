@@ -52,11 +52,17 @@ Character.prototype.update = function(time) {
             this.x = this.destX;
             this.y = this.destY;
             this.state = 0;
+            return;
         }
-        else {
-            this.x += (this.destX - this.x)/this.distToTarget * this.speed;
-            this.y += (this.destY - this.y)/this.distToTarget * this.speed;
+        // collision avec un autre personnage
+        for (var i in this.game.characters) {
+            if (this.game.characters[i] != this && this.game.characters[i].collidesWith(this.x + (this.destX - this.x) / this.distToTarget * this.speed, this.y+(this.destY - this.y) / this.distToTarget * this.speed, this.width, this.height)) {
+                // contournement ou pause
+                return;
+            }
         }
+        this.x += (this.destX - this.x) / this.distToTarget * this.speed;
+        this.y += (this.destY - this.y) / this.distToTarget * this.speed;
     }
     else { // IDLE
         // is it performing the shaman ritual ?

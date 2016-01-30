@@ -17,7 +17,7 @@ function Shaman(_g) {
 
     // position 
     //var x = altarX - 50, y = altarY;
-    this.x = altarX - 50;
+    this.x = altarX;
     this.y = altarY;
     
     // largeur, hauteur
