@@ -21,6 +21,8 @@ var Game = (function () {
         // set of projectiles 
         this.projectiles = [];
         
+        this.niveau = 0;
+        
         this.spritesheet = new Image();
         this.spritesheet.src = "images/spritesheet.png";
     }
@@ -44,13 +46,14 @@ var Game = (function () {
         return this;
     };
     
-    Game.prototype.start = function () {
+    Game.prototype.start = function (_niveau) {
         
         console.log("Game::start");
         
         this.pause = false;
+        this.niveau = _niveau;
         
-        this.AddEnnemisWave(0);
+        this.AddEnnemisWave(this.niveau, 0);
         
         if (!this.initialized) {
             throw new Error("The class Game has not initialized yet");
@@ -121,9 +124,9 @@ var Game = (function () {
         
         
         this.timeEnnemyCreation += time.tick;
-        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get(time.time)) {            
+        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get(this.niveau, time.time)) {            
             this.AddEnnemisWave(time.time);
-            this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get(time.time);
+            this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get(this.niveau, time.time);
         }
         
         
@@ -146,7 +149,7 @@ var Game = (function () {
     
     Game.prototype.AddEnnemisWave = function (time) {
         //for (var i=this.ennemies.length; i <t this.gameRules.ennemies.nbEnnemiesByWave.get(); i++) {
-        for (var i=0; i < this.gameRules.ennemies.nbEnnemiesByWave.get(time); i++) { // Si on attent pas la fin de la vague
+        for (var i=0; i < this.gameRules.ennemies.nbEnnemiesByWave.get(this.niveau, time); i++) { // Si on attent pas la fin de la vague
             //var posX = (this.width + 40 + Math.random()*200) | 0; // ??
             
             // on tire l'ennemi dans la zone

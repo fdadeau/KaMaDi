@@ -6,8 +6,8 @@ function Button(_menu, _x, _y) {
     this.x = _x;
     this.y = _y;
     
-    this.width = 200;
-    this.height = 40;
+    this.width = 60;
+    this.height = 60;
 }
 
 Button.prototype.checkMousePosition = function(mousePosition) {
@@ -18,7 +18,6 @@ Button.prototype.checkMousePosition = function(mousePosition) {
 };
 
 Button.prototype.render = function () {
-    
     this.menu.context.fillStyle = "#FF0000";
     this.menu.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
 };

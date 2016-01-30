@@ -18,7 +18,11 @@ Menu.prototype.init = function () {
 
     this.initialized = true;
 
-    this.level_button[0] = new Button(this, 200, 100);
+    this.level_button[0] = new Button(this, 200, 200);
+    this.level_button[1] = new Button(this, 350, 200);
+    this.level_button[2] = new Button(this, 500, 200);
+    this.level_button[3] = new Button(this, 650, 200);
+    this.level_button[4] = new Button(this, 800, 200);
 
     return this;
 };
@@ -40,7 +44,7 @@ Menu.prototype.update = function (time, mousePosition) {
         if(mousePosition != null && this.level_button[i].checkMousePosition(mousePosition))
         {
             this.lauchGame = true;
-            this.levelSelect = (i+1);
+            this.levelSelect = i;
             this.pause = true;
         }
     }

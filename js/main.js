@@ -64,7 +64,7 @@ var Application = function () {
         
         if(menu.lauchGame)
         {
-            game.init().start();
+            game.init().start(menu.levelSelect);
             menu.lauchGame = false;
         }
         if(menu.pause && game.pause)
