@@ -100,7 +100,7 @@ var Application = function () {
         if(victoryScreen.lauchGame) {
             victoryScreen.lauchGame = false;
             game.init().start(victoryScreen.levelSelect);
-            gameTime.reset();;
+            gameTime.reset();
         }
         if(victoryScreen.lauchMenu) {
             victoryScreen.lauchMenu = false;

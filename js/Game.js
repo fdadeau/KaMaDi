@@ -45,6 +45,8 @@ var Game = (function () {
         this.projectiles = [];
         
         this.ennemies = [];
+        
+        this.timeEnnemyCreation = 0;
 
         return this;
     };
