@@ -25,7 +25,7 @@ function GameRules() {
         },
         // frequence d'apparition
         delay: {
-            value: [13 * 1000, 15 * 1000, 17 * 1000, 19 * 1000, 21 * 1000],
+            value: [20 * 1000, 17 * 1000, 15 * 1000, 13 * 1000, 11 * 1000],
             get: function(niveau, time) { return this.value[niveau]; }
         },
         life: {
