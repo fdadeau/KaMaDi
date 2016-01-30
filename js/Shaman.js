@@ -24,6 +24,13 @@ function Shaman(_g) {
         lastUpdate = 0;
     }
     
+    this.getX = function() {
+        return x;
+    }
+    this.getY = function() {
+        return y;
+    }
+    
     // Mise à jour du shaman
     this.update = function(time) {
         if (game.allCharactersInPosition()) {
