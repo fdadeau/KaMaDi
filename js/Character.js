@@ -76,7 +76,7 @@ Character.prototype.update = function(time) {
             var shortestDistance = this.attackRange + 1;
             for (var i in this.game.ennemies) {
                 var distance = this.distanceTo(this.game.ennemies[i].x, this.game.ennemies[i].y); 
-                if (distance < this.attackRange && distance < shortestDistance) {
+                if (this.game.ennemies[i].life > 0 && distance < this.attackRange && distance < shortestDistance) {
                     closestEnnemy = this.game.ennemies[i];
                     shortestDistance = distance;
                 }

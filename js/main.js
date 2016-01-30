@@ -19,8 +19,8 @@ var Application = function () {
         cvs = document.getElementById("cvs");
         cvs.onclick = this.captureMouseClick.bind(this);
         ctx = cvs.getContext("2d");
-        CVS_HEIGHT = cvs.height = window.innerHeight - 10;
-        CVS_WIDTH = cvs.width = window.innerWidth - 10;
+        CVS_HEIGHT = cvs.height = 700; // window.innerHeight - 10;
+        CVS_WIDTH = cvs.width = 1200; // window.innerWidth - 10;
 
         gameTime = new GameTime();
 

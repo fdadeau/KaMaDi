@@ -13,7 +13,7 @@ function Shaman(_g) {
     this.currentLoadingTime = 0;
     
     // Autel autour duquel se trouve le shaman
-    var altarX = game.width/2 + 50, altarY = game.height/2, altarRadius = 70; 
+    var altarX = game.width/2, altarY = game.height/2, altarRadius = 70; 
 
     // position 
     //var x = altarX - 50, y = altarY;

@@ -18,38 +18,46 @@ function Ennemy(_game, _x, _y) {
     var rnd = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
     
     this.type = ""; // Type d'ennemis : conditionne son comportement -> Parametrer attribution dans GameRule
-    var indexRules; // Index sur lequel il récupère les informations
+    this.indexRules; // Index sur lequel il récupère les informations
     if(rnd === 1)
     {
         this.type = "Chargeur"; 
-        indexRules = 0;
+        this.indexRules = 0;
     }
     else if(rnd === 2)
     {
         this.type = "Tireur"; 
-        indexRules = 1;
+        this.indexRules = 1;
     }
     
     // speed
-    this.speed = this.game.gameRules.ennemies.speed.get(indexRules);
+    this.speed = this.game.gameRules.ennemies.speed.get(this.indexRules);
 
     this.posTargetX = this.game.shaman.getX();
     this.posTargetY = this.game.shaman.getY();
     
 
-    this.moveX = (this.posTargetX - _x)/Math.sqrt(Math.pow(_x - this.posTargetX,2) + Math.pow(_y - this.posTargetY,2)) * this.speed;
-    this.moveY = (this.posTargetY - _y)/Math.sqrt(Math.pow(_x - this.posTargetX,2) + Math.pow(_y - this.posTargetY,2)) * this.speed;
+    this.moveX = this.getVectorToTargetX();
+    this.moveY = this.getVectorToTargetY(); 
 
-    this.attackDelay = this.game.gameRules.ennemies.attackDelay.get(indexRules);
+    this.attackDelay = this.game.gameRules.ennemies.attackDelay.get(this.indexRules);
     this.lastAttack = 0;
-    this.attackSpeed = this.game.gameRules.ennemies.attackSpeed.get(indexRules);
-    this.attackDamage = this.game.gameRules.ennemies.attackDamage.get(indexRules);
-    this.attackRange = this.game.gameRules.ennemies.attackRange.get(indexRules);
+    this.attackSpeed = this.game.gameRules.ennemies.attackSpeed.get(this.indexRules);
+    this.attackDamage = this.game.gameRules.ennemies.attackDamage.get(this.indexRules);
+    this.attackRange = this.game.gameRules.ennemies.attackRange.get(this.indexRules);
     
-    this.life = this.game.gameRules.ennemies.life.get(indexRules);
-    
+    this.life = this.game.gameRules.ennemies.life.get(this.indexRules);
         
     this.dead = false; // FD: redondant avec life == 0 
+}
+
+
+Ennemy.prototype.getVectorToTargetX = function() {
+    return (this.posTargetX - this.x)/Math.sqrt(Math.pow(this.x - this.posTargetX,2) + Math.pow(this.y - this.posTargetY,2)) * this.speed;
+}
+
+Ennemy.prototype.getVectorToTargetY = function() {
+    return (this.posTargetY - this.y)/Math.sqrt(Math.pow(this.x - this.posTargetX,2) + Math.pow(this.y - this.posTargetY,2)) * this.speed;
 }
 
 Ennemy.prototype.getX = function() {
@@ -95,16 +103,20 @@ Ennemy.prototype.update = function(time) {
     }
     */
     
+    if (this.moveX == 0) {
+        this.moveX = this.getVectorToTargetX();
+    }
+    if (this.moveY == 0) {
+        this.moveY = this.getVectorToTargetY();
+    }
+    
     if(this.life <= 0)
     {
+        this.life = 0;
         this.x -= this.moveX;
         this.y -= this.moveY;
         return;
     }
-    this.x += this.moveX;
-    this.y += this.moveY;
-    
-
 
     // Gestion de la collision entre les ennemis
     for (var i in this.game.ennemies) {
@@ -117,13 +129,11 @@ Ennemy.prototype.update = function(time) {
 
         }
     }
-    
     // Gestion de la collision avec le shaman
-    if(this.collidesWith(this.game.shaman.getX(), this.game.shaman.getY(), this.game.shaman.getWidth(), this.game.shaman.getHeight())) {
+/*    if(this.collidesWith(this.game.shaman.getX(), this.game.shaman.getY(), this.game.shaman.getWidth(), this.game.shaman.getHeight())) {
 
         this.life = 0;
-    }
-
+    }*/
    for (var i in this.game.characters) {
        
         if(this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackRange) {
@@ -137,6 +147,13 @@ Ennemy.prototype.update = function(time) {
         this.moveY = 0;
     }
    
+    
+    this.x += this.moveX;
+    this.y += this.moveY;
+    
+
+
+
    if (time.time - this.lastAttack > this.attackDelay) {
             var closestCharacter = null;
             var shortestDistance = this.attackRange + 1;
@@ -177,4 +194,6 @@ Ennemy.prototype.render = function() {
         this.game.context.fillStyle = "#800080";
         this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
     }
+    
+    this.game.context.fillRect(this.x - this.width/2, this.y- this.height/2 - 10, this.width * this.life / this.game.gameRules.ennemies.life.get(this.indexRules), 5);
 };
