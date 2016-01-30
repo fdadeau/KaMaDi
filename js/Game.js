@@ -37,7 +37,7 @@ var Game = (function () {
         
         this.characters = [];
         for (var i=0; i < this.gameRules.character.nbStartCharacter.get(); i++) {
-            this.characters[this.characters.length] = new Character(this, this.width*0.8*Math.random() + this.width*0.2, this.height*Math.random());
+            this.characters[this.characters.length] = new Character(this, this.width*0.5*Math.random() + this.width*0.25, this.height*0.5*Math.random() + this.height*0.25);
         }
         this.projectiles = [];
         
@@ -104,13 +104,7 @@ var Game = (function () {
         
         // characters update
         for (var i=0; i < this.characters.length; i++) {
-            //if (this.characters[i].life <= 0) {
-                //this.characters.splice(i,1);
-                //i--;
-            //}
-            //else {
-                this.characters[i].update(time);
-            //}
+            this.characters[i].update(time);
         }
         
         // projectiles update

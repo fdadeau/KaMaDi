@@ -49,6 +49,7 @@ function Ennemy(_game, _x, _y) {
    
     this.inclinaison = 0;
     this.lastInclinaison = 0;
+    this.delta = Math.floor(Math.random()*30);
     this.width = this.sprite.destW; 
     this.height = this.sprite.destH;
     
@@ -130,7 +131,7 @@ Ennemy.prototype.update = function(time) {
         this.life = 0;
         this.x -= this.moveX;
         this.y -= this.moveY;
-        if (time.time - this.lastInclinaison > 60/this.speed) {
+        if (time.time - this.lastInclinaison > 60/this.speed+this.delta) {
             this.inclinaison = (this.inclinaison == 0) ? 4 : -this.inclinaison;
             this.lastInclinaison = time.time;
         }
@@ -167,8 +168,8 @@ Ennemy.prototype.update = function(time) {
     this.y += this.moveY;
     
 
-    if (this.moveX > 0 || this.moveY > 0) {
-        if (time.time - this.lastInclinaison > 60/this.speed) {
+    if (this.moveX != 0 || this.moveY != 0) {
+        if (time.time - this.lastInclinaison > 60/this.speed+this.delta) {
             this.inclinaison = (this.inclinaison == 0) ? 4 : -this.inclinaison;
             this.lastInclinaison = time.time;
         }
@@ -199,9 +200,7 @@ Ennemy.prototype.update = function(time) {
                 this.lastAttack = time.time;
             }
         }
-   
-    this.x += this.moveX;
-    this.y += this.moveY;
+
 };
 
 Ennemy.prototype.distanceTo = function(_x,_y) {
