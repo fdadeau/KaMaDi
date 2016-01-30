@@ -50,8 +50,7 @@ Ennemy.prototype.update = function(time) {
         && this.y + this.moveY + this.height > this.game.ennemies[i].getY()
         && this.y + this.moveY < this.game.ennemies[i].getY() + this.getHeight()
         && this.game.ennemies[i] !== this
-        && this.x > this.game.ennemies[i].getX())
-        {
+        && this.x > this.game.ennemies[i].getX()) {
             this.moveX = 0;
             this.moveY = 0;
         }
