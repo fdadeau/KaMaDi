@@ -125,6 +125,7 @@ Character.prototype.update = function(time) {
 };
 
 Character.prototype.goTo = function(_toX, _toY) {
+    if (this.isStun()) return;
     this.destX = _toX;
     this.destY = _toY;
     this.state = 1;
