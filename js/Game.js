@@ -95,13 +95,13 @@ var Game = (function () {
         
         // characters update
         for (var i=0; i < this.characters.length; i++) {
-            if (this.characters[i].life <= 0) {
-                this.characters.splice(i,1);
-                i--;
-            }
-            else {
+            //if (this.characters[i].life <= 0) {
+                //this.characters.splice(i,1);
+                //i--;
+            //}
+            //else {
                 this.characters[i].update(time);
-            }
+            //}
         }
         
         // projectiles update

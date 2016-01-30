@@ -28,6 +28,8 @@ function Character(_game, _x, _y) {
     this.attackDamage = this.game.gameRules.character.attackDamage.get();
     // portée de l'attaque
     this.attackRange = this.game.gameRules.character.attackRange.get();
+    
+    this.timeStun = 0;
 }
 
 Character.prototype.getX = function() {
@@ -42,8 +44,26 @@ Character.prototype.getWidth = function() {
 Character.prototype.getHeight = function() {
     return this.height;
 };
+Character.prototype.isStun = function() {
+    return this.life <= 0;
+};
 
 Character.prototype.update = function(time) {
+    
+    if(this.isStun())
+    {
+        this.timeStun += time.tick;
+        console.log("timeStun Charact : " + this.game.gameRules.character.timeStun.get());
+        if(this.timeStun >= this.game.gameRules.character.timeStun.get())
+        {
+            this.timeStun = 0;
+            this.life = this.game.gameRules.character.life.get();
+        }
+        else
+        {
+            return;
+        }
+    }
     
     if (this.state == 1) { // MOVING
         this.distToTarget = Math.sqrt(Math.pow(this.x - this.destX,2) + Math.pow(this.y - this.destY,2));

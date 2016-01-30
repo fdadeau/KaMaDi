@@ -25,6 +25,7 @@ La partie se termine :
 -> Les ennemis qui combattent à distance, lance leur tir dès que les persos qui sont dans leur zone de combat
 -> Les perso qui combattent au corps à corps doivent attaquer automatiquement les ennemis qui leur tir dessus
 -> Les personnages s'envoit des sigles japonais à la place des tir ( amour, passion ) et pour perso ( peace, sagesse )
+-> Joueur assommé quand n'a plus de vie
 
 *** Affichage ***
 -> Ennemis = carré rouge
@@ -42,6 +43,8 @@ La partie se termine :
 -> Gestion pouvoir Shaman : perte ennergie -> Click sur Shaman
 -> 
 -> 
+
+
 -> 
 
 -> Ennemise plus dangereux quand proche du centre

@@ -136,7 +136,7 @@ Ennemy.prototype.update = function(time) {
     }*/
    for (var i in this.game.characters) {
        
-        if(this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackRange) {
+        if((!this.game.characters[i].isStun()) && this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackRange) {
             this.moveX = 0;
             this.moveY = 0;
         }
@@ -159,7 +159,7 @@ Ennemy.prototype.update = function(time) {
             var shortestDistance = this.attackRange + 1;
             for (var i in this.game.characters) {
                 var distance = this.distanceTo(this.game.characters[i].x, this.game.characters[i].y); 
-                if (distance < this.attackRange && distance < shortestDistance) {
+                if ((!this.game.characters[i].isStun()) && distance < this.attackRange && distance < shortestDistance) {
                     closestCharacter = this.game.characters[i];
                     shortestDistance = distance;
                 }

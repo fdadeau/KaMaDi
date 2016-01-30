@@ -61,8 +61,12 @@ function GameRules() {
             get: function() { return this.value; }
         },
         life: {
-            value: 100,
+            value: 25,
             get: function() { return this.value; }
+        },
+        timeStun: {
+           value: 1000 * 10,
+           get: function() { return this.value; }  
         },
         speed: {
             value: 5,
