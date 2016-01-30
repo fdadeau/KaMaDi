@@ -67,6 +67,10 @@ var Application = function () {
             game.init().start();
             menu.lauchGame = false;
         }
+        if(menu.pause && game.pause)
+        {
+            menu.init().start();
+        }
     };
 
     this.render = function() {

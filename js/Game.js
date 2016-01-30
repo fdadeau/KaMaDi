@@ -38,6 +38,8 @@ var Game = (function () {
             this.characters[this.characters.length] = new Character(this, this.width*0.8*Math.random() + this.width*0.2, this.height*Math.random());
         }
         this.projectiles = [];
+        
+        this.ennemies = [];
 
         return this;
     };
