@@ -80,6 +80,11 @@ var Game = (function () {
             
             mousePosition.raz();
         }
+        
+        if (this.shaman.life <= 0) {
+            this.pause = true;
+            return;
+        }
         this.shaman.update(time);
         
         // characters update

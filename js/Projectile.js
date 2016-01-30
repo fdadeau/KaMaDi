@@ -54,7 +54,7 @@ Projectile.prototype.update = function(time) {
             }
             if (this.game.shaman.collidesWith(this.x, this.y, this.size, this.size)) {
                 
-                this.game.currentLoadingTime -= this.damage;
+                this.game.shaman.life -= this.damage;
                 this.active = 0;
                 return;
             }

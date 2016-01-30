@@ -8,7 +8,12 @@ function GameRules() {
         loadingTime: { 
             value: 60 * 1000,
             get: function() { return this.value; } 
-        }
+        },
+        // points de vie
+        life: {
+            value: 100,
+            get: function() { return this.value; }
+        } 
     };
     
     this.ennemies = { // value : 0 = chargeur, 1 : tireur

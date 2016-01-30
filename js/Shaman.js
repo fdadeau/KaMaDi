@@ -23,6 +23,9 @@ function Shaman(_g) {
     // largeur, hauteur
     var width = 20, height = 20;
     
+    // points du vie du shaman
+    this.life = game.gameRules.shaman.life.get();
+    
     // Remise à zéro du temps de chargement
     this.reset = function() {
         this.currentLoadingTime = 0;
@@ -74,8 +77,13 @@ function Shaman(_g) {
         // dessin du shaman
         game.context.fillStyle = "#000000";
         game.context.fillRect(this.x - width/2|0, this.y - height/2 | 0, width, height);
+        //barre de chargement
+        game.context.fillStyle = "#000055";
+        console.log(height * this.currentLoadingTime/loadingTime);
+        game.context.fillRect((this.x - width/2 - 10) | 0, (this.y + height/2 - height * this.currentLoadingTime / loadingTime) | 0, 5, height * this.currentLoadingTime / loadingTime | 0);
+        //barre de vie
         game.context.fillStyle = "#FF5555";
-        game.context.fillRect(this.x - width/2|0, (this.y - height/2 | 0) - 10, width * this.currentLoadingTime / loadingTime | 0, 5);
+        game.context.fillRect(this.x - width/2|0, (this.y - height/2 | 0) - 10, width * this.life / game.gameRules.shaman.life.get() | 0, 5);
         // dessin du cercle où se trouve le shaman
         game.context.beginPath();
         game.context.arc(altarX, altarY, altarRadius, 0, 2*Math.PI);
