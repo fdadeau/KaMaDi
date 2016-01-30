@@ -18,7 +18,6 @@ function Character(_game, _x, _y) {
     this.moveY = 0;
 }
 
-
 Character.prototype.getX = function() {
     return this.x;
 };

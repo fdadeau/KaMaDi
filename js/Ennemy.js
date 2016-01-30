@@ -16,6 +16,8 @@ function Ennemy(_game, _x, _y) {
 
     this.moveX = 0;
     this.moveY = 0;
+    
+    this.dead = false;
 }
 
 Ennemy.prototype.getX = function() {
@@ -29,6 +31,9 @@ Ennemy.prototype.getWidth = function() {
 };
 Ennemy.prototype.getHeight = function() {
     return this.height;
+};
+Ennemy.prototype.isDead = function() {
+    return this.dead;
 };
 
 Ennemy.prototype.update = function(time) {
@@ -45,15 +50,24 @@ Ennemy.prototype.update = function(time) {
 
     // Gestion de la collision entre les ennemis
     for (var i in this.game.ennemies) {
-        if(this.x + this.moveX + this.width > this.game.ennemies[i].getX()
-        && this.x + this.moveX < this.game.ennemies[i].getX() + this.getWidth()
+        if(this.game.ennemies[i] !== null && this.game.ennemies[i] !== this
+        && this.x + this.moveX + this.width > this.game.ennemies[i].getX()
+        && this.x + this.moveX < this.game.ennemies[i].getX() + this.game.ennemies[i].getWidth()
         && this.y + this.moveY + this.height > this.game.ennemies[i].getY()
-        && this.y + this.moveY < this.game.ennemies[i].getY() + this.getHeight()
-        && this.game.ennemies[i] !== this
+        && this.y + this.moveY < this.game.ennemies[i].getY() + this.game.ennemies[i].getHeight()
         && this.x > this.game.ennemies[i].getX()) {
             this.moveX = 0;
             this.moveY = 0;
         }
+    }
+    
+    // Gestion de la collision avec le shaman
+    if(this.x + this.width > this.game.shaman.getX()
+    && this.x < this.game.shaman.getX() + this.game.shaman.getWidth()
+    && this.y + this.height > this.game.shaman.getY()
+    && this.y < this.game.shaman.getY() + this.game.shaman.getHeight()) {
+
+        this.dead = true;
     }
 
     this.x += this.moveX;

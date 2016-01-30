@@ -13,7 +13,7 @@ function Shaman(_g) {
     var currentLoadingTime = 0;
     
     // position 
-    var x = 40, y = document.getElementById("cvs").height / 2 | 0;
+    var x = 140, y = document.getElementById("cvs").height / 2 | 0;
     
     // largeur, hauteur
     var width = 20, height = 20;
@@ -23,13 +23,19 @@ function Shaman(_g) {
         currentLoadingTime = 0;
         lastUpdate = 0;
     }
-    
+
     this.getX = function() {
         return x;
-    }
+    };
     this.getY = function() {
         return y;
-    }
+    };
+    this.getWidth = function() {
+        return width;
+    };
+    this.getHeight = function() {
+        return height;
+    };
     
     // Mise à jour du shaman
     this.update = function(time) {
@@ -40,7 +46,7 @@ function Shaman(_g) {
                 this.reset();
             }
         }
-    }
+    };
     
     // Affichage du shaman
     this.render = function() {
@@ -48,6 +54,6 @@ function Shaman(_g) {
         game.context.fillRect(x - width/2|0, y - height/2 | 0, width, height);
         game.context.fillStyle = "#FF5555";
         game.context.fillRect(x - width/2|0, (y - height/2 | 0) - 10, width * currentLoadingTime / loadingTime | 0, 5);
-    }
+    };
     
 }

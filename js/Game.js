@@ -58,7 +58,18 @@ var Game = (function () {
             //this.lastEnnemyCreation = time;
         
         for (var i in this.ennemies) {
-            this.ennemies[i].update(time);
+            
+            if(this.ennemies[i] != null)
+            {
+                if(this.ennemies[i].isDead())
+                {
+                    this.ennemies[i] = null; // -> Ne libere pas la case de l'ennemis ( A AMELIORER )
+                }
+                else
+                {
+                    this.ennemies[i].update(time);
+                }
+            }
         }
     };
     
@@ -75,7 +86,10 @@ var Game = (function () {
     Game.prototype.render = function () {
         this.shaman.render();
         for (var i in this.ennemies) {
-            this.ennemies[i].render();
+            if(this.ennemies[i] != null)
+            {
+                this.ennemies[i].render();
+            }
         }
     };
     
