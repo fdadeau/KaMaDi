@@ -209,5 +209,28 @@ var Game = (function () {
     
     Game.prototype.endLevel = function() { alert("Fin du niveau"); this.pause = true; }; // TODO modify 
     
+    
+    Game.prototype.drawImage = function(img, srcX, srcY, srcW, srcH, x, y, width, height, deg, flip){
+        //save current context before applying transformations
+        this.context.save();
+        //convert degrees to radians
+        if(flip){ 
+            var rad = deg * Math.PI / 180;
+        }else{
+            var rad = 2*Math.PI - deg * Math.PI / 180;
+        }
+        //set the origin to the center of the image
+        this.context.translate(x + width/2, y + height/2);
+        //rotate the canvas around the origin
+        this.context.rotate(rad);
+        if(flip){
+            //flip the canvas
+            this.context.scale(-1,1);
+        }
+        //draw the image    
+        this.context.drawImage(img, srcX, srcY, srcW, srcH, -width/2, -height/2, width, height);
+        //restore the canvas
+        this.context.restore();
+    }
     return Game;
 })();

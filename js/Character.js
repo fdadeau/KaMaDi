@@ -145,7 +145,7 @@ Character.prototype.distanceTo = function(_x,_y) {
                     
 Character.prototype.render = function() {
 
-    // dessin d'un cercle autour du personnage pour le repérer
+    // dessin d'un cercle autour du personnage actif pour le repérer
     if (this.game.selectedCharacter == this) {
         this.game.context.globalAlpha = 0.2;
         this.game.context.fillStyle = "#88FF88";
@@ -154,42 +154,10 @@ Character.prototype.render = function() {
         this.game.context.fill();
         this.game.context.globalAlpha = 1;
     }
-    /**
-    this.game.context.fillStyle = "#00FF00";
-    this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
-    this.game.context.save();
-    console.log(this.direction);
-    if (this.direction == 1) {
-        this.game.context.scale(-1,1);
-    }
-    this.game.context.drawImage(this.game.spritesheet, 1980, 1677, 357, 626, this.x-this.width/2, this.y-this.height/2, this.width,   this.height);
-    this.game.context.restore();
-    */
-     drawImage(this.game.context,this.game.spritesheet,1980, 1677, 357, 626, this.x-this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
+
+    this.game.drawImage(this.game.spritesheet,1980, 1677, 357, 626, this.x-this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
     this.game.context.fillStyle = "#000000";
     this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2 - 10, this.width * this.life / this.game.gameRules.character.life.get(), 5)
     
 };
 
-function drawImage(ctx, img, srcX, srcY, srcW, srcH, x, y, width, height, deg, flip){
-    //save current context before applying transformations
-    ctx.save();
-    //convert degrees to radians
-    if(flip){ 
-        var rad = deg * Math.PI / 180;
-    }else{
-        var rad = 2*Math.PI - deg * Math.PI / 180;
-    }
-    //set the origin to the center of the image
-    ctx.translate(x + width/2, y + height/2);
-    //rotate the canvas around the origin
-    ctx.rotate(rad);
-    if(flip){
-        //flip the canvas
-        ctx.scale(-1,1);
-    }
-    //draw the image    
-    ctx.drawImage(img, srcX, srcY, srcW, srcH, -width/2, -height/2, width, height);
-    //restore the canvas
-    ctx.restore();
-}

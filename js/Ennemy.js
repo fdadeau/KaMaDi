@@ -6,10 +6,6 @@ function Ennemy(_game, _x, _y) {
     // position
     this.x = _x;
     this.y = _y;
-
-    // size
-    this.width = 20;
-    this.height = 20;
     
     this.strength;
     
@@ -29,7 +25,32 @@ function Ennemy(_game, _x, _y) {
         this.type = "Tireur"; 
         this.indexRules = 1;
     }
-    this.sprite = Math.floor(Math.random()*3); 
+    // sprite used 
+    switch (0) { //Math.floor(Math.random()*3+this.indexRules*3)) {
+        case 0: 
+            this.sprite = {srcX: 39, srcY: 16, srcW: 384, srcH: 726, destW: 50, destH: 94}; 
+            break;
+        case 1: 
+            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            break;
+        case 2: 
+            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            break;
+        case 3: 
+            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            break;
+        case 4: 
+            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            break;
+        case 5: 
+            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            break;        
+    }
+   
+    this.inclinaison = 0;
+    this.lastInclinaison = 0;
+    this.width = this.sprite.destW; 
+    this.height = this.sprite.destH;
     
     // speed
     this.speed = this.game.gameRules.ennemies.speed.get(this.indexRules);
@@ -38,10 +59,11 @@ function Ennemy(_game, _x, _y) {
     this.posTargetX = this.game.shaman.getX();
     this.posTargetY = this.game.shaman.getY();
     
-
     this.moveX = this.getVectorToTargetX(this.speed);
     this.moveY = this.getVectorToTargetY(this.speed); 
 
+    this.direction = (this.moveX > 0) ? 1 : -1;
+    
     this.attackDelay = this.game.gameRules.ennemies.attackDelay.get(this.indexRules);
     this.lastAttack = 0;
     this.attackSpeed = this.game.gameRules.ennemies.attackSpeed.get(this.indexRules);
@@ -94,17 +116,6 @@ Ennemy.prototype.calcDistance = function(_x,_y) {
 Ennemy.prototype.update = function(time) {
 
     //Gestion du deplacement des ennemis vers le Shaman
-    /*
-    if(Math.abs(this.game.shaman.getX() - this.x) > Math.abs(this.game.shaman.getY() - this.y)) {
-        this.moveY = ((this.game.shaman.getY() - this.y) / Math.abs(this.game.shaman.getX() - this.x)) * this.speed;
-        this.moveX = -this.speed;
-    }
-    else {
-        this.moveX = -((this.game.shaman.getX() - this.x) / Math.abs(this.game.shaman.getY() - this.y)) * this.speed;
-        this.moveY = this.speed;
-    }
-    */
-    
     if(this.life > 0) {
         if (this.moveX == 0) {
             this.moveX = this.getVectorToTargetX(this.speed);
@@ -113,14 +124,17 @@ Ennemy.prototype.update = function(time) {
             this.moveY = this.getVectorToTargetY(this.speed);
         }
     }
-    else {
-        
+    else {        
         this.moveX = this.getVectorToTargetX(this.escapeSpeed);
         this.moveY = this.getVectorToTargetY(this.escapeSpeed);
-        
         this.life = 0;
         this.x -= this.moveX;
         this.y -= this.moveY;
+        if (time.time - this.lastInclinaison > 80) {
+            this.inclinaison = (this.inclinaison == 0) ? 4 : -this.inclinaison;
+            this.lastInclinaison = time.time;
+        }
+        this.direction = (this.moveX > 0) ? -1 : 1;
         return;
     }
 
@@ -136,12 +150,7 @@ Ennemy.prototype.update = function(time) {
         }
     }
     // Gestion de la collision avec le shaman
-/*    if(this.collidesWith(this.game.shaman.getX(), this.game.shaman.getY(), this.game.shaman.getWidth(), this.game.shaman.getHeight())) {
-
-        this.life = 0;
-    }*/
-   for (var i in this.game.characters) {
-       
+    for (var i in this.game.characters) {   
         if((!this.game.characters[i].isStun()) && this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackRange) {
             this.moveX = 0;
             this.moveY = 0;
@@ -153,13 +162,22 @@ Ennemy.prototype.update = function(time) {
         this.moveY = 0;
     }
    
-    
+     
     this.x += this.moveX;
     this.y += this.moveY;
     
 
+    if (this.moveX > 0 || this.moveY > 0) {
+        if (time.time - this.lastInclinaison > 80) {
+            this.inclinaison = (this.inclinaison == 0) ? 4 : -this.inclinaison;
+            this.lastInclinaison = time.time;
+        }
+    }
+    else {
+        this.inclinaison = 0;
+    }
 
-
+    
    if (time.time - this.lastAttack > this.attackDelay) {
             var closestCharacter = null;
             var shortestDistance = this.attackRange + 1;
@@ -192,14 +210,8 @@ Ennemy.prototype.distanceTo = function(_x,_y) {
 
 Ennemy.prototype.render = function() {
 
-    if(this.type === "Chargeur") {    
-        this.game.context.fillStyle = "#FF0000";
-        this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
-    }
-    else if(this.type === "Tireur") {
-        this.game.context.fillStyle = "#800080";
-        this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
-    }
+    // dessin du sprite;
+    this.game.drawImage(this.game.spritesheet, this.sprite.srcX, this.sprite.srcY, this.sprite.srcW, this.sprite.srcH, this.x - this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
     
     this.game.context.fillRect(this.x - this.width/2, this.y- this.height/2 - 10, this.width * this.life / this.game.gameRules.ennemies.life.get(this.indexRules), 5);
 };
