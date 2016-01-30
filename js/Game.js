@@ -45,7 +45,7 @@ var Game = (function () {
         
         this.pause = false;
         
-        this.AddEnnemisWave();
+        this.AddEnnemisWave(0);
         
         if (!this.initialized) {
             throw new Error("The class Game has not initialized yet");
@@ -114,9 +114,9 @@ var Game = (function () {
         
         
         this.timeEnnemyCreation += time.tick;
-        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get()) {            
-            this.AddEnnemisWave();
-            this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get();
+        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get(time.time)) {            
+            this.AddEnnemisWave(time.time);
+            this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get(time.time);
         }
         
         
@@ -137,9 +137,9 @@ var Game = (function () {
         }
     };
     
-    Game.prototype.AddEnnemisWave = function () {
-        //for (var i=this.ennemies.length; i < this.gameRules.ennemies.nbEnnemiesByWave.get(); i++) {
-        for (var i=0; i < this.gameRules.ennemies.nbEnnemiesByWave.get(); i++) { // Si on attent pas la fin de la vague
+    Game.prototype.AddEnnemisWave = function (time) {
+        //for (var i=this.ennemies.length; i <t this.gameRules.ennemies.nbEnnemiesByWave.get(); i++) {
+        for (var i=0; i < this.gameRules.ennemies.nbEnnemiesByWave.get(time); i++) { // Si on attent pas la fin de la vague
             //var posX = (this.width + 40 + Math.random()*200) | 0; // ??
             
             // on tire l'ennemi dans la zone

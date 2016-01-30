@@ -6,7 +6,7 @@ function GameRules() {
     this.shaman = {
         // temps de recharge
         loadingTime: { 
-            value: 60 * 1000,
+            value: 20 * 1000,
             get: function() { return this.value; } 
         },
         // points de vie
@@ -20,20 +20,20 @@ function GameRules() {
         // nombre d'ennemis/vague
         nbEnnemiesByWave: {
             //value: 30,
-            value: 10,
-            get: function() { return this.value; }
+            value: 5,
+            get: function(time) { return this.value * (1 + time / (1000 * 60 * 2)); }
         },
         // frequence d'apparition
         delay: {
-            value: 10 * 1000,
-            get: function() { return this.value; }
+            value: 15 * 1000,
+            get: function(time) { return this.value; }
         },
         life: {
             value: [ 10, 10 ],
             get: function(index) { return this.value[index]; }
         },
         speed: {
-            value: [ 1, 1 ],
+            value: [ 0.4, 0.4 ],
             get: function(index) { return this.value[index]; }
         },
         attackDelay: {
@@ -57,7 +57,7 @@ function GameRules() {
     this.character = {
         
         nbStartCharacter: {
-            value: 4,
+            value: 5,
             get: function() { return this.value; }
         },
         life: {

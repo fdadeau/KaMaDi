@@ -43,3 +43,5 @@ La partie se termine :
 -> 
 -> 
 -> 
+
+-> Ennemise plus dangereux quand proche du centre
