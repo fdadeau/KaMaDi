@@ -21,7 +21,10 @@ var Game = (function () {
         // set of projectiles 
         this.projectiles = [];
         
-        this.niveau = 0;
+        this.victoire = false;
+        this.defaite = false;
+        
+        this.level = 0;
         
         this.spritesheet = new Image();
         this.spritesheet.src = "images/spritesheet.png";
@@ -46,14 +49,17 @@ var Game = (function () {
         return this;
     };
     
-    Game.prototype.start = function (_niveau) {
+    Game.prototype.start = function (_level) {
         
         console.log("Game::start");
         
         this.pause = false;
-        this.niveau = _niveau;
+        this.level = _level;
         
-        this.AddEnnemisWave(this.niveau, 0);
+        this.victoire = false;
+        this.defaite = false;
+        
+        this.AddEnnemisWave(this.level, 0);
         
         if (!this.initialized) {
             throw new Error("The class Game has not initialized yet");
@@ -97,6 +103,7 @@ var Game = (function () {
         }
         
         if (this.shaman.life <= 0) {
+            this.defaite = true;
             this.pause = true;
             return;
         }
@@ -118,9 +125,9 @@ var Game = (function () {
         
         
         this.timeEnnemyCreation += time.tick;
-        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get(this.niveau, time.time)) {            
+        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get(this.level, time.time)) {            
             this.AddEnnemisWave(time.time);
-            this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get(this.niveau, time.time);
+            this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get(this.level, time.time);
         }
         
         
@@ -143,7 +150,7 @@ var Game = (function () {
     
     Game.prototype.AddEnnemisWave = function (time) {
         //for (var i=this.ennemies.length; i <t this.gameRules.ennemies.nbEnnemiesByWave.get(); i++) {
-        for (var i=0; i < this.gameRules.ennemies.nbEnnemiesByWave.get(this.niveau, time); i++) { // Si on attent pas la fin de la vague
+        for (var i=0; i < this.gameRules.ennemies.nbEnnemiesByWave.get(this.level, time); i++) { // Si on attent pas la fin de la vague
             //var posX = (this.width + 40 + Math.random()*200) | 0; // ??
             
             // on tire l'ennemi dans la zone
@@ -204,7 +211,10 @@ var Game = (function () {
         }
     };
     
-    Game.prototype.endLevel = function() { alert("Fin du niveau"); this.pause = true; }; // TODO modify 
+    Game.prototype.endLevel = function() { 
+        this.victoire = true; 
+        this.pause = true; 
+    }; 
     
     
     Game.prototype.drawImage = function(img, srcX, srcY, srcW, srcH, x, y, width, height, deg, flip){

@@ -1,13 +1,13 @@
 
-function Button(_menu, _x, _y) {
+function Button(_menu, _x, _y, _width, _height) {
     
     this.menu = _menu;
     
     this.x = _x;
     this.y = _y;
     
-    this.width = 60;
-    this.height = 60;
+    this.width = _width;
+    this.height = _height;
 }
 
 Button.prototype.checkMousePosition = function(mousePosition) {

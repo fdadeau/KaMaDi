@@ -7,6 +7,9 @@ var Application = function () {
         ctx,
         game,
         menu,
+        victoryScreen,
+        gameOverScreen,
+        menu,
         gameTime;
 
     this.mouse_position = {
@@ -36,6 +39,16 @@ var Application = function () {
         //game.init().start();
         game.init();
         
+        gameOverScreen = new GameOverScreen(ctx);
+        gameOverScreen.width = CVS_WIDTH;
+        gameOverScreen.height = CVS_HEIGHT;
+        gameOverScreen.init();
+        
+        victoryScreen = new VictoryScreen(ctx);
+        victoryScreen.width = CVS_WIDTH;
+        victoryScreen.height = CVS_HEIGHT;
+        victoryScreen.init();
+        
         this.boucleDeJeu();
     };
 
@@ -59,18 +72,46 @@ var Application = function () {
         gameTime.update();
         
         game.update(gameTime, this.mouse_position);
-        
         menu.update(gameTime, this.mouse_position);
+        gameOverScreen.update(gameTime, this.mouse_position);
+        victoryScreen.update(gameTime, this.mouse_position);
         
-        if(menu.lauchGame)
-        {
+        if(menu.lauchGame) {
             game.init().start(menu.levelSelect);
             menu.lauchGame = false;
         }
-        if(menu.pause && game.pause)
-        {
+        if(game.defaite) {
+            game.defaite = false;
+            gameOverScreen.init().start(game.level);
+        }
+        if(game.victoire) {
+            game.victoire = false;
+            victoryScreen.init().start(game.level);
+        }
+        if(gameOverScreen.lauchGame) {
+            gameOverScreen.lauchGame = false;
+            game.init().start(gameOverScreen.levelSelect);
+            gameTime.reset();
+        }
+        if(gameOverScreen.lauchMenu) {
+            gameOverScreen.lauchMenu = false;
             menu.init().start();
         }
+        if(victoryScreen.lauchGame) {
+            victoryScreen.lauchGame = false;
+            game.init().start(victoryScreen.levelSelect);
+            gameTime.reset();;
+        }
+        if(victoryScreen.lauchMenu) {
+            victoryScreen.lauchMenu = false;
+            menu.init().start();
+            gameTime.reset();
+        }
+        
+        //if(menu.pause && game.pause)
+        //{
+        //    menu.init().start();
+        //}
     };
 
     this.render = function() {
@@ -78,6 +119,8 @@ var Application = function () {
         
         game.render();
         menu.render();
+        gameOverScreen.render();
+        victoryScreen.render();
     };
 
     this.captureMouseClick = function(event) {
