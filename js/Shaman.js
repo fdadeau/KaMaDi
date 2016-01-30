@@ -69,7 +69,7 @@ function Shaman(_g) {
     this.update = function(time) {
         var nbCharactersInPosition = 0;
         for (var i in game.characters) {
-            if (game.characters[i].state == 0 && this.isInShamanCircle(game.characters[i].x, game.characters[i].y)) {
+            if (game.characters[i].state == 0 && game.characters[i].life > 0 && this.isInShamanCircle(game.characters[i].x, game.characters[i].y)) {
                 nbCharactersInPosition++;
             }
         }
