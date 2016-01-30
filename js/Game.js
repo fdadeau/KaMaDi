@@ -188,6 +188,7 @@ var Game = (function () {
             }
             
             this.ennemies[this.ennemies.length] = new Ennemy(this, posX, posY);  
+            this.audio.playSoundF(3);
         }
     }
     
