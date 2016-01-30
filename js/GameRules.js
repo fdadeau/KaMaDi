@@ -60,7 +60,7 @@ function GameRules() {
             get: function() { return this.value; }
         },
         attackSpeed: {
-            value: 5,
+            value: 10,
             get: function() { return this.value; }
         }
     }
