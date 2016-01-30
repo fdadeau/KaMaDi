@@ -64,6 +64,7 @@ var Game = (function () {
             // clic sur le shaman -> libère sa puissance 
             if (this.shaman.collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
                 this.shaman.unleash();
+                this.selectedCharacter = null;
             }
             else {
                 // detection du personnage selectionné
@@ -74,7 +75,7 @@ var Game = (function () {
                     }
                 }
                 if (targetCharacter != null) {
-                    this.selectedCharacter = targetCharacter;
+                    this.selectedCharacter = (targetCharacter == this.selectedCharacter) ? null : targetCharacter;
                 }
                 else {
                     if (this.selectedCharacter != null) {
