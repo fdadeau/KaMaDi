@@ -38,7 +38,7 @@ La partie se termine :
 *****************
 -> Chaque perso a un pouvoir spétial ( Défier route ennemis, ... )
 -> Scoring sur personnage : attire plus les ennemis
--> 
+-> Gestion pouvoir Shaman : perte ennergie -> Click sur Shaman
 -> 
 -> 
 -> 

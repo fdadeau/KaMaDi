@@ -52,6 +52,12 @@ Projectile.prototype.update = function(time) {
                     return;
                 }
             }
+            if (this.game.shaman.collidesWith(this.x, this.y, this.size, this.size)) {
+                
+                this.game.currentLoadingTime -= this.damage;
+                this.active = 0;
+                return;
+            }
         }
         
     }

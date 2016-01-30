@@ -110,12 +110,17 @@ Ennemy.prototype.update = function(time) {
    for (var i in this.game.characters) {
        
         if(this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackRange) {
-           
             this.moveX = 0;
             this.moveY = 0;
-            
         }
    }
+   
+    if(this.calcDistance(this.game.shaman.getX(), this.game.shaman.getY()) < this.attackRange) {
+        this.moveX = 0;
+        this.moveY = 0;
+    }
+   
+   
    
    if (time.time - this.lastAttack > this.attackDelay) {
             var closestCharacter = null;
@@ -127,6 +132,12 @@ Ennemy.prototype.update = function(time) {
                     shortestDistance = distance;
                 }
             }
+            var distance = this.distanceTo(this.game.shaman.getX(), this.game.shaman.getY());
+            if (distance < this.attackRange && distance < shortestDistance) {
+                    closestCharacter = this.game.shaman;
+                    shortestDistance = distance;
+            }
+            
             if (closestCharacter != null) {
                 this.game.addProjectile(this.x, this.y, closestCharacter.x, closestCharacter.y, this.attackSpeed, this.attackDamage, false);
                 this.lastAttack = time.time;

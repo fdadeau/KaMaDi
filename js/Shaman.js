@@ -10,28 +10,37 @@ function Shaman(_g) {
     var loadingTime = game.gameRules.shaman.loadingTime.get();
     
     // Temps de chargement courant
-    var currentLoadingTime = 0;
+    this.currentLoadingTime = 0;
     
     // Autel autour duquel se trouve le shaman
     var altarX = game.width/2 + 50, altarY = game.height/2, altarRadius = 70; 
 
     // position 
-    var x = altarX - 50, y = altarY;
+    //var x = altarX - 50, y = altarY;
+    this.x = altarX - 50;
+    this.y = altarY;
     
     // largeur, hauteur
     var width = 20, height = 20;
     
     // Remise à zéro du temps de chargement
     this.reset = function() {
-        currentLoadingTime = 0;
+        this.currentLoadingTime = 0;
         lastUpdate = 0;
-    }
+    };
+    
+    this.collidesWith = function(_x,_y, _w, _h) {
+        return  !(this.x + width / 2 < _x - _w/2 ||
+            this.x - width / 2 > _x + _w/2 ||
+            this.y - height / 2 > _y + _h / 2 ||
+            this.y + height / 2 < _y - _h / 2); 
+    };
 
     this.getX = function() {
-        return x;
+        return this.x;
     };
     this.getY = function() {
-        return y;
+        return this.y;
     };
     this.getWidth = function() {
         return width;
@@ -53,8 +62,8 @@ function Shaman(_g) {
             }
         }
         if (nbCharactersInPosition == 0) return;
-        currentLoadingTime += (time.tick * nbCharactersInPosition / game.gameRules.character.nbStartCharacter.get());
-        if (currentLoadingTime >= loadingTime) {
+        this.currentLoadingTime += (time.tick * nbCharactersInPosition / game.gameRules.character.nbStartCharacter.get());
+        if (this.currentLoadingTime >= loadingTime) {
             game.endLevel();
             this.reset();
         }
@@ -64,9 +73,9 @@ function Shaman(_g) {
     this.render = function() {
         // dessin du shaman
         game.context.fillStyle = "#000000";
-        game.context.fillRect(x - width/2|0, y - height/2 | 0, width, height);
+        game.context.fillRect(this.x - width/2|0, this.y - height/2 | 0, width, height);
         game.context.fillStyle = "#FF5555";
-        game.context.fillRect(x - width/2|0, (y - height/2 | 0) - 10, width * currentLoadingTime / loadingTime | 0, 5);
+        game.context.fillRect(this.x - width/2|0, (this.y - height/2 | 0) - 10, width * this.currentLoadingTime / loadingTime | 0, 5);
         // dessin du cercle où se trouve le shaman
         game.context.beginPath();
         game.context.arc(altarX, altarY, altarRadius, 0, 2*Math.PI);
