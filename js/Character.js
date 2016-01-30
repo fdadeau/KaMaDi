@@ -76,7 +76,7 @@ Character.prototype.update = function(time) {
                 }
             }
             if (closestEnnemy != null) {
-                this.game.addProjectile(this.x, this.y, closestEnnemy.x, closestEnnemy.y, this.attackSpeed, this.attackDamage);
+                this.game.addProjectile(this.x, this.y, closestEnnemy.x, closestEnnemy.y, this.attackSpeed, this.attackDamage, true);
                 this.lastAttack = time.time;
             }
         }

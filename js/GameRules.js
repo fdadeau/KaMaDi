@@ -32,7 +32,7 @@ function GameRules() {
             get: function(index) { return this.value[index]; }
         },
         attackDelay: {
-            value: [ 1, 1 ],
+            value: [ 1000, 1000 ],
             get: function(index) { return this.value[index]; }
         },
         attackSpeed: {
@@ -40,11 +40,11 @@ function GameRules() {
             get: function(index) { return this.value[index]; }
         },
         attackDamage: {
-            value: [ 4, 4 ],
+            value: [ 2, 1 ],
             get: function(index) { return this.value[index]; }
         },
         attackRange: {
-            value: [ 45, 100 ],
+            value: [ 45, 200 ],
             get: function(index) { return this.value[index]; }
         }
     }

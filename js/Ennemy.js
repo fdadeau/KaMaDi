@@ -36,11 +36,11 @@ function Ennemy(_game, _x, _y) {
         indexRules = 1;
     }
     
-    this.attackDelay = this.game.gameRules.character.attackDelay.get(indexRules);
+    this.attackDelay = this.game.gameRules.ennemies.attackDelay.get(indexRules);
     this.lastAttack = 0;
-    this.attackSpeed = this.game.gameRules.character.attackSpeed.get(indexRules);
-    this.attackDamage = this.game.gameRules.character.attackDamage.get(indexRules);
-    this.attackRange = this.game.gameRules.character.attackRange.get(indexRules);
+    this.attackSpeed = this.game.gameRules.ennemies.attackSpeed.get(indexRules);
+    this.attackDamage = this.game.gameRules.ennemies.attackDamage.get(indexRules);
+    this.attackRange = this.game.gameRules.ennemies.attackRange.get(indexRules);
     
     this.life = this.game.gameRules.ennemies.life.get(indexRules);
     this.speed = this.game.gameRules.ennemies.speed.get(indexRules);
@@ -114,11 +114,6 @@ Ennemy.prototype.update = function(time) {
             this.moveX = 0;
             this.moveY = 0;
             
-            /*
-            if(this.type === "Chargeur") {
-                this.game.characters[i].life -= this.attackDamage;
-            }
-            */
         }
    }
    
@@ -133,7 +128,7 @@ Ennemy.prototype.update = function(time) {
                 }
             }
             if (closestCharacter != null) {
-                this.game.addProjectile(this.x, this.y, closestCharacter.x, closestCharacter.y, this.attackSpeed, this.attackDamage);
+                this.game.addProjectile(this.x, this.y, closestCharacter.x, closestCharacter.y, this.attackSpeed, this.attackDamage, false);
                 this.lastAttack = time.time;
             }
         }
