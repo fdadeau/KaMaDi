@@ -10,6 +10,7 @@ var Application = function () {
         victoryScreen,
         gameOverScreen,
         menu,
+        audio,
         gameTime;
 
     this.mouse_position = {
@@ -28,12 +29,14 @@ var Application = function () {
 
         gameTime = new GameTime();
         
-        menu = new Menu(ctx);
+        audio = new Sound();
+        
+        menu = new Menu(ctx, audio);
         menu.width = CVS_WIDTH;
         menu.height = CVS_HEIGHT;
         menu.init().start();
 
-        game = new Game(ctx);
+        game = new Game(ctx, audio);
         game.width = CVS_WIDTH;
         game.height = CVS_HEIGHT;
         //game.init().start();

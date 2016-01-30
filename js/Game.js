@@ -1,11 +1,12 @@
 "use strict";
 var Game = (function () {
     
-    function Game(context) {
+    function Game(context, audio) {
         console.log("Game::()");
         this.initialized = false;
         this.pause = true;
         this.context = context;
+        this.audio = audio;
         this.width = null;
         this.height = null;
         this.gameRules = new GameRules();
@@ -60,6 +61,8 @@ var Game = (function () {
         
         this.victoire = false;
         this.defaite = false;
+        
+        this.audio.playBacking(1);
         
         this.AddEnnemisWave(this.level, 0);
         

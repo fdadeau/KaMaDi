@@ -38,6 +38,9 @@ Projectile.prototype.update = function(time) {
             for (var i in this.game.ennemies) {
                 if (this.game.ennemies[i].collidesWith(this.x, this.y, this.size, this.size)) {
                     this.game.ennemies[i].life -= this.damage;
+                    if (this.game.ennemies[i].life < 0) {
+                        this.game.audio.playSoundF(Math.random()*2 | 0);
+                    }
                     this.active = 0;
                     return;
                 }
@@ -49,6 +52,7 @@ Projectile.prototype.update = function(time) {
                 if (this.game.characters[i].collidesWith(this.x, this.y, this.size, this.size)) {
                     this.game.characters[i].life -= this.damage;
                     this.active = 0;
+                    this.game.audio.playSoundM((this.game.characters[i].life > 0) ? 0 : 1);
                     return;
                 }
             }

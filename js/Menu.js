@@ -1,10 +1,11 @@
 
-function Menu(context) {
+function Menu(context, audio) {
     console.log("Menu::()");
     
     this.initialized = false;
     this.pause = true;
     this.context = context;
+    this.audio = audio;
     
     this.lauchGame = false;
     this.levelSelect = 0;
@@ -33,6 +34,8 @@ Menu.prototype.start = function () {
     
     this.pause = false;
     this.lauchGame = false;
+
+    this.audio.playBacking(0);
 
     return this;
 };
