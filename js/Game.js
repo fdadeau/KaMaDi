@@ -185,6 +185,10 @@ var Game = (function () {
     }
     
     Game.prototype.render = function () {
+        
+        if(this.pause)
+            return;
+        
         // dessin du shaman
         this.shaman.render();
         // dessin des personnages
