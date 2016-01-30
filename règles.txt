@@ -36,8 +36,8 @@ La partie se termine :
 *****************
 ***** Idées *****
 *****************
--> 
--> 
+-> Chaque perso a un pouvoir spétial ( Défier route ennemis, ... )
+-> Scoring sur personnage : attire plus les ennemis
 -> 
 -> 
 -> 

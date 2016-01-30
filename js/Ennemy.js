@@ -20,6 +20,8 @@ function Ennemy(_game, _x, _y) {
     this.posTagetX;
     this.posTagetY;
     
+    this.strength;
+    
     this.attackDistance = 0; // Distance à partir de laquelle l'ennemis attauque le joueur
     
     var rnd = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
@@ -29,11 +31,13 @@ function Ennemy(_game, _x, _y) {
     {
         this.type = "Chargeur"; 
         this.attackDistance = 45;
+        this.strength = 5;
     }
     else if(rnd === 2)
     {
         this.type = "Tireur"; 
         this.attackDistance = 160;
+        this.strength = 5;
     }
         
     this.dead = false; // FD: redondant avec life == 0 
@@ -67,7 +71,6 @@ Ennemy.prototype.calcDistance = function(_x,_y) {
     return Math.sqrt(Math.pow(_x - this.x, 2) + Math.pow(_y - this.y, 2), 2);
 }
 
-
 Ennemy.prototype.update = function(time) {
 
     //Gestion du deplacement des ennemis vers le Shaman
@@ -88,6 +91,11 @@ Ennemy.prototype.update = function(time) {
         
             this.moveX = 0;
             this.moveY = 0;
+            
+            if(this.type === "Chargeur")
+            {
+                this.game.life -= this.strength;
+            }
         }
     }
     
@@ -96,29 +104,14 @@ Ennemy.prototype.update = function(time) {
 
         this.life = 0;
     }
-    
-    // Test les collisions avec le joueur
-    /*
-    for (var i in this.game.characters) {
-        if(this.type === "Chargeur" && this.game.characters[i].collidesWith(this.x+this.moveX, this.y+this.moveY, this.width, this.height)) {
-            this.moveX = 0;
-            this.moveY = 0;
-        }
-        if(this.type === "Tireur" && this.game.characters[i].collidesWith(this.x+this.moveX, this.y+this.moveY, 250, 250)) {
-            this.moveX = 0;
-            this.moveY = 0;
-        }
-    }
-    */
-   
+
    for (var i in this.game.characters) {
        
-       if(this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackDistance) {
+        if(this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackDistance) {
            
-        this.moveX = 0;
-        this.moveY = 0;
-       }
-       
+            this.moveX = 0;
+            this.moveY = 0;
+        }
    }
    
     this.x += this.moveX;
