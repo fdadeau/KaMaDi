@@ -20,8 +20,8 @@ function GameRules() {
         // nombre d'ennemis/vague
         nbEnnemiesByWave: {
             //value: 30,
-            value: [4, 5, 6, 7, 8],
-            get: function(niveau, time) { return this.value[niveau] * (1 + time / (1000 * 60 * 2)); }
+            value: [3, 4, 5, 6, 7],
+            get: function(niveau, time) { return this.value[niveau] * (1 + time / (1000 * 60 * 3)); }
         },
         // frequence d'apparition
         delay: {
@@ -65,11 +65,11 @@ function GameRules() {
             get: function() { return this.value; }
         },
         life: {
-            value: 25,
+            value: 30,
             get: function() { return this.value; }
         },
         timeStun: {
-           value: 1000 * 15,
+           value: 1000 * 13,
            get: function() { return this.value; }  
         },
         speed: {
