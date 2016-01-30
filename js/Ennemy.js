@@ -10,12 +10,6 @@ function Ennemy(_game, _x, _y) {
     // size
     this.width = 20;
     this.height = 20;
-
-    this.moveX = 0;
-    this.moveY = 0;
-    
-    this.posTagetX;
-    this.posTagetY;
     
     this.strength;
     
@@ -36,6 +30,16 @@ function Ennemy(_game, _x, _y) {
         indexRules = 1;
     }
     
+    // speed
+    this.speed = this.game.gameRules.ennemies.speed.get(indexRules);
+
+    this.posTargetX = this.game.shaman.getX();
+    this.posTargetY = this.game.shaman.getY();
+    
+
+    this.moveX = (this.posTargetX - _x)/Math.sqrt(Math.pow(_x - this.posTargetX,2) + Math.pow(_y - this.posTargetY,2)) * this.speed;
+    this.moveY = (this.posTargetY - _y)/Math.sqrt(Math.pow(_x - this.posTargetX,2) + Math.pow(_y - this.posTargetY,2)) * this.speed;
+
     this.attackDelay = this.game.gameRules.ennemies.attackDelay.get(indexRules);
     this.lastAttack = 0;
     this.attackSpeed = this.game.gameRules.ennemies.attackSpeed.get(indexRules);
@@ -43,8 +47,7 @@ function Ennemy(_game, _x, _y) {
     this.attackRange = this.game.gameRules.ennemies.attackRange.get(indexRules);
     
     this.life = this.game.gameRules.ennemies.life.get(indexRules);
-    this.speed = this.game.gameRules.ennemies.speed.get(indexRules);
-
+    
         
     this.dead = false; // FD: redondant avec life == 0 
 }
@@ -81,6 +84,7 @@ Ennemy.prototype.calcDistance = function(_x,_y) {
 Ennemy.prototype.update = function(time) {
 
     //Gestion du deplacement des ennemis vers le Shaman
+    /*
     if(Math.abs(this.game.shaman.getX() - this.x) > Math.abs(this.game.shaman.getY() - this.y)) {
         this.moveY = ((this.game.shaman.getY() - this.y) / Math.abs(this.game.shaman.getX() - this.x)) * this.speed;
         this.moveX = -this.speed;
@@ -89,6 +93,7 @@ Ennemy.prototype.update = function(time) {
         this.moveX = -((this.game.shaman.getX() - this.x) / Math.abs(this.game.shaman.getY() - this.y)) * this.speed;
         this.moveY = this.speed;
     }
+    */
     
     if(this.life <= 0)
     {
@@ -96,6 +101,10 @@ Ennemy.prototype.update = function(time) {
         this.y -= this.moveY;
         return;
     }
+    this.x += this.moveX;
+    this.y += this.moveY;
+    
+
 
     // Gestion de la collision entre les ennemis
     for (var i in this.game.ennemies) {

@@ -107,18 +107,15 @@ var Game = (function () {
             }
         }
         
-        this.timeEnnemyCreation += time.tick;
-        //if (!this.lastEnnemyCreation || this.lastEnnemyCreation.time > this.gameRules.ennemies.delay.get()) { // Fonctionnement ??
-        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get()) {
-            
-            this.AddEnnemisWave();
         
+        this.timeEnnemyCreation += time.tick;
+        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get()) {            
+            this.AddEnnemisWave();
             this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get();
         }
-            //this.lastEnnemyCreation = time;
+        
         
         for (var i=0; i < this.ennemies.length; i++) {
-            
             if(this.ennemies[i] != null)
             {
                 if(this.ennemies[i].isDead())
@@ -139,8 +136,36 @@ var Game = (function () {
         //for (var i=this.ennemies.length; i < this.gameRules.ennemies.nbEnnemiesByWave.get(); i++) {
         for (var i=0; i < this.gameRules.ennemies.nbEnnemiesByWave.get(); i++) { // Si on attent pas la fin de la vague
             //var posX = (this.width + 40 + Math.random()*200) | 0; // ??
-            var posX = (this.width + 40 + Math.random()*200) | 0; // ??
-            var posY = this.height * Math.random() | 0; 
+            
+            // on tire l'ennemi dans la zone
+            var posX = Math.random() * this.width * 2 / 3;
+            if (posX > this.width / 3) {
+                posX += this.width / 3;
+            }
+            var posY = Math.random() * this.height;
+            
+            
+            var seed = Math.random();
+            if (seed < 0.33) {
+                // on le bouge vers le haut
+                posY = -30;
+            }
+            else if (seed > 0.66) {
+                // on le bouge vers le bas
+                posY = this.height + 30;
+            }
+            else {
+                if(Math.random() > 0.5) {
+                    // on le sort vers la gauche
+                    posX = - 30;
+                }
+                else {
+                    // on le sort vers la droite
+                    posX = this.width + 30;
+                }
+                
+            }
+            
             this.ennemies[this.ennemies.length] = new Ennemy(this, posX, posY);  
         }
     }
