@@ -12,7 +12,7 @@ function Ennemy(_game, _x, _y) {
     this.height = 20;
 
     this.life = this.game.gameRules.ennemies.life.get();
-    this.speed = 5;
+    this.speed = this.game.gameRules.ennemies.speed.get();
 
     this.moveX = 0;
     this.moveY = 0;
@@ -20,16 +20,16 @@ function Ennemy(_game, _x, _y) {
 
 Ennemy.prototype.getX = function() {
     return this.x;
-}
+};
 Ennemy.prototype.getY = function() {
     return this.y;
-}
+};
 Ennemy.prototype.getWidth = function() {
     return this.width;
-}
+};
 Ennemy.prototype.getHeight = function() {
     return this.height;
-}
+};
 
 Ennemy.prototype.update = function(time) {
 
@@ -58,11 +58,11 @@ Ennemy.prototype.update = function(time) {
 
     this.x += this.moveX;
     this.y += this.moveY;
-}
+};
 
 Ennemy.prototype.render = function() {
 
     this.game.context.fillStyle = "#FF0000";
     this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
 
-}
+};

@@ -26,6 +26,26 @@ function GameRules() {
         life: {
             value: 100,
             get: function() { return this.value; }
+        },
+        speed: {
+            value: 5,
+            get: function() { return this.value; }
+        }
+    }
+    
+    this.character = {
+        
+        nbStartCharacter: {
+            value: 10,
+            get: function() { return this.value; }
+        },
+        life: {
+            value: 100,
+            get: function() { return this.value; }
+        },
+        speed: {
+            value: 5,
+            get: function() { return this.value; }
         }
     }
 
