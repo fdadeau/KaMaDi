@@ -17,6 +17,25 @@ function Ennemy(_game, _x, _y) {
     this.moveX = 0;
     this.moveY = 0;
     
+    this.posTagetX;
+    this.posTagetY;
+    
+    this.attackDistance = 0; // Distance à partir de laquelle l'ennemis attauque le joueur
+    
+    var rnd = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
+    
+    this.type = ""; // Type d'ennemis : conditionne son comportement -> Parametrer attribution dans GameRule
+    if(rnd === 1)
+    {
+        this.type = "Chargeur"; 
+        this.attackDistance = 45;
+    }
+    else if(rnd === 2)
+    {
+        this.type = "Tireur"; 
+        this.attackDistance = 160;
+    }
+        
     this.dead = false; // FD: redondant avec life == 0 
 }
 
@@ -43,6 +62,11 @@ return  !(this.x + this.width / 2 < _x - _w/2 ||
             this.y + this.height / 2 < _y - _h / 2); 
 }
 
+Ennemy.prototype.calcDistance = function(_x,_y) {
+    
+    return Math.sqrt(Math.pow(_x - this.x, 2) + Math.pow(_y - this.y, 2), 2);
+}
+
 
 Ennemy.prototype.update = function(time) {
 
@@ -60,32 +84,57 @@ Ennemy.prototype.update = function(time) {
     for (var i in this.game.ennemies) {
         if(this.game.ennemies[i] !== null && this.game.ennemies[i] !== this
             && this.game.ennemies[i].collidesWith(this.x+this.moveX, this.y+this.moveY, this.width, this.height)
-/*        && this.x + this.moveX + this.width > this.game.ennemies[i].getX()
-        && this.x + this.moveX < this.game.ennemies[i].getX() + this.game.ennemies[i].getWidth()
-        && this.y + this.moveY + this.height > this.game.ennemies[i].getY()
-        && this.y + this.moveY < this.game.ennemies[i].getY() + this.game.ennemies[i].getHeight()*/
-        && this.x > this.game.ennemies[i].getX()) {
+            && this.x > this.game.ennemies[i].getX()) {
+        
             this.moveX = 0;
             this.moveY = 0;
         }
     }
     
     // Gestion de la collision avec le shaman
-    if(this.x + this.width > this.game.shaman.getX()
-    && this.x < this.game.shaman.getX() + this.game.shaman.getWidth()
-    && this.y + this.height > this.game.shaman.getY()
-    && this.y < this.game.shaman.getY() + this.game.shaman.getHeight()) {
+    if(this.collidesWith(this.game.shaman.getX(), this.game.shaman.getY(), this.game.shaman.getWidth(), this.game.shaman.getHeight())) {
 
         this.life = 0;
     }
-
+    
+    // Test les collisions avec le joueur
+    /*
+    for (var i in this.game.characters) {
+        if(this.type === "Chargeur" && this.game.characters[i].collidesWith(this.x+this.moveX, this.y+this.moveY, this.width, this.height)) {
+            this.moveX = 0;
+            this.moveY = 0;
+        }
+        if(this.type === "Tireur" && this.game.characters[i].collidesWith(this.x+this.moveX, this.y+this.moveY, 250, 250)) {
+            this.moveX = 0;
+            this.moveY = 0;
+        }
+    }
+    */
+   
+   for (var i in this.game.characters) {
+       
+       if(this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackDistance) {
+           
+        this.moveX = 0;
+        this.moveY = 0;
+       }
+       
+   }
+   
     this.x += this.moveX;
     this.y += this.moveY;
 };
 
 Ennemy.prototype.render = function() {
 
-    this.game.context.fillStyle = "#FF0000";
-    this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
-
+    if(this.type === "Chargeur")
+    {
+        this.game.context.fillStyle = "#FF0000";
+        this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+    }
+    else if(this.type === "Tireur")
+    {
+        this.game.context.fillStyle = "#800080";
+        this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+    }
 };
