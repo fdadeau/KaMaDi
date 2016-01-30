@@ -59,6 +59,11 @@ Character.prototype.update = function(time) {
         }
     }
     else { // IDLE
+        // is it performing the shaman ritual ?
+        if (this.game.shaman.isInShamanCircle(this.x, this.y)) {
+            return;
+        }
+        
         // detect closest ennemy 
         if (time.time - this.lastAttack > this.attackDelay) {
             var closestEnnemy = null;
@@ -112,10 +117,8 @@ Character.prototype.render = function() {
     }
     this.game.context.fillStyle = "#00FF00";
     this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
-    /*
+    
     this.game.context.fillStyle = "#000000";
-    this.game.context.beginPath();
-    this.game.context.arc(this.x, this.y, 1, 0, 2*Math.PI);
-    this.game.context.stroke();
-    */
+    this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2 - 10, this.width * this.life / this.game.gameRules.character.life.get(), 5)
+    
 };

@@ -15,6 +15,8 @@ function Shaman(_g) {
     // position 
     var x = 140, y = document.getElementById("cvs").height / 2 | 0;
     
+    var altarX = x + 50, altarY = y, altarRadius = 70; 
+    
     // largeur, hauteur
     var width = 20, height = 20;
     
@@ -37,15 +39,23 @@ function Shaman(_g) {
         return height;
     };
     
+    this.isInShamanCircle = function(_x, _y) {
+        return Math.sqrt(Math.pow(altarX - _x,2) + Math.pow(altarY - _y,2)) < altarRadius;
+    };
+    
     // Mise à jour du shaman
     this.update = function(time) {
-        
-        if (game.allCharactersInPosition()) {
-            currentLoadingTime += time.tick;
-            if (currentLoadingTime >= loadingTime) {
-                game.endLevel();
-                this.reset();
+        var nbCharactersInPosition = 0;
+        for (var i in game.characters) {
+            if (game.characters[i].state == 0 && this.isInShamanCircle(game.characters[i].x, game.characters[i].y)) {
+                nbCharactersInPosition++;
             }
+        }
+        if (nbCharactersInPosition == 0) return;
+        currentLoadingTime += (time.tick * nbCharactersInPosition / game.gameRules.character.nbStartCharacter.get());
+        if (currentLoadingTime >= loadingTime) {
+            game.endLevel();
+            this.reset();
         }
     };
     

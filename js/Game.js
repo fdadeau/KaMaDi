@@ -4,6 +4,7 @@ var Game = (function () {
     function Game(context) {
         console.log("Game::()");
         this.initialized = false;
+        this.pause = true;
         this.context = context;
         this.width = null;
         this.height = null;
@@ -40,6 +41,8 @@ var Game = (function () {
         
         console.log("Game::start");
         
+        this.pause = false;
+        
         this.AddEnnemisWave();
         
         if (!this.initialized) {
@@ -51,6 +54,8 @@ var Game = (function () {
     };
     
     Game.prototype.update = function (time, mousePosition) {
+        if (this.pause) return;
+        
         if (mousePosition.x !== null) {
             console.log(mousePosition);
             console.log(time);
@@ -160,7 +165,7 @@ var Game = (function () {
     
     
     Game.prototype.allCharactersInPosition = function() { return true; }; // TODO modify 
-    Game.prototype.endLevel = function() { alert("Fin du niveau"); this.init().start(); }; // TODO modify 
+    Game.prototype.endLevel = function() { alert("Fin du niveau"); this.pause = true; }; // TODO modify 
     
     return Game;
 })();
