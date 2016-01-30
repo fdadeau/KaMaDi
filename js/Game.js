@@ -54,7 +54,7 @@ var Game = (function () {
             // detection du personnage selectionné
             var targetCharacter = null;
             for (var i in this.characters) {
-                if (this.characters[i].collidesWith(mousePosition.x, mousePosition.y)) {
+                if (this.characters[i].collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
                     targetCharacter = this.characters[i];
                 }
             }

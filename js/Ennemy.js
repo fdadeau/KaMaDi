@@ -36,11 +36,11 @@ Ennemy.prototype.isDead = function() {
     return this.life <= 0;
 };
 
-Ennemy.prototype.collidesWith = function(_x,_y) {
-return  _x >= this.x - this.width/2 &&
-        _x <= this.x + this.width/2 &&
-        _y >= this.y - this.height/2 &&
-        _y <= this.y + this.height/2;
+Ennemy.prototype.collidesWith = function(_x,_y, _w, _h) {
+return  !(this.x + this.width / 2 < _x - _w/2 ||
+            this.x - this.width / 2 > _x + _w/2 ||
+            this.y - this.height / 2 > _y + _h / 2 ||
+            this.y + this.height / 2 < _y - _h / 2); 
 }
 
 
@@ -59,10 +59,11 @@ Ennemy.prototype.update = function(time) {
     // Gestion de la collision entre les ennemis
     for (var i in this.game.ennemies) {
         if(this.game.ennemies[i] !== null && this.game.ennemies[i] !== this
-        && this.x + this.moveX + this.width > this.game.ennemies[i].getX()
+            && this.game.ennemies[i].collidesWith(this.x+this.moveX, this.y+this.moveY, this.width, this.height)
+/*        && this.x + this.moveX + this.width > this.game.ennemies[i].getX()
         && this.x + this.moveX < this.game.ennemies[i].getX() + this.game.ennemies[i].getWidth()
         && this.y + this.moveY + this.height > this.game.ennemies[i].getY()
-        && this.y + this.moveY < this.game.ennemies[i].getY() + this.game.ennemies[i].getHeight()
+        && this.y + this.moveY < this.game.ennemies[i].getY() + this.game.ennemies[i].getHeight()*/
         && this.x > this.game.ennemies[i].getX()) {
             this.moveX = 0;
             this.moveY = 0;

@@ -69,11 +69,11 @@ Character.prototype.goTo = function(_toX, _toY) {
 };
 
 
-Character.prototype.collidesWith = function(_x,_y) {
-return  _x >= this.x - this.width/2 &&
-        _x <= this.x + this.width/2 &&
-        _y >= this.y - this.height/2 &&
-        _y <= this.y + this.height/2;
+Character.prototype.collidesWith = function(_x,_y, _w, _h) {
+return  !(this.x + this.width / 2 < _x - _w/2 ||
+            this.x - this.width / 2 > _x + _w/2 ||
+            this.y - this.height / 2 > _y + _h / 2 ||
+            this.y + this.height / 2 < _y - _h / 2); 
 }
 
                     
