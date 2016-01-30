@@ -17,6 +17,8 @@ var Game = (function () {
         // set of characters
         this.characters = [];
         this.selectedCharacter = null;
+        // set of projectiles 
+        this.projectiles = [];
     }
     
     Game.prototype.init = function () {
@@ -29,6 +31,7 @@ var Game = (function () {
         for (var i=0; i < this.gameRules.character.nbStartCharacter.get(); i++) {
             this.characters[this.characters.length] = new Character(this, this.width*0.8*Math.random() + this.width*0.2, this.height*Math.random());
         }
+        this.projectiles = [];
 
         return this;
     };
@@ -58,17 +61,14 @@ var Game = (function () {
                     targetCharacter = this.characters[i];
                 }
             }
-            if (this.selectedCharacter != null) {
-                if (targetCharacter == null) {
+            if (targetCharacter != null) {
+                this.selectedCharacter = targetCharacter;
+            }
+            else {
+                if (this.selectedCharacter != null) {
                     this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
                     this.selectedCharacter = null;
                 }
-                else {
-                    this.selectedCharacter = targetCharacter;
-                }
-            }
-            else {
-                this.selectedCharacter = targetCharacter;
             }
             
             mousePosition.raz();
@@ -77,7 +77,22 @@ var Game = (function () {
         
         // characters update
         for (var i=0; i < this.characters.length; i++) {
-            this.characters[i].update(time);
+            if (this.characters[i].life <= 0) {
+                this.characters.splice(i,1);
+                i--;
+            }
+            else {
+                this.characters[i].update(time);
+            }
+        }
+        
+        // projectiles update
+        for (var i=0; i < this.projectiles.length; i++) {
+            this.projectiles[i].update(time);
+            if (this.projectiles[i].active == 0) {
+                this.projectiles[i] = null;
+                this.projectiles.splice(i,1);
+            }
         }
         
         this.timeEnnemyCreation += time.tick;
@@ -118,6 +133,10 @@ var Game = (function () {
         }
     }
     
+    Game.prototype.addProjectile = function(_x, _y, _tx, _ty, _s, _d) {
+        this.projectiles[this.projectiles.length] = new Projectile(this, _x, _y, _tx, _ty, _s, _d);
+    }
+    
     Game.prototype.render = function () {
         // DEBUG : dessin du cercle où se trouve le shaman
         this.context.beginPath();
@@ -132,6 +151,10 @@ var Game = (function () {
         // dessin des ennemis
         for (var i in this.ennemies) {
             this.ennemies[i].render();
+        }
+        // dessin des projectiles
+        for (var i in this.projectiles) {
+            this.projectiles[i].render();
         }
     };
     

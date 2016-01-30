@@ -24,7 +24,7 @@ function GameRules() {
             get: function() { return this.value; }
         },
         life: {
-            value: 100,
+            value: 10,
             get: function() { return this.value; }
         },
         speed: {
@@ -48,11 +48,19 @@ function GameRules() {
             get: function() { return this.value; }
         },
         attackDelay: {
-            value: 100,
+            value: 1000,
             get: function() { return this.value; }
         },
         attackRange: {
-            value: 300,
+            value: 200,
+            get: function() { return this.value; }
+        },
+        attackDamage: {
+            value: 4,
+            get: function() { return this.value; }
+        },
+        attackSpeed: {
+            value: 5,
             get: function() { return this.value; }
         }
     }

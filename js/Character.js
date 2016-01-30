@@ -24,7 +24,8 @@ function Character(_game, _x, _y) {
     // délai entre deux attaques
     this.attackDelay = this.game.gameRules.character.attackDelay.get();
     this.lastAttack = 0;
-    
+    this.attackSpeed = this.game.gameRules.character.attackSpeed.get();
+    this.attackDamage = this.game.gameRules.character.attackDamage.get();
     // portée de l'attaque
     this.attackRange = this.game.gameRules.character.attackRange.get();
 }
@@ -58,7 +59,24 @@ Character.prototype.update = function(time) {
         }
     }
     else { // IDLE
-        // attack --> TODO
+        // detect closest ennemy 
+        if (time.time - this.lastAttack > this.attackDelay) {
+            var closestEnnemy = null;
+            var shortestDistance = this.attackRange + 1;
+            for (var i in this.game.ennemies) {
+                var distance = this.distanceTo(this.game.ennemies[i].x, this.game.ennemies[i].y); 
+                if (distance < this.attackRange && distance < shortestDistance) {
+                    closestEnnemy = this.game.ennemies[i];
+                    shortestDistance = distance;
+                }
+            }
+            if (closestEnnemy != null) {
+                this.game.addProjectile(this.x, this.y, closestEnnemy.x, closestEnnemy.y, this.attackSpeed, this.attackDamage);
+                this.lastAttack = time.time;
+            }
+        }
+        
+        
     }
 };
 
@@ -76,6 +94,10 @@ return  !(this.x + this.width / 2 < _x - _w/2 ||
             this.y + this.height / 2 < _y - _h / 2); 
 }
 
+Character.prototype.distanceTo = function(_x,_y) {
+    return  Math.sqrt(Math.pow(this.x-_x,2)+Math.pow(this.y-_y,2)); 
+}
+
                     
 Character.prototype.render = function() {
 
@@ -90,9 +112,10 @@ Character.prototype.render = function() {
     }
     this.game.context.fillStyle = "#00FF00";
     this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
+    /*
     this.game.context.fillStyle = "#000000";
     this.game.context.beginPath();
     this.game.context.arc(this.x, this.y, 1, 0, 2*Math.PI);
     this.game.context.stroke();
-
+    */
 };

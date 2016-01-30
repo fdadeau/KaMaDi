@@ -39,6 +39,7 @@ function Shaman(_g) {
     
     // Mise à jour du shaman
     this.update = function(time) {
+        
         if (game.allCharactersInPosition()) {
             currentLoadingTime += time.tick;
             if (currentLoadingTime >= loadingTime) {
