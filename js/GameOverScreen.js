@@ -19,8 +19,8 @@ GameOverScreen.prototype.init = function () {
 
     this.initialized = true;
 
-    this.button[0] = new Button(this, 600, 450, 140, 60);
-    this.button[1] = new Button(this, 600, 550, 140, 60);
+    this.button[0] = new Button(this, 600, 450, 300, 70, "recommencer");
+    this.button[1] = new Button(this, 600, 550, 300, 70, "menu");
     return this;
 };
 

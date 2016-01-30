@@ -49,7 +49,7 @@ Projectile.prototype.update = function(time) {
         else
         {
             for (var i in this.game.characters) {
-                if (this.game.characters[i].collidesWith(this.x, this.y, this.size, this.size)) {
+                if (!this.game.characters[i].isStun() && this.game.characters[i].collidesWith(this.x, this.y, this.size, this.size)) {
                     this.game.characters[i].life -= this.damage;
                     this.active = 0;
                     this.game.audio.playSoundM((this.game.characters[i].life > 0) ? 0 : 1);
