@@ -10,6 +10,9 @@ function VictoryScreen(context) {
     this.lauchMenu = false;
     this.levelSelect = 0;
     
+    this.imageTitre = new Image();
+    this.imageTitre.src = "images/image_victory.png";
+    
     this.button = [];
 }
 
@@ -56,6 +59,8 @@ VictoryScreen.prototype.render = function () {
     
     if(this.pause)
         return;
+    
+    this.context.drawImage(this.imageTitre, 0, 0, 600, 120, 350, 60, 600, 120);
     
     for(var i in this.button)
         this.button[i].render();
