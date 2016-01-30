@@ -24,6 +24,7 @@ La partie se termine :
 *** Combat ***
 -> Les ennemis qui combattent à distance, lance leur tir dès que les persos qui sont dans leur zone de combat
 -> Les perso qui combattent au corps à corps doivent attaquer automatiquement les ennemis qui leur tir dessus
+-> Les personnages s'envoit des sigles japonais à la place des tir ( amour, passion ) et pour perso ( peace, sagesse )
 
 *** Affichage ***
 -> Ennemis = carré rouge
