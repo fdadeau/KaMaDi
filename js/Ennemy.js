@@ -17,7 +17,7 @@ function Ennemy(_game, _x, _y) {
     this.moveX = 0;
     this.moveY = 0;
     
-    this.dead = false;
+    this.dead = false; // FD: redondant avec life == 0 
 }
 
 Ennemy.prototype.getX = function() {
@@ -33,7 +33,7 @@ Ennemy.prototype.getHeight = function() {
     return this.height;
 };
 Ennemy.prototype.isDead = function() {
-    return this.dead;
+    return this.life <= 0;
 };
 
 Ennemy.prototype.update = function(time) {
@@ -67,7 +67,7 @@ Ennemy.prototype.update = function(time) {
     && this.y + this.height > this.game.shaman.getY()
     && this.y < this.game.shaman.getY() + this.game.shaman.getHeight()) {
 
-        this.dead = true;
+        this.life = 0;
     }
 
     this.x += this.moveX;

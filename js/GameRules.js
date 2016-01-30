@@ -36,7 +36,7 @@ function GameRules() {
     this.character = {
         
         nbStartCharacter: {
-            value: 10,
+            value: 4,
             get: function() { return this.value; }
         },
         life: {
@@ -45,6 +45,14 @@ function GameRules() {
         },
         speed: {
             value: 5,
+            get: function() { return this.value; }
+        },
+        attackDelay: {
+            value: 100,
+            get: function() { return this.value; }
+        },
+        attackRange: {
+            value: 300,
             get: function() { return this.value; }
         }
     }

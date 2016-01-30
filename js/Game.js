@@ -14,6 +14,9 @@ var Game = (function () {
         // last ennemy creation
         //this.lastEnnemyCreation = null;
         this.timeEnnemyCreation = 0;
+        // set of characters
+        this.characters = [];
+        this.selectedCharacter = null;
     }
     
     Game.prototype.init = function () {
@@ -21,6 +24,11 @@ var Game = (function () {
         console.log("Game::init");
         
         this.initialized = true;
+
+        this.characters = [];
+        for (var i=0; i < this.gameRules.character.nbStartCharacter.get(); i++) {
+            this.characters[this.characters.length] = new Character(this, this.width*0.8*Math.random() + this.width*0.2, this.height*Math.random());
+        }
 
         return this;
     };
@@ -43,9 +51,29 @@ var Game = (function () {
         if (mousePosition.x !== null) {
             console.log(mousePosition);
             console.log(time);
+            // detection du personnage selectionné
+            if (this.selectedCharacter == null) {
+                for (var i in this.characters) {
+                    if (mousePosition.x >= this.characters[i].x - this.characters[i].width/2 &&
+                        mousePosition.x <= this.characters[i].x + this.characters[i].width/2 &&
+                        mousePosition.y >= this.characters[i].y - this.characters[i].height/2 &&
+                        mousePosition.y <= this.characters[i].y + this.characters[i].height/2) {
+                        this.selectedCharacter = this.characters[i];
+                    }
+                }
+            }
+            else {
+                this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
+                this.selectedCharacter = null;
+            }
             mousePosition.raz();
         }
         this.shaman.update(time);
+        
+        // characters update
+        for (var i=0; i < this.characters.length; i++) {
+            this.characters[i].update(time);
+        }
         
         this.timeEnnemyCreation += time.tick;
         //if (!this.lastEnnemyCreation || this.lastEnnemyCreation.time > this.gameRules.ennemies.delay.get()) { // Fonctionnement ??
@@ -57,13 +85,15 @@ var Game = (function () {
         }
             //this.lastEnnemyCreation = time;
         
-        for (var i in this.ennemies) {
+        for (var i=0; i < this.ennemies.length; i++) {
             
             if(this.ennemies[i] != null)
             {
                 if(this.ennemies[i].isDead())
                 {
-                    this.ennemies[i] = null; // -> Ne libere pas la case de l'ennemis ( A AMELIORER )
+                    this.ennemies[i] = null;    // -> Ne libere pas la case de l'ennemis 
+                    this.ennemies.splice(i,1);  // -> suppression de la case de l'ennemi.
+                    i--;
                 }
                 else
                 {
@@ -84,18 +114,25 @@ var Game = (function () {
     }
     
     Game.prototype.render = function () {
+        // DEBUG : dessin du cercle où se trouve le shaman
+        this.context.beginPath();
+        this.context.arc(this.shaman.getX()+50, this.shaman.getY(), 70, 0, 2*Math.PI);
+        this.context.stroke();
+        // dessin du shaman
         this.shaman.render();
+        // dessin des personnages
+        for (var i in this.characters) {
+            this.characters[i].render();
+        }
+        // dessin des ennemis
         for (var i in this.ennemies) {
-            if(this.ennemies[i] != null)
-            {
-                this.ennemies[i].render();
-            }
+            this.ennemies[i].render();
         }
     };
     
     
     Game.prototype.allCharactersInPosition = function() { return true; }; // TODO modify 
-    Game.prototype.endLevel = function() { alert("Fin du niveau"); }; // TODO modify 
+    Game.prototype.endLevel = function() { alert("Fin du niveau"); this.init().start(); }; // TODO modify 
     
     return Game;
 })();
