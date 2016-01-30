@@ -12,10 +12,11 @@ function Shaman(_g) {
     // Temps de chargement courant
     var currentLoadingTime = 0;
     
+    // Autel autour duquel se trouve le shaman
+    var altarX = game.width/2 + 50, altarY = game.height/2, altarRadius = 70; 
+
     // position 
-    var x = 140, y = document.getElementById("cvs").height / 2 | 0;
-    
-    var altarX = x + 50, altarY = y, altarRadius = 70; 
+    var x = altarX - 50, y = altarY;
     
     // largeur, hauteur
     var width = 20, height = 20;
@@ -61,10 +62,16 @@ function Shaman(_g) {
     
     // Affichage du shaman
     this.render = function() {
+        // dessin du shaman
         game.context.fillStyle = "#000000";
         game.context.fillRect(x - width/2|0, y - height/2 | 0, width, height);
         game.context.fillStyle = "#FF5555";
         game.context.fillRect(x - width/2|0, (y - height/2 | 0) - 10, width * currentLoadingTime / loadingTime | 0, 5);
+        // dessin du cercle où se trouve le shaman
+        game.context.beginPath();
+        game.context.arc(altarX, altarY, altarRadius, 0, 2*Math.PI);
+        game.context.stroke();
+        
     };
     
 }

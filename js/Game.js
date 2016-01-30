@@ -9,7 +9,7 @@ var Game = (function () {
         this.width = null;
         this.height = null;
         this.gameRules = new GameRules();
-        this.shaman = new Shaman(this); 
+        this.shaman = null;
         // set of ennemies
         this.ennemies = [];
         // last ennemy creation
@@ -25,9 +25,11 @@ var Game = (function () {
     Game.prototype.init = function () {
         
         console.log("Game::init");
-        
-        this.initialized = true;
 
+        this.initialized = true;
+        
+        this.shaman = new Shaman(this); 
+        
         this.characters = [];
         for (var i=0; i < this.gameRules.character.nbStartCharacter.get(); i++) {
             this.characters[this.characters.length] = new Character(this, this.width*0.8*Math.random() + this.width*0.2, this.height*Math.random());
@@ -138,15 +140,11 @@ var Game = (function () {
         }
     }
     
-    Game.prototype.addProjectile = function(_x, _y, _tx, _ty, _s, _d) {
-        this.projectiles[this.projectiles.length] = new Projectile(this, _x, _y, _tx, _ty, _s, _d);
+    Game.prototype.addProjectile = function(_x, _y, _tx, _ty, _s, _d, _j) {
+        this.projectiles[this.projectiles.length] = new Projectile(this, _x, _y, _tx, _ty, _s, _d, _j);
     }
     
     Game.prototype.render = function () {
-        // DEBUG : dessin du cercle où se trouve le shaman
-        this.context.beginPath();
-        this.context.arc(this.shaman.getX()+50, this.shaman.getY(), 70, 0, 2*Math.PI);
-        this.context.stroke();
         // dessin du shaman
         this.shaman.render();
         // dessin des personnages
@@ -163,8 +161,6 @@ var Game = (function () {
         }
     };
     
-    
-    Game.prototype.allCharactersInPosition = function() { return true; }; // TODO modify 
     Game.prototype.endLevel = function() { alert("Fin du niveau"); this.pause = true; }; // TODO modify 
     
     return Game;
