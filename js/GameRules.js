@@ -15,7 +15,7 @@ function GameRules() {
         // nombre d'ennemis/vague
         nbEnnemiesByWave: {
             //value: 30,
-            value: 30,
+            value: 10,
             get: function() { return this.value; }
         },
         // frequence d'apparition
@@ -28,7 +28,7 @@ function GameRules() {
             get: function() { return this.value; }
         },
         speed: {
-            value: 5,
+            value: 1,
             get: function() { return this.value; }
         }
     }

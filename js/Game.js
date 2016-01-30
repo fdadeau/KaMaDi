@@ -52,20 +52,25 @@ var Game = (function () {
             console.log(mousePosition);
             console.log(time);
             // detection du personnage selectionné
-            if (this.selectedCharacter == null) {
-                for (var i in this.characters) {
-                    if (mousePosition.x >= this.characters[i].x - this.characters[i].width/2 &&
-                        mousePosition.x <= this.characters[i].x + this.characters[i].width/2 &&
-                        mousePosition.y >= this.characters[i].y - this.characters[i].height/2 &&
-                        mousePosition.y <= this.characters[i].y + this.characters[i].height/2) {
-                        this.selectedCharacter = this.characters[i];
-                    }
+            var targetCharacter = null;
+            for (var i in this.characters) {
+                if (this.characters[i].collidesWith(mousePosition.x, mousePosition.y)) {
+                    targetCharacter = this.characters[i];
+                }
+            }
+            if (this.selectedCharacter != null) {
+                if (targetCharacter == null) {
+                    this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
+                    this.selectedCharacter = null;
+                }
+                else {
+                    this.selectedCharacter = targetCharacter;
                 }
             }
             else {
-                this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
-                this.selectedCharacter = null;
+                this.selectedCharacter = targetCharacter;
             }
+            
             mousePosition.raz();
         }
         this.shaman.update(time);

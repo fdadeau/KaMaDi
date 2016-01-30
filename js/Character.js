@@ -8,19 +8,18 @@ function Character(_game, _x, _y) {
     this.y = _y;
 
     // size
-    this.width = 20;
-    this.height = 20;
+    this.width = 30;
+    this.height = 30;
     
     this.life = this.game.gameRules.character.life.get();
     this.speed = this.game.gameRules.character.speed.get();
 
-    this.moveX = 0;
-    this.moveY = 0;
-    
+    // point de destination lorsqu'il est en mouvement
     this.destX = 0;
     this.destY = 0;
+    this.distToTarget = 0;
     
-    this.state = 0; // IDLE
+    this.state = 0; // 0 : IDLE | 1 : MOVING 
     
     // délai entre deux attaques
     this.attackDelay = this.game.gameRules.character.attackDelay.get();
@@ -46,15 +45,16 @@ Character.prototype.getHeight = function() {
 Character.prototype.update = function(time) {
     
     if (this.state == 1) { // MOVING
-        var distToTarget = Math.sqrt(Math.pow(this.x - this.destX,2) + Math.pow(this.y - this.destY,2));
-        if (distToTarget < this.speed) {
+        this.distToTarget = Math.sqrt(Math.pow(this.x - this.destX,2) + Math.pow(this.y - this.destY,2));
+        if (this.distToTarget < this.speed) {
+            // arrive à destination
             this.x = this.destX;
             this.y = this.destY;
             this.state = 0;
         }
         else {
-            this.x += (this.destX - this.x)/distToTarget * this.speed;
-            this.y += (this.destY - this.y)/distToTarget * this.speed;
+            this.x += (this.destX - this.x)/this.distToTarget * this.speed;
+            this.y += (this.destY - this.y)/this.distToTarget * this.speed;
         }
     }
     else { // IDLE
@@ -68,6 +68,15 @@ Character.prototype.goTo = function(_toX, _toY) {
     this.state = 1;
 };
 
+
+Character.prototype.collidesWith = function(_x,_y) {
+return  _x >= this.x - this.width/2 &&
+        _x <= this.x + this.width/2 &&
+        _y >= this.y - this.height/2 &&
+        _y <= this.y + this.height/2;
+}
+
+                    
 Character.prototype.render = function() {
 
     // dessin d'un cercle autour du personnage pour le repérer

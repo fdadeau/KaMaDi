@@ -36,6 +36,14 @@ Ennemy.prototype.isDead = function() {
     return this.life <= 0;
 };
 
+Ennemy.prototype.collidesWith = function(_x,_y) {
+return  _x >= this.x - this.width/2 &&
+        _x <= this.x + this.width/2 &&
+        _y >= this.y - this.height/2 &&
+        _y <= this.y + this.height/2;
+}
+
+
 Ennemy.prototype.update = function(time) {
 
     //Gestion du deplacement des ennemis vers le Shaman
