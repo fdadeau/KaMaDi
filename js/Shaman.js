@@ -10,7 +10,7 @@ function Shaman(_g) {
     var loadingTime = game.gameRules.shaman.loadingTime.get();
     
     // Temps de chargement courant
-    this.currentLoadingTime = 0;
+    this.currentLoadingTime = 0; // 0.8 * loadingTime;
     
     // Autel autour duquel se trouve le shaman
     var altarX = game.width/2, altarY = game.height/2, altarRadius = 70; 
@@ -55,6 +55,15 @@ function Shaman(_g) {
     this.isInShamanCircle = function(_x, _y) {
         return Math.sqrt(Math.pow(altarX - _x,2) + Math.pow(altarY - _y,2)) < altarRadius;
     };
+    
+    this.unleash = function() {
+        for (var i in game.ennemies) {
+            if (game.ennemies[i].distanceTo(this.x, this.y) <= game.height / 3  * this.currentLoadingTime / loadingTime) {
+                game.ennemies[i].life = 0;
+            }
+        }
+        this.currentLoadingTime = 0;
+    }
     
     // Mise à jour du shaman
     this.update = function(time) {

@@ -61,23 +61,28 @@ var Game = (function () {
         if (mousePosition.x !== null) {
             console.log(mousePosition);
             console.log(time);
-            // detection du personnage selectionné
-            var targetCharacter = null;
-            for (var i in this.characters) {
-                if (this.characters[i].collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
-                    targetCharacter = this.characters[i];
-                }
-            }
-            if (targetCharacter != null) {
-                this.selectedCharacter = targetCharacter;
+            // clic sur le shaman -> libère sa puissance 
+            if (this.shaman.collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
+                this.shaman.unleash();
             }
             else {
-                if (this.selectedCharacter != null) {
-                    this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
-                    this.selectedCharacter = null;
+                // detection du personnage selectionné
+                var targetCharacter = null;
+                for (var i in this.characters) {
+                    if (this.characters[i].collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
+                        targetCharacter = this.characters[i];
+                    }
+                }
+                if (targetCharacter != null) {
+                    this.selectedCharacter = targetCharacter;
+                }
+                else {
+                    if (this.selectedCharacter != null) {
+                        this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
+                        this.selectedCharacter = null;
+                    }
                 }
             }
-            
             mousePosition.raz();
         }
         
