@@ -20,6 +20,9 @@ var Game = (function () {
         this.selectedCharacter = null;
         // set of projectiles 
         this.projectiles = [];
+        
+        this.spritesheet = new Image();
+        this.spritesheet.src = "images/spritesheet.png";
     }
     
     Game.prototype.init = function () {

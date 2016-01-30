@@ -136,7 +136,7 @@ Character.prototype.render = function() {
 
     // dessin d'un cercle autour du personnage pour le repérer
     if (this.game.selectedCharacter == this) {
-        this.game.context.globalAlpha = 0.4;
+        this.game.context.globalAlpha = 0.2;
         this.game.context.fillStyle = "#88FF88";
         this.game.context.beginPath();
         this.game.context.arc(this.x, this.y, this.attackRange, 0, 2*Math.PI);

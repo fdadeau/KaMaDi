@@ -13,7 +13,7 @@ function Shaman(_g) {
     this.currentLoadingTime = 0; // 0.8 * loadingTime;
     
     // Autel autour duquel se trouve le shaman
-    var altarX = game.width/2, altarY = game.height/2, altarRadius = 70; 
+    var altarX = game.width/2, altarY = game.height/2, altarRadius = 100; 
 
     // position 
     //var x = altarX - 50, y = altarY;
@@ -21,7 +21,7 @@ function Shaman(_g) {
     this.y = altarY;
     
     // largeur, hauteur
-    var width = 20, height = 20;
+    var width = 150, height = width/1.5;
     
     // points du vie du shaman
     this.life = game.gameRules.shaman.life.get();
@@ -84,8 +84,9 @@ function Shaman(_g) {
     // Affichage du shaman
     this.render = function() {
         // dessin du shaman
-        game.context.fillStyle = "#000000";
-        game.context.fillRect(this.x - width/2|0, this.y - height/2 | 0, width, height);
+        game.context.drawImage(game.spritesheet, 8, 1715, 1062, 705, this.x - width/2, this.y-height/2, width, height);
+/*        game.context.fillStyle = "#000000";
+        game.context.fillRect(this.x - width/2|0, this.y - height/2 | 0, width, height);*/
         //barre de chargement
         game.context.fillStyle = "#000055";
         console.log(height * this.currentLoadingTime/loadingTime);
