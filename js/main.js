@@ -6,6 +6,7 @@ var Application = function () {
         cvs,
         ctx,
         game,
+        menu,
         gameTime;
 
     this.mouse_position = {
@@ -23,12 +24,18 @@ var Application = function () {
         CVS_WIDTH = cvs.width = 1300; // window.innerWidth - 10;
 
         gameTime = new GameTime();
+        
+        menu = new Menu(ctx);
+        menu.width = CVS_WIDTH;
+        menu.height = CVS_HEIGHT;
+        menu.init().start();
 
         game = new Game(ctx);
         game.width = CVS_WIDTH;
         game.height = CVS_HEIGHT;
-        game.init().start();
-
+        //game.init().start();
+        game.init();
+        
         this.boucleDeJeu();
     };
 
@@ -50,12 +57,23 @@ var Application = function () {
 
     this.update = function() { 
         gameTime.update();
+        
         game.update(gameTime, this.mouse_position);
+        
+        menu.update(gameTime, this.mouse_position);
+        
+        if(menu.lauchGame)
+        {
+            game.init().start();
+            menu.lauchGame = false;
+        }
     };
 
     this.render = function() {
         ctx.clearRect(0, 0, CVS_WIDTH, CVS_HEIGHT);
+        
         game.render();
+        menu.render();
     };
 
     this.captureMouseClick = function(event) {
