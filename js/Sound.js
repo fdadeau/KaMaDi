@@ -1,7 +1,7 @@
 function Sound() {
 
     var backingAudio = new Audio();
-    var backingFiles = ["GeishaInLove.wav","GeishaGoesWrong.wav","KatanaGitari.wav"];    
+    var backingFiles = ["GeishaGoesWrong.wav","GeishaInLove.wav","KatanaGitari.wav"];    
     var backingCurrent = 0;    
     
     var soundFilesF = ["cri1.mp3", "cri2.mp3", "cri3.mp3", "cris.mp3"];
