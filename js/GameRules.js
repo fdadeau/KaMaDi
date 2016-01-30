@@ -36,6 +36,10 @@ function GameRules() {
             value: [ 0.4, 0.4 ],
             get: function(index) { return this.value[index]; }
         },
+        escapSpeed: {
+            value: [ 3, 3 ],
+            get: function(index) { return this.value[index]; }
+        },
         attackDelay: {
             value: [ 1000, 1000 ],
             get: function(index) { return this.value[index]; }

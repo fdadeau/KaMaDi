@@ -32,13 +32,14 @@ function Ennemy(_game, _x, _y) {
     
     // speed
     this.speed = this.game.gameRules.ennemies.speed.get(this.indexRules);
+    this.escapeSpeed = this.game.gameRules.ennemies.escapSpeed.get(this.indexRules);
 
     this.posTargetX = this.game.shaman.getX();
     this.posTargetY = this.game.shaman.getY();
     
 
-    this.moveX = this.getVectorToTargetX();
-    this.moveY = this.getVectorToTargetY(); 
+    this.moveX = this.getVectorToTargetX(this.speed);
+    this.moveY = this.getVectorToTargetY(this.speed); 
 
     this.attackDelay = this.game.gameRules.ennemies.attackDelay.get(this.indexRules);
     this.lastAttack = 0;
@@ -52,12 +53,12 @@ function Ennemy(_game, _x, _y) {
 }
 
 
-Ennemy.prototype.getVectorToTargetX = function() {
-    return (this.posTargetX - this.x)/Math.sqrt(Math.pow(this.x - this.posTargetX,2) + Math.pow(this.y - this.posTargetY,2)) * this.speed;
+Ennemy.prototype.getVectorToTargetX = function(_speed) {
+    return (this.posTargetX - this.x)/Math.sqrt(Math.pow(this.x - this.posTargetX,2) + Math.pow(this.y - this.posTargetY,2)) * _speed;
 }
 
-Ennemy.prototype.getVectorToTargetY = function() {
-    return (this.posTargetY - this.y)/Math.sqrt(Math.pow(this.x - this.posTargetX,2) + Math.pow(this.y - this.posTargetY,2)) * this.speed;
+Ennemy.prototype.getVectorToTargetY = function(_speed) {
+    return (this.posTargetY - this.y)/Math.sqrt(Math.pow(this.x - this.posTargetX,2) + Math.pow(this.y - this.posTargetY,2)) * _speed;
 }
 
 Ennemy.prototype.getX = function() {
@@ -103,15 +104,19 @@ Ennemy.prototype.update = function(time) {
     }
     */
     
-    if (this.moveX == 0) {
-        this.moveX = this.getVectorToTargetX();
+    if(this.life > 0) {
+        if (this.moveX == 0) {
+            this.moveX = this.getVectorToTargetX(this.speed);
+        }
+        if (this.moveY == 0) {
+            this.moveY = this.getVectorToTargetY(this.speed);
+        }
     }
-    if (this.moveY == 0) {
-        this.moveY = this.getVectorToTargetY();
-    }
-    
-    if(this.life <= 0)
-    {
+    else {
+        
+        this.moveX = this.getVectorToTargetX(this.escapeSpeed);
+        this.moveY = this.getVectorToTargetY(this.escapeSpeed);
+        
         this.life = 0;
         this.x -= this.moveX;
         this.y -= this.moveY;
