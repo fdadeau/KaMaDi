@@ -8,8 +8,8 @@ function Character(_game, _x, _y) {
     this.y = _y;
 
     // size
-    this.width = 30;
-    this.height = 30;
+    this.width = 50;
+    this.height = this.width/0.57;
     
     this.life = this.game.gameRules.character.life.get();
     this.speed = this.game.gameRules.character.speed.get();
@@ -18,6 +18,9 @@ function Character(_game, _x, _y) {
     this.destX = 0;
     this.destY = 0;
     this.distToTarget = 0;
+    this.direction = (this.x < this.game.width/2) ? 1: -1;   
+    this.inclinaison = 0;
+    this.lastInclinaison = 0;
     
     this.state = 0; // 0 : IDLE | 1 : MOVING 
     
@@ -52,6 +55,7 @@ Character.prototype.update = function(time) {
     
     if(this.isStun())
     {
+        this.life = 0;
         this.timeStun += time.tick;
         console.log("timeStun Charact : " + this.game.gameRules.character.timeStun.get());
         if(this.timeStun >= this.game.gameRules.character.timeStun.get())
@@ -72,6 +76,7 @@ Character.prototype.update = function(time) {
             this.x = this.destX;
             this.y = this.destY;
             this.state = 0;
+            this.inclinaison = 0;
             return;
         }
         // collision avec un autre personnage
@@ -83,6 +88,11 @@ Character.prototype.update = function(time) {
             }
         }
         */
+        this.direction = (this.destX >= this.x) ? 1 : -1;
+        if (time.time - this.lastInclinaison > 80) {
+            this.inclinaison = (this.inclinaison == 0) ? 4 : - this.inclinaison;
+            this.lastInclinaison = time.time;
+        }
         this.x += (this.destX - this.x) / this.distToTarget * this.speed;
         this.y += (this.destY - this.y) / this.distToTarget * this.speed;
     }
@@ -101,6 +111,7 @@ Character.prototype.update = function(time) {
                 if (this.game.ennemies[i].life > 0 && distance < this.attackRange && distance < shortestDistance) {
                     closestEnnemy = this.game.ennemies[i];
                     shortestDistance = distance;
+                    this.direction = (this.x > closestEnnemy.x) ? -1 : 1;
                 }
             }
             if (closestEnnemy != null) {
@@ -143,10 +154,42 @@ Character.prototype.render = function() {
         this.game.context.fill();
         this.game.context.globalAlpha = 1;
     }
+    /**
     this.game.context.fillStyle = "#00FF00";
     this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
-    
+    this.game.context.save();
+    console.log(this.direction);
+    if (this.direction == 1) {
+        this.game.context.scale(-1,1);
+    }
+    this.game.context.drawImage(this.game.spritesheet, 1980, 1677, 357, 626, this.x-this.width/2, this.y-this.height/2, this.width,   this.height);
+    this.game.context.restore();
+    */
+     drawImage(this.game.context,this.game.spritesheet,1980, 1677, 357, 626, this.x-this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
     this.game.context.fillStyle = "#000000";
     this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2 - 10, this.width * this.life / this.game.gameRules.character.life.get(), 5)
     
 };
+
+function drawImage(ctx, img, srcX, srcY, srcW, srcH, x, y, width, height, deg, flip){
+    //save current context before applying transformations
+    ctx.save();
+    //convert degrees to radians
+    if(flip){ 
+        var rad = deg * Math.PI / 180;
+    }else{
+        var rad = 2*Math.PI - deg * Math.PI / 180;
+    }
+    //set the origin to the center of the image
+    ctx.translate(x + width/2, y + height/2);
+    //rotate the canvas around the origin
+    ctx.rotate(rad);
+    if(flip){
+        //flip the canvas
+        ctx.scale(-1,1);
+    }
+    //draw the image    
+    ctx.drawImage(img, srcX, srcY, srcW, srcH, -width/2, -height/2, width, height);
+    //restore the canvas
+    ctx.restore();
+}

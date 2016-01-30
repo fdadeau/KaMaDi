@@ -64,27 +64,28 @@ var Game = (function () {
         if (mousePosition.x !== null) {
             console.log(mousePosition);
             console.log(time);
-            // clic sur le shaman -> libère sa puissance 
-            if (this.shaman.collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
-                this.shaman.unleash();
-                this.selectedCharacter = null;
+            
+            // detection du personnage selectionné
+            var targetCharacter = null;
+            for (var i in this.characters) {
+                if (this.characters[i].collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
+                    targetCharacter = this.characters[i];
+                }
+            }
+            if (targetCharacter != null) {
+                this.selectedCharacter = (targetCharacter == this.selectedCharacter) ? null : targetCharacter;
             }
             else {
-                // detection du personnage selectionné
-                var targetCharacter = null;
-                for (var i in this.characters) {
-                    if (this.characters[i].collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
-                        targetCharacter = this.characters[i];
-                    }
-                }
-                if (targetCharacter != null) {
-                    this.selectedCharacter = (targetCharacter == this.selectedCharacter) ? null : targetCharacter;
+                if (this.selectedCharacter != null) {
+                    this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
+                    this.selectedCharacter = null;
                 }
                 else {
-                    if (this.selectedCharacter != null) {
-                        this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
+                    // clic sur le shaman -> libère sa puissance 
+                    if (this.shaman.collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
+                        this.shaman.unleash();
                         this.selectedCharacter = null;
-                    }
+                    }            
                 }
             }
             mousePosition.raz();
