@@ -39,7 +39,7 @@ Projectile.prototype.update = function(time) {
                 if (this.game.ennemies[i].collidesWith(this.x, this.y, this.size, this.size)) {
                     this.game.ennemies[i].life -= this.damage;
                     if (this.game.ennemies[i].life < 0) {
-                        this.game.audio.playSoundF(Math.random()*2 | 0);
+                        this.game.audio.playSoundF(1);
                     }
                     this.active = 0;
                     return;

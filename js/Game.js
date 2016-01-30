@@ -90,10 +90,14 @@ var Game = (function () {
             }
             if (targetCharacter != null) {
                 this.selectedCharacter = (targetCharacter == this.selectedCharacter) ? null : targetCharacter;
+                if (this.selectedCharacter != null) {
+                    this.audio.playSoundC(2);
+                }
             }
             else {
                 if (this.selectedCharacter != null) {
                     this.selectedCharacter.goTo(mousePosition.x, mousePosition.y);
+                    this.audio.playSoundC(3);
                     this.selectedCharacter = null;
                 }
                 else {
@@ -132,6 +136,9 @@ var Game = (function () {
         this.timeEnnemyCreation += time.tick;
         if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get(this.level, time.time)) {            
             this.AddEnnemisWave(time.time);
+            if (this.ennemies.length >= 20) {
+                this.audio.playBacking(2);
+            }
             this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get(this.level, time.time);
         }
         
@@ -144,6 +151,9 @@ var Game = (function () {
                     this.ennemies[i] = null;    // -> Ne libere pas la case de l'ennemis 
                     this.ennemies.splice(i,1);  // -> suppression de la case de l'ennemi.
                     i--;
+                    if (this.ennemies.length < 20) {
+                        this.audio.playBacking(1);
+                    }
                 }
                 else
                 {

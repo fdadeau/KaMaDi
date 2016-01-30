@@ -2,37 +2,54 @@ function Sound() {
 
     var backingAudio = new Audio();
     var backingFiles = ["GeishaGoesWrong.wav","GeishaInLove.wav","KatanaGitari.wav"];    
-    var backingCurrent = 0;    
     
     var soundFilesF = ["cri1.mp3", "cri2.mp3", "cri3.mp3", "cris.mp3"];
     var soundAudioF = new Audio();
-    var soundCurrentF = 0;
 
-    var soundFilesM = ["coup1.mp3","coup2.mp3"];
+    var soundFilesM = ["ouh1.mp3","ouh2.mp3","hein.mp3","hu.mp3"];
     var soundAudioM = new Audio();
-    var soundCurrentM = 0;
+
+    var soundAudioT = new Audio();
+    var soundAudioC = new Audio();
     
     this.playBacking = function(n) {
-        backingCurrent = n;
-        backingAudio.src = "sounds/" + backingFiles[backingCurrent];
+        backingAudio.src = "sounds/" + backingFiles[n];
         backingAudio.loop = true;
         backingAudio.play();
     }     
     
     this.playSoundF = function(n) {
         if (soundAudioF.ended || soundAudioF.paused) {
-            soundCurrentF = n;
-            soundAudioF.src = "sounds/" + soundFilesF[soundCurrentF];
+            soundAudioF.src = "sounds/" + soundFilesF[n];
+            soundAudioF.volume = 0.4;
             soundAudioF.play();
         }
     }
 
     this.playSoundM = function(n) {
         if (soundAudioM.ended || soundAudioM.paused) {
-            soundCurrentM = n;
-            soundAudioM.src = "sounds/" + soundFilesM[soundCurrentM];
+            soundAudioM.src = "sounds/" + soundFilesM[n];
+            soundAudioM.volume = 0.5;
             soundAudioM.play();
         }
+    }
+
+    this.playSoundC = function(n) {
+        soundAudioC.src = "sounds/" + soundFilesM[n];
+        soundAudioC.volume = 0.5;
+        soundAudioC.play();
+    }
+
+    this.playSoundT = function(n) {
+        if (soundAudioT.ended || soundAudioT.paused) {
+            soundAudioT.src = "sounds/the.mp3";
+            soundAudioT.loop = true;
+            soundAudioT.volume = 0.6;
+            soundAudioT.play();
+        }
+    }
+    this.pauseSoundT = function(n) {
+        soundAudioT.pause();
     }
 
 }

@@ -73,7 +73,11 @@ function Shaman(_g) {
                 nbCharactersInPosition++;
             }
         }
-        if (nbCharactersInPosition == 0) return;
+        if (nbCharactersInPosition == 0) {
+            game.audio.pauseSoundT();
+            return;
+        }
+        game.audio.playSoundT();
         this.currentLoadingTime += (time.tick * nbCharactersInPosition / game.gameRules.character.nbStartCharacter.get());
         if (this.currentLoadingTime >= loadingTime) {
             game.endLevel();
