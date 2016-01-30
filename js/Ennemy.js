@@ -26,27 +26,27 @@ function Ennemy(_game, _x, _y) {
         this.indexRules = 1;
     }
     // sprite used 
-    switch (0) { //Math.floor(Math.random()*3+this.indexRules*3)) {
+    switch (Math.floor(Math.random()*3+this.indexRules*3)) {
         case 0: 
-            this.sprite = {srcX: 39, srcY: 16, srcW: 384, srcH: 726, destW: 50, destH: 94}; 
+            this.sprite = {srcX: 72, srcY: 864, srcW: 477, srcH: 698, destW: 50, destH:0}; 
             break;
         case 1: 
-            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            this.sprite = {srcX: 592, srcY: 900, srcW: 414, srcH: 663, destW: 50, destH: 0}; 
             break;
         case 2: 
-            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            this.sprite = {srcX: 1112, srcY: 876, srcW: 430, srcH: 674, destW: 55, destH: 0}; 
             break;
         case 3: 
-            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            this.sprite = {srcX: 1590, srcY: 873, srcW: 429, srcH: 684, destW: 50, destH: 0}; 
             break;
         case 4: 
-            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            this.sprite = {srcX: 2103, srcY: 870, srcW: 407, srcH: 692, destW: 50, destH: 0}; 
             break;
         case 5: 
-            this.sprite = {srcX: 0, srcY: 0, srcW: 0, srcH: 0, destW: 0, destH: 0}; 
+            this.sprite = {srcX: 2592, srcY: 852, srcW: 405, srcH: 688, destW: 50, destH: 0}; 
             break;        
     }
-   
+    this.sprite.destH =  this.sprite.srcH/this.sprite.srcW*this.sprite.destW;
     this.inclinaison = 0;
     this.lastInclinaison = 0;
     this.delta = Math.floor(Math.random()*30);
