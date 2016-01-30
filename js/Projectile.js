@@ -1,7 +1,7 @@
 /**
  *  Représentation des projectiles
  */
-function Projectile(_game, _x, _y, _tX, _tY, _s, _d) {
+function Projectile(_game, _x, _y, _tX, _tY, _s, _d, _joueur) {
 
     this.game = _game;
 
@@ -15,6 +15,8 @@ function Projectile(_game, _x, _y, _tX, _tY, _s, _d) {
     this.speed = _s;
     
     this.damage = _d;  
+    
+    this.joueur = _joueur
     
     this.size = 2; // to do changer ?
     
@@ -30,11 +32,25 @@ Projectile.prototype.update = function(time) {
             this.active = 0;
             return;
         }
-        for (var i in this.game.ennemies) {
-            if (this.game.ennemies[i].collidesWith(this.x, this.y, this.size, this.size)) {
-                this.game.ennemies[i].life -= this.damage;
-                this.active = 0;
-                return;
+        
+        if(this.joueur)
+        {
+            for (var i in this.game.ennemies) {
+                if (this.game.ennemies[i].collidesWith(this.x, this.y, this.size, this.size)) {
+                    this.game.ennemies[i].life -= this.damage;
+                    this.active = 0;
+                    return;
+                }
+            }
+        }
+        else
+        {
+            for (var i in this.game.characters) {
+                if (this.game.characters[i].collidesWith(this.x, this.y, this.size, this.size)) {
+                    this.game.characters[i].life -= this.damage;
+                    this.active = 0;
+                    return;
+                }
             }
         }
         

@@ -11,9 +11,6 @@ function Ennemy(_game, _x, _y) {
     this.width = 20;
     this.height = 20;
 
-    this.life = this.game.gameRules.ennemies.life.get();
-    this.speed = this.game.gameRules.ennemies.speed.get();
-
     this.moveX = 0;
     this.moveY = 0;
     
@@ -27,18 +24,27 @@ function Ennemy(_game, _x, _y) {
     var rnd = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
     
     this.type = ""; // Type d'ennemis : conditionne son comportement -> Parametrer attribution dans GameRule
+    var indexRules; // Index sur lequel il récupère les informations
     if(rnd === 1)
     {
         this.type = "Chargeur"; 
-        this.attackDistance = 45;
-        this.strength = 5;
+        indexRules = 0;
     }
     else if(rnd === 2)
     {
         this.type = "Tireur"; 
-        this.attackDistance = 160;
-        this.strength = 5;
+        indexRules = 1;
     }
+    
+    this.attackDelay = this.game.gameRules.character.attackDelay.get(indexRules);
+    this.lastAttack = 0;
+    this.attackSpeed = this.game.gameRules.character.attackSpeed.get(indexRules);
+    this.attackDamage = this.game.gameRules.character.attackDamage.get(indexRules);
+    this.attackRange = this.game.gameRules.character.attackRange.get(indexRules);
+    
+    this.life = this.game.gameRules.ennemies.life.get(indexRules);
+    this.speed = this.game.gameRules.ennemies.speed.get(indexRules);
+
         
     this.dead = false; // FD: redondant avec life == 0 
 }
@@ -91,11 +97,7 @@ Ennemy.prototype.update = function(time) {
         
             this.moveX = 0;
             this.moveY = 0;
-            
-            if(this.type === "Chargeur")
-            {
-                this.game.life -= this.strength;
-            }
+
         }
     }
     
@@ -107,15 +109,41 @@ Ennemy.prototype.update = function(time) {
 
    for (var i in this.game.characters) {
        
-        if(this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackDistance) {
+        if(this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackRange) {
            
             this.moveX = 0;
             this.moveY = 0;
+            
+            /*
+            if(this.type === "Chargeur") {
+                this.game.characters[i].life -= this.attackDamage;
+            }
+            */
         }
    }
    
+   if (time.time - this.lastAttack > this.attackDelay) {
+            var closestCharacter = null;
+            var shortestDistance = this.attackRange + 1;
+            for (var i in this.game.characters) {
+                var distance = this.distanceTo(this.game.characters[i].x, this.game.characters[i].y); 
+                if (distance < this.attackRange && distance < shortestDistance) {
+                    closestCharacter = this.game.characters[i];
+                    shortestDistance = distance;
+                }
+            }
+            if (closestCharacter != null) {
+                this.game.addProjectile(this.x, this.y, closestCharacter.x, closestCharacter.y, this.attackSpeed, this.attackDamage);
+                this.lastAttack = time.time;
+            }
+        }
+   
     this.x += this.moveX;
     this.y += this.moveY;
+};
+
+Ennemy.prototype.distanceTo = function(_x,_y) {
+    return  Math.sqrt(Math.pow(this.x-_x,2)+Math.pow(this.y-_y,2)); 
 };
 
 Ennemy.prototype.render = function() {

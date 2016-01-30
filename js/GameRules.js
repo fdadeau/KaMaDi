@@ -11,7 +11,7 @@ function GameRules() {
         }
     };
     
-    this.ennemies = {
+    this.ennemies = { // value : 0 = chargeur, 1 : tireur
         // nombre d'ennemis/vague
         nbEnnemiesByWave: {
             //value: 30,
@@ -24,12 +24,28 @@ function GameRules() {
             get: function() { return this.value; }
         },
         life: {
-            value: 10,
-            get: function() { return this.value; }
+            value: [ 10, 10 ],
+            get: function(index) { return this.value[index]; }
         },
         speed: {
-            value: 1,
-            get: function() { return this.value; }
+            value: [ 1, 1 ],
+            get: function(index) { return this.value[index]; }
+        },
+        attackDelay: {
+            value: [ 1, 1 ],
+            get: function(index) { return this.value[index]; }
+        },
+        attackSpeed: {
+            value: [ 10, 10 ],
+            get: function(index) { return this.value[index]; }
+        },
+        attackDamage: {
+            value: [ 4, 4 ],
+            get: function(index) { return this.value[index]; }
+        },
+        attackRange: {
+            value: [ 45, 100 ],
+            get: function(index) { return this.value[index]; }
         }
     }
     
