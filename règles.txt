@@ -1,4 +1,4 @@
-﻿
+
 Définie les règles de jeu de ShamanDefense
 
 ******************
@@ -48,3 +48,12 @@ La partie se termine :
 -> 
 
 -> Ennemise plus dangereux quand proche du centre
+
+
+
+
+TEXTE =
+
+C'est un grand jour au temple Shinto Midori, on s'apprête à fêter le kanamara matsuri, la fête annuelle de la fertilité. La tension est à son comble... Sauf que...
+... Maitre Hirota est plongé dans sa cérémonie du thé journalière. Il est hors de question de le déranger! 
+Les disciples du maître vont avoir fort à faire pour empécher les fidèles enfiévrés de parvenir jusqu'à lui... Ce serait dommage que son rite rate!
