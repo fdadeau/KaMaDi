@@ -252,7 +252,13 @@ var Game = (function () {
             
             for(var i = 0; i < this.tabAffichage.length - 1; i++)
             {
-                if (this.tabAffichage[i].y + this.tabAffichage[i].height / 2 > this.tabAffichage[i + 1].y + this.tabAffichage[i + 1].height / 2)
+                var h1 =  (this.tabAffichage[i].delta) ? this.tabAffichage[i].sprite.destH(this.tabAffichage[i].sprite, this.tabAffichage[i].state) : this.tabAffichage[i].height;
+                
+                var h2 =  (this.tabAffichage[i+1].delta) ? this.tabAffichage[i+1].sprite.destH(this.tabAffichage[i+1].sprite, this.tabAffichage[i+1].state) : this.tabAffichage[i+1].height;
+                
+                console.log(h1 + " vs. " + h2);
+                
+                if (this.tabAffichage[i].y + h1 / 2 > this.tabAffichage[i + 1].y + h2 / 2)
                 {
                     var spProvisoir = this.tabAffichage[i];
                     this.tabAffichage[i] = this.tabAffichage[i + 1];

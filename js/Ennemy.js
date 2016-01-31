@@ -27,44 +27,45 @@ function Ennemy(_game, _x, _y, _i) {
     switch (this.image) {
             // hommes
         case 0: 
-            this.sprite = {srcX: [57, 57, 57, 57, 1695], srcY: [56, 56+921, 56+2271, 56+2271, 2835], srcW: [231, 231, 231, 231, 195], srcH: [380,380,380,380,300], destW: 50, destH:0}; 
+            this.sprite = {srcX: [57, 57, 57, 57, 1695], srcY: [56, 56+921, 56+1826, 56+1826, 2835], srcW: [231, 231, 231, 231, 195], srcH: [380,380,380,380,300], destW: 60, destH:0}; 
             break;
         case 1: 
-            this.sprite = {srcX: [364, 364, 364, 364, 1695], srcY: [98, 98+921, 98+2271, 98+2271, 2835], srcW: [208, 208, 208, 208, 195], srcH: [337,337,337,337,300], destW: 50, destH:0}; 
+            this.sprite = {srcX: [364, 364, 364, 364, 1695], srcY: [98, 98+921, 98+1826, 98+1826, 2835], srcW: [208, 208, 208, 208, 195], srcH: [337,337,337,337,300], destW: 60, destH:0}; 
             break;
         case 2: 
-            this.sprite = {srcX: [664, 664, 664, 664, 1695], srcY: [58, 58+921, 58+2271, 58+2271, 2835], srcW: [272, 272, 272, 272, 195], srcH: [366,366,366,366,300], destW: 50, destH:0}; 
+            this.sprite = {srcX: [664, 664, 664, 664, 1695], srcY: [58, 58+921, 58+1826, 58+1826, 2835], srcW: [272, 272, 272, 272, 195], srcH: [366,366,366,366,300], destW: 60, destH:0}; 
             break;
         case 3: 
-            this.sprite = {srcX: [1028, 1028, 1028, 1028, 1695], srcY: [108, 108+921, 108+2271, 108+2271, 2835], srcW: [246, 246, 246, 246, 195], srcH: [310,310,310,310,300], destW: 50, destH:0}; 
+            this.sprite = {srcX: [1028, 1028, 1028, 1028, 1695], srcY: [108, 108+921, 108+1826, 108+1826, 2835], srcW: [246, 246, 246, 246, 195], srcH: [310,310,310,310,300], destW: 60, destH:0}; 
             break;
         case 4: 
-            this.sprite = {srcX: [1380, 1380, 1380, 1380, 1695], srcY: [24, 24+921, 24+2271, 24+2271, 2835], srcW: [226, 226, 226, 226, 195], srcH: [404,404,404,404,300], destW: 50, destH:0}; 
+            this.sprite = {srcX: [1380, 1380, 1380, 1380, 1695], srcY: [24, 24+921, 24+1826, 24+1826, 2835], srcW: [226, 226, 226, 226, 195], srcH: [404,404,404,404,300], destW: 60, destH:0}; 
             break;
         case 5: 
-            this.sprite = {srcX: [1696, 1696, 1696, 1696, 1695], srcY: [36, 36+921, 36+2271, 36+2271, 2835], srcW: [226, 226, 226, 226, 195], srcH: [396,396,396,396,300], destW: 50, destH:0}; 
+            this.sprite = {srcX: [1696, 1696, 1696, 1696, 1695], srcY: [36, 36+921, 36+1826, 36+1826, 2835], srcW: [226, 226, 226, 226, 195], srcH: [396,396,396,396,300], destW: 60, destH:0}; 
             break;
             // femmes
         case 6: 
-            this.sprite = {srcX: [60, 60, 60, 60, 1714], srcY: [507, 507+921, 507+2271, 507+2271, 3232], srcW: [260, 260, 260, 260, 192], srcH: [353,353,353,353,356], destW: 50, destH:0}; 
+            this.sprite = {srcX: [60, 60, 60, 60, 1714], srcY: [507, 507+921, 507+1826, 507+1826, 3232], srcW: [260, 260, 260, 260, 192], srcH: [353,353,353,353,356], destW: 60, destH:0}; 
             break;
         case 7: 
-            this.sprite = {srcX: [376, 376, 376, 376, 1714], srcY: [522, 522+921, 522+2271, 522+2271, 3232], srcW: [244, 244, 244, 244, 192], srcH: [342,342,342,342,356], destW: 50, destH:0}; 
+            this.sprite = {srcX: [376, 376, 376, 376, 1714], srcY: [522, 522+921, 522+1826, 522+1826, 3232], srcW: [244, 244, 244, 244, 192], srcH: [342,342,342,342,356], destW: 60, destH:0}; 
             break;
         case 8: 
-            this.sprite = {srcX: [696, 696, 696, 696, 1714], srcY: [514, 514+921, 514+2271, 514+2271, 3232], srcW: [248, 248, 248, 248, 192], srcH: [352,352,352,352,356], destW: 50, destH:0}; 
+            this.sprite = {srcX: [696, 696, 696, 696, 1714], srcY: [514, 514+921, 514+1826, 514+1826, 3232], srcW: [248, 248, 248, 248, 192], srcH: [352,352,352,352,356], destW: 60, destH:0}; 
             break;
         case 9: 
-            this.sprite = {srcX: [1036, 1036, 1036, 1036, 1714], srcY: [516, 516+921, 516+2271, 516+2271, 3232], srcW: [248, 248, 248, 248, 192], srcH: [350,350,350,350,356], destW: 50, destH:0}; 
+            this.sprite = {srcX: [1036, 1036, 1036, 1036, 1714], srcY: [516, 516+921, 516+1826, 516+1826, 3232], srcW: [248, 248, 248, 248, 192], srcH: [350,350,350,350,356], destW: 60, destH:0}; 
             break;
         case 10: 
-            this.sprite = {srcX: [1382, 1382, 1382, 1382, 1714], srcY: [496, 496+921, 496+2271, 496+2271, 3232], srcW: [258, 258, 258, 258, 192], srcH: [365,365,365,365,356], destW: 50, destH:0}; 
+            this.sprite = {srcX: [1382, 1382, 1382, 1382, 1714], srcY: [496, 496+921, 496+1826, 496+1826, 3232], srcW: [258, 258, 258, 258, 192], srcH: [365,365,365,365,356], destW: 60, destH:0}; 
             break;
         default: 
-            this.sprite = {srcX: [1696, 1696, 1696, 1696, 1714], srcY: [495, 495+921, 495+2271, 495+2271, 3232], srcW: [232, 232, 232, 232, 192], srcH: [367,367,367,367,356], destW: 50, destH:0}; 
+            this.sprite = {srcX: [1696, 1696, 1696, 1696, 1714], srcY: [495, 495+921, 495+1826, 495+1826, 3232], srcW: [232, 232, 232, 232, 192], srcH: [367,367,367,367,356], destW: 60, destH:0}; 
             break;        
     }   
-    this.sprite.destH =  function(s) { this.srcH[s]/this.srcW[s]*this.destW[s] };
+    this.sprite.destW = 60;
+    this.sprite.destH =  function(sp,st) { return sp.srcH[st]/sp.srcW[st]*sp.destW; };
     this.inclinaison = 0;
     this.lastInclinaison = 0;
     this.delta = Math.floor(Math.random()*30);
@@ -138,7 +139,7 @@ Ennemy.prototype.calcDistance = function(_x,_y) {
 Ennemy.prototype.update = function(time) {
 
     //Gestion du deplacement des ennemis vers le Shaman
-    if(this.life > 0) {
+    if (this.life > 0) {
         if (this.moveX == 0) {
             this.moveX = this.getVectorToTargetX(this.speed);
         }
@@ -148,14 +149,15 @@ Ennemy.prototype.update = function(time) {
         // determiner etat du personnage en fonction de la distance
         if (this.state < 3) { // si pas dans l'animation
             var distanceToShaman = this.distanceTo(this.game.shaman.x, this.game.shaman.y);
+            this.state = 0;
             if (distanceToShaman < 500) {
                 this.state = 1;
             }
-            if (distanceToShaman < 400) {
+            if (distanceToShaman < 350) {
                 this.state = 2;
             }
-            if (distanceToShaman < 300) {
-                this.state = 3;
+            if (distanceToShaman < 200) {
+                this.state = 4;
             }
         }
         else if (this.state == 3) {
@@ -176,6 +178,7 @@ Ennemy.prototype.update = function(time) {
             this.inclinaison = (this.inclinaison == 0) ? 4 : -this.inclinaison;
             this.lastInclinaison = time.time;
         }
+        this.state = 0;
         this.direction = (this.moveX > 0) ? -1 : 1;
         return;
     }
@@ -251,16 +254,16 @@ Ennemy.prototype.distanceTo = function(_x,_y) {
 Ennemy.prototype.render = function() {
 
     // dessin du sprite;
-    if (this.state != 3) {
+    if (this.state != 5) {
         this.game.drawImage(this.game.spritesheet, 
                             this.sprite.srcX[this.state], 
                             this.sprite.srcY[this.state], 
                             this.sprite.srcW[this.state], 
                             this.sprite.srcH[this.state], 
-                            this.x - this.width/2, 
-                            this.y-this.height/2, 
+                            this.x - this.sprite.destW/2, 
+                            this.y - this.sprite.destH(this.sprite,this.state)/2, 
                             this.sprite.destW, 
-                            this.sprite.destH(this.sprite.destW), 
+                            this.sprite.destH(this.sprite,this.state), 
                             this.inclinaison, 
                             this.direction==1); // todo modifier pour etat = 4;
          

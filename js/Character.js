@@ -35,7 +35,7 @@ function Character(_game, _x, _y, _t) {
             break;
     }
     this.sprite.kind = 0;
-    this.sprite.destH =  this.sprite.srcH/this.sprite.srcW*this.sprite.destW;
+    this.sprite.destH = this.sprite.srcH/this.sprite.srcW*this.sprite.destW;
     this.width = this.sprite.destW;
     this.height = this.sprite.destH;
     
