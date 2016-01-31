@@ -1,10 +1,12 @@
 
-function TitleScreen(context) {
+function TitleScreen(context, audio) {
     console.log("TitleScreen::()");
     
     this.initialized = false;
     this.pause = true;
     this.context = context;
+    
+    audio.playBacking(0);
     
     this.lauchMenu = false;
     this.tempsEcran = 1000 * 3;
@@ -63,5 +65,7 @@ TitleScreen.prototype.render = function () {
     if(this.pause)
         return;
     
+    this.context.font="20px Verdana";
     this.context.drawImage(this.imageFond, 0, 0, 1300, 700, 0, 0, 1300, 700);
+    this.context.fillText("Programmation : Fred Dadeau, Maxence Martin, Illustrations : Maxime Péroz, Son : Gérard Taiclet", 200, 700);
 };

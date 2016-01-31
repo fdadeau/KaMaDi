@@ -60,7 +60,7 @@ var Application = function () {
         introScreen.height = CVS_HEIGHT;
         introScreen.init();
         
-        titleScreen = new TitleScreen(ctx);
+        titleScreen = new TitleScreen(ctx, audio);
         titleScreen.width = CVS_WIDTH;
         titleScreen.height = CVS_HEIGHT;
         titleScreen.init().start();

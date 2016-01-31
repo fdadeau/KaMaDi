@@ -100,7 +100,7 @@ function Shaman(_g) {
         game.context.fillRect(11, 11, 298 * this.currentLoadingTime / loadingTime, 28);
         
         //barre de vie
-        game.context.fillStyle = "#FF5555";
+        game.context.fillStyle = "#88FF88";
         game.context.fillRect(this.x - this.width/2|0, (this.y - this.height/2 | 0) - 10, this.width * this.life / game.gameRules.shaman.life.get(game.level) | 0, 5);
         
         // dessin du cercle où se trouve le shaman

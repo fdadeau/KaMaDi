@@ -64,7 +64,7 @@ function Ennemy(_game, _x, _y, _i) {
             this.sprite = {srcX: [1696, 1696, 1696, 1696, 1714], srcY: [495, 495+921, 495+1826, 495+1826, 3232], srcW: [232, 232, 232, 232, 192], srcH: [367,367,367,367,356], destW: 60, destH:0}; 
             break;        
     }   
-    this.sprite.destW = 60;
+    this.sprite.destW = 70;
     this.sprite.destH =  function(sp,st) { return sp.srcH[st]/sp.srcW[st]*sp.destW; };
     this.inclinaison = 0;
     this.lastInclinaison = 0;
@@ -333,6 +333,6 @@ Ennemy.prototype.render = function() {
                 break;                
         }
     }
-    this.game.context.fillStyle = "#000000";
+    this.game.context.fillStyle = "#FF0000";
     this.game.context.fillRect(this.x - this.sprite.destW/2, this.y - this.sprite.destH(this.sprite,this.state)/2, this.sprite.destW * this.life / this.game.gameRules.ennemies.life.get(this.image), 5);
 };

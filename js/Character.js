@@ -22,16 +22,16 @@ function Character(_game, _x, _y, _t) {
     
     switch (this.type) {
         case 0: 
-            this.sprite = { srcX: [614,612], srcY: [2746,3090], srcW: 190, srcH: 324, destW: 60, destH: 0 };
+            this.sprite = { srcX: [614,612], srcY: [2746,3090], srcW: 190, srcH: 324, destW: 70, destH: 0 };
             break;
         case 1: 
-            this.sprite = { srcX: [837,844], srcY: [2700,3070], srcW: 215, srcH: 375, destW: 60, destH: 0 };
+            this.sprite = { srcX: [837,844], srcY: [2700,3070], srcW: 215, srcH: 375, destW: 70, destH: 0 };
             break;
         case 2: 
-            this.sprite = { srcX: [1076,1104], srcY: [2715,3069], srcW: 258, srcH: 341, destW: 65, destH: 0 };
+            this.sprite = { srcX: [1076,1104], srcY: [2715,3069], srcW: 258, srcH: 341, destW: 75, destH: 0 };
             break;
         default: 
-            this.sprite = { srcX: [1422,1443], srcY: [2712,3060], srcW: 207, srcH: 346, destW: 60, destH: 0 };
+            this.sprite = { srcX: [1422,1443], srcY: [2712,3060], srcW: 207, srcH: 346, destW: 70, destH: 0 };
             break;
     }
     this.sprite.kind = 0;
@@ -172,7 +172,7 @@ Character.prototype.render = function() {
     }
 
     this.game.drawImage(this.game.spritesheet, this.sprite.srcX[this.sprite.kind], this.sprite.srcY[this.sprite.kind], this.sprite.srcW, this.sprite.srcH, this.x-this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
-    this.game.context.fillStyle = "#000000";
+    this.game.context.fillStyle = "#88FF88";
     this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2 - 10, this.width * this.life / this.game.gameRules.character.life.get(this.type), 5)
     
 };
