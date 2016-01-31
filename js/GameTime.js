@@ -10,11 +10,6 @@ var GameTime = (function () {
         this.time = time;
         this.tick = time - this.previousTime;
     };
-    GameTime.prototype.reset = function (time) {
-        this.tick = 0;
-        this.time = 0;
-        this.previousTime = 0;
-    };
     GameTime.prototype.update = function () {
         this.setTime(this.now());
     };

@@ -25,6 +25,8 @@ var Game = (function () {
         this.victoire = false;
         this.defaite = false;
         
+        this.timeLevel = 0;
+        
         this.level = 0;
         
         this.tabAffichage = [];
@@ -59,6 +61,8 @@ var Game = (function () {
         this.victoire = false;
         this.defaite = false;
         
+        this.timeLevel = 0;
+        
         this.shaman = new Shaman(this); 
         
         this.audio.playBacking(1);
@@ -80,6 +84,8 @@ var Game = (function () {
     
     Game.prototype.update = function (time, mousePosition) {
         if (this.pause) return;
+        
+        this.timeLevel += time.tick;
         
         if (mousePosition.x !== null) {
             console.log(mousePosition);
@@ -138,12 +144,12 @@ var Game = (function () {
         
         
         this.timeEnnemyCreation += time.tick;
-        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get(this.level, time.time)) {            
-            this.AddEnnemisWave(time.time);
+        if (this.timeEnnemyCreation >= this.gameRules.ennemies.delay.get(this.level, this.timeLevel)) {            
+            this.AddEnnemisWave(this.timeLevel);
             if (this.ennemies.length >= 20) {
                 this.audio.playBacking(2);
             }
-            this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get(this.level, time.time);
+            this.timeEnnemyCreation -= this.gameRules.ennemies.delay.get(this.level, this.timeLevel);
         }
         
         

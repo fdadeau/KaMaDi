@@ -72,6 +72,8 @@ Menu.prototype.update = function (time, mousePosition) {
             this.lauchGame = true;
             this.levelSelect = i;
             this.pause = true;
+            
+            mousePosition.raz();
         }
     }
     

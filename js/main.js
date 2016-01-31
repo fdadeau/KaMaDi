@@ -94,7 +94,7 @@ var Application = function () {
         if(gameOverScreen.lauchGame) {
             gameOverScreen.lauchGame = false;
             game.init().start(gameOverScreen.levelSelect);
-            gameTime.reset();
+            
         }
         if(gameOverScreen.lauchMenu) {
             gameOverScreen.lauchMenu = false;
@@ -103,12 +103,11 @@ var Application = function () {
         if(victoryScreen.lauchGame) {
             victoryScreen.lauchGame = false;
             game.init().start(victoryScreen.levelSelect);
-            gameTime.reset();
         }
         if(victoryScreen.lauchMenu) {
             victoryScreen.lauchMenu = false;
             menu.init().start();
-            gameTime.reset();
+            
         }
         
         //if(menu.pause && game.pause)
