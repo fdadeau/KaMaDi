@@ -168,12 +168,15 @@ Character.prototype.render = function() {
 
     // dessin d'un cercle autour du personnage actif pour le repérer
     if (this.game.selectedCharacter == this) {
+    /*
         this.game.context.globalAlpha = 0.2;
         this.game.context.fillStyle = "#88FF88";
         this.game.context.beginPath();
         this.game.context.arc(this.x, this.y, this.attackRange, 0, 2*Math.PI);
         this.game.context.fill();
         this.game.context.globalAlpha = 1;
+    */
+        this.game.context.drawImage(this.game.spritesheet, 67, 3255, 88, 14, this.x - this.width/2, this.y + this.height/2-10, this.width, 14);
     }
 
     this.game.drawImage(this.game.spritesheet, this.sprite.srcX[this.sprite.kind], this.sprite.srcY[this.sprite.kind], this.sprite.srcW, this.sprite.srcH, this.x-this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);

@@ -39,8 +39,15 @@ IntroScreen.prototype.start = function (_levelSelect) {
 };
 
 IntroScreen.prototype.update = function (time, mousePosition) {
-
+    
     if (this.pause) return;
+    
+    if (mousePosition.x !== null) {
+         this.timeEcran = 0;
+        this.pause = true;
+        this.lauchMenu = true;
+        mousePosition.raz();
+    }
     
     this.timeEcran += time.tick;
     if(this.timeEcran >= this.tempsEcran)
