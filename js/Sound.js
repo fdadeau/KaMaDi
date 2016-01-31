@@ -15,11 +15,11 @@ function Sound() {
     var actif = true;
     
     this.playBacking = function(n) {
-        if(this.actif) {
+      //  if(this.actif) {
             backingAudio.src = "sounds/" + backingFiles[n];
             backingAudio.loop = true;
             backingAudio.play();
-        }
+    //    }
     }     
     
     this.playSoundF = function(n) {

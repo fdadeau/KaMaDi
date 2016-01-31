@@ -7,8 +7,6 @@ function IntroScreen(context) {
     this.context = context;
     
     this.lauchMenu = false;
-    //this.tempsEcran = 1000 * 20;
-    this.timeEcran = 0;
     
     this.rules = false;
     this.credit = false;
@@ -40,8 +38,6 @@ IntroScreen.prototype.start = function (_levelSelect) {
     
     this.pause = false;
     
-    this.timeEcran = 0;
-    
     this.levelSelect = _levelSelect;
 
     return this;
@@ -67,16 +63,6 @@ IntroScreen.prototype.update = function (time, mousePosition) {
         }
         mousePosition.raz();
     }
-    
-    /*
-    this.timeEcran += time.tick;
-    if(this.timeEcran >= this.tempsEcran)
-    {
-        this.timeEcran = 0;
-        this.pause = true;
-        this.lauchMenu = true;
-    }
-    */
 };
 
 IntroScreen.prototype.render = function () {
