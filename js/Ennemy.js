@@ -72,7 +72,7 @@ function Ennemy(_game, _x, _y, _i) {
     this.width = this.sprite.destW; 
     this.height = this.sprite.destH;
     
-    this.animation = { state: 0, delay: 500, lastUpdate: 0 };
+    this.animation = { state: 0, delay: 100, lastUpdate: 0 };
     
     // speed
     this.speed = this.game.gameRules.ennemies.speed.get(this.image);
@@ -285,6 +285,9 @@ Ennemy.prototype.render = function() {
             // dessin Q
             this.game.drawImage(this.game.spritesheet, this.sprite.srcX[4], this.sprite.srcY[4], this.sprite.srcW[4], this.sprite.srcH[4], this.x - this.sprite.destW/2, this.y - this.sprite.destH(this.sprite,4)/2, this.sprite.destW, this.sprite.destH(this.sprite,4), this.inclinaison, this.direction==1); 
         }
+        var dx = [+20, -20, 20, 40, -20, 10, -20];
+        var dy = [-10, -40, -30, 0, 10, 20, 30];
+        
         switch (this.animation.state) {
             case 0:
                 this.game.drawImage(this.game.spritesheet, 1773, 3675, 93, 97, this.x - 30/2, this.y - 32/2, 30, 32, 0, false);
@@ -298,7 +301,36 @@ Ennemy.prototype.render = function() {
             case 3:
                 this.game.drawImage(this.game.spritesheet, 22, 3384, 414, 423, this.x - 70/2, this.y - 72/2, 70, 72, 0, false);
                 break;
-                
+            case 4:
+                for (var i in dx) {
+                    this.game.drawImage(this.game.spritesheet, 1131, 3618, 233, 216, this.x - 62/2 + dx[i], this.y - 60/2+dy[i], 62, 60, 0, false);
+                }
+                break;
+            case 5:
+                for (var i in dx) {
+                    this.game.drawImage(this.game.spritesheet, 1402, 3660, 156, 142, this.x - 55/2 + dx[i], this.y - 50/2+dy[i], 52, 50, 0, false);
+                }
+                break;
+            case 6:
+                for (var i in dx) {
+                    this.game.drawImage(this.game.spritesheet, 1574, 3681, 106, 102, this.x - 42/2 + dx[i], this.y - 40/2+dy[i], 42, 40, 0, false);
+                }
+                break;
+            case 7:
+                for (var i in dx) {
+                    this.game.drawImage(this.game.spritesheet, 1428, 3526, 100, 88, this.x - 40/2 + dx[i], this.y - 38/2+dy[i], 40, 38, 0, false);
+                }
+                break;
+            case 8:
+                for (var i in dx) {
+                    this.game.drawImage(this.game.spritesheet, 1564, 3432, 100, 88, this.x - 40/2 + dx[i], this.y - 38/2+dy[i], 40, 38, 0, false);
+                }
+                break;
+            default:
+                for (var i in dx) {
+                    this.game.drawImage(this.game.spritesheet, 1578, 3561, 82, 63, this.x - 30/2 + dx[i], this.y - 28/2+dy[i], 30, 28, 0, false);
+                }
+                break;                
         }
     }
     
