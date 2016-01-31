@@ -1,5 +1,5 @@
 
-function Ennemy(_game, _x, _y) {
+function Ennemy(_game, _x, _y, _i) {
 
     this.game = _game;
 
@@ -11,42 +11,60 @@ function Ennemy(_game, _x, _y) {
     
     this.attackDistance = 0; // Distance à partir de laquelle l'ennemis attauque le joueur
     
-    var rnd = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
+    // var rnd = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
     
-    this.type = ""; // Type d'ennemis : conditionne son comportement -> Parametrer attribution dans GameRule
-    this.indexRules; // Index sur lequel il récupère les informations
-    if(rnd === 1)
+    if(_i < 6)
     {
         this.type = "Chargeur"; 
-        this.indexRules = 0;
     }
-    else if(rnd === 2)
+    else 
     {
         this.type = "Tireur"; 
-        this.indexRules = 1;
     }
+    this.image = _i;
+    this.state = 0; // 0 : calme, 1 : un peu excite, 2 : beaucoup excite, 3 : animation transformation, 4 : bite/chatte 
     // sprite used 
-    switch (Math.floor(Math.random()*3+this.indexRules*3)) {
+    switch (this.image) {
+            // hommes
         case 0: 
-            this.sprite = {srcX: 72, srcY: 864, srcW: 477, srcH: 698, destW: 50, destH:0}; 
+            this.sprite = {srcX: [57, 57, 57, 57, 1695], srcY: [56, 56+921, 56+2271, 56+2271, 2835], srcW: [231, 231, 231, 231, 195], srcH: [380,380,380,380,300], destW: 50, destH:0}; 
             break;
         case 1: 
-            this.sprite = {srcX: 592, srcY: 900, srcW: 414, srcH: 663, destW: 50, destH: 0}; 
+            this.sprite = {srcX: [364, 364, 364, 364, 1695], srcY: [98, 98+921, 98+2271, 98+2271, 2835], srcW: [208, 208, 208, 208, 195], srcH: [337,337,337,337,300], destW: 50, destH:0}; 
             break;
         case 2: 
-            this.sprite = {srcX: 1112, srcY: 876, srcW: 430, srcH: 674, destW: 55, destH: 0}; 
+            this.sprite = {srcX: [664, 664, 664, 664, 1695], srcY: [58, 58+921, 58+2271, 58+2271, 2835], srcW: [272, 272, 272, 272, 195], srcH: [366,366,366,366,300], destW: 50, destH:0}; 
             break;
         case 3: 
-            this.sprite = {srcX: 1590, srcY: 873, srcW: 429, srcH: 684, destW: 50, destH: 0}; 
+            this.sprite = {srcX: [1028, 1028, 1028, 1028, 1695], srcY: [108, 108+921, 108+2271, 108+2271, 2835], srcW: [246, 246, 246, 246, 195], srcH: [310,310,310,310,300], destW: 50, destH:0}; 
             break;
         case 4: 
-            this.sprite = {srcX: 2103, srcY: 870, srcW: 407, srcH: 692, destW: 50, destH: 0}; 
+            this.sprite = {srcX: [1380, 1380, 1380, 1380, 1695], srcY: [24, 24+921, 24+2271, 24+2271, 2835], srcW: [226, 226, 226, 226, 195], srcH: [404,404,404,404,300], destW: 50, destH:0}; 
             break;
         case 5: 
-            this.sprite = {srcX: 2592, srcY: 852, srcW: 405, srcH: 688, destW: 50, destH: 0}; 
+            this.sprite = {srcX: [1696, 1696, 1696, 1696, 1695], srcY: [36, 36+921, 36+2271, 36+2271, 2835], srcW: [226, 226, 226, 226, 195], srcH: [396,396,396,396,300], destW: 50, destH:0}; 
+            break;
+            // femmes
+        case 6: 
+            this.sprite = {srcX: [60, 60, 60, 60, 1714], srcY: [507, 507+921, 507+2271, 507+2271, 3232], srcW: [260, 260, 260, 260, 192], srcH: [353,353,353,353,356], destW: 50, destH:0}; 
+            break;
+        case 7: 
+            this.sprite = {srcX: [376, 376, 376, 376, 1714], srcY: [522, 522+921, 522+2271, 522+2271, 3232], srcW: [244, 244, 244, 244, 192], srcH: [342,342,342,342,356], destW: 50, destH:0}; 
+            break;
+        case 8: 
+            this.sprite = {srcX: [696, 696, 696, 696, 1714], srcY: [514, 514+921, 514+2271, 514+2271, 3232], srcW: [248, 248, 248, 248, 192], srcH: [352,352,352,352,356], destW: 50, destH:0}; 
+            break;
+        case 9: 
+            this.sprite = {srcX: [1036, 1036, 1036, 1036, 1714], srcY: [516, 516+921, 516+2271, 516+2271, 3232], srcW: [248, 248, 248, 248, 192], srcH: [350,350,350,350,356], destW: 50, destH:0}; 
+            break;
+        case 10: 
+            this.sprite = {srcX: [1382, 1382, 1382, 1382, 1714], srcY: [496, 496+921, 496+2271, 496+2271, 3232], srcW: [258, 258, 258, 258, 192], srcH: [365,365,365,365,356], destW: 50, destH:0}; 
+            break;
+        default: 
+            this.sprite = {srcX: [1696, 1696, 1696, 1696, 1714], srcY: [495, 495+921, 495+2271, 495+2271, 3232], srcW: [232, 232, 232, 232, 192], srcH: [367,367,367,367,356], destW: 50, destH:0}; 
             break;        
-    }
-    this.sprite.destH =  this.sprite.srcH/this.sprite.srcW*this.sprite.destW;
+    }   
+    this.sprite.destH =  function(s) { this.srcH[s]/this.srcW[s]*this.destW[s] };
     this.inclinaison = 0;
     this.lastInclinaison = 0;
     this.delta = Math.floor(Math.random()*30);
@@ -54,8 +72,8 @@ function Ennemy(_game, _x, _y) {
     this.height = this.sprite.destH;
     
     // speed
-    this.speed = this.game.gameRules.ennemies.speed.get(this.indexRules);
-    this.escapeSpeed = this.game.gameRules.ennemies.escapSpeed.get(this.indexRules);
+    this.speed = this.game.gameRules.ennemies.speed.get(this.image);
+    this.escapeSpeed = this.game.gameRules.ennemies.escapSpeed.get(this.image);
 
     this.posTargetX = this.game.shaman.getX();
     this.posTargetY = this.game.shaman.getY();
@@ -65,16 +83,19 @@ function Ennemy(_game, _x, _y) {
 
     this.direction = (this.moveX > 0) ? 1 : -1;
     
-    this.attackDelay = this.game.gameRules.ennemies.attackDelay.get(this.indexRules);
+    this.attackDelay = this.game.gameRules.ennemies.attackDelay.get(this.image);
     this.lastAttack = 0;
-    this.attackSpeed = this.game.gameRules.ennemies.attackSpeed.get(this.indexRules);
-    this.attackDamage = this.game.gameRules.ennemies.attackDamage.get(this.indexRules);
-    this.attackRange = this.game.gameRules.ennemies.attackRange.get(this.indexRules);
+    this.attackSpeed = this.game.gameRules.ennemies.attackSpeed.get(this.image);
+    this.attackDamage = this.game.gameRules.ennemies.attackDamage.get(this.image);
+    this.attackRange = this.game.gameRules.ennemies.attackRange.get(this.image);
     
-    this.life = this.game.gameRules.ennemies.life.get(this.indexRules);
+    this.life = this.game.gameRules.ennemies.life.get(this.image);
         
-    this.dead = false; // FD: redondant avec life == 0 
 }
+
+// ombre commune
+Ennemy.prototype.ombre = { srcX: 1760, srcY: 3138, srcW: 112, srcH: 28};
+Ennemy.prototype.ombre.destH = function(w) { this.srcW/this.srcH*w; };
 
 
 Ennemy.prototype.getVectorToTargetX = function(_speed) {
@@ -123,6 +144,26 @@ Ennemy.prototype.update = function(time) {
         }
         if (this.moveY == 0) {
             this.moveY = this.getVectorToTargetY(this.speed);
+        }
+        // determiner etat du personnage en fonction de la distance
+        if (this.state < 3) { // si pas dans l'animation
+            var distanceToShaman = this.distanceTo(this.game.shaman.x, this.game.shaman.y);
+            if (distanceToShaman < 500) {
+                this.state = 1;
+            }
+            if (distanceToShaman < 400) {
+                this.state = 2;
+            }
+            if (distanceToShaman < 300) {
+                this.state = 3;
+            }
+        }
+        else if (this.state == 3) {
+            this.moveX = 0;
+            this.moveY = 0;
+            this.inclinaison = 0;
+            this.state = 4; // TODO MODIFIER
+            return;
         }
     }
     else {        
@@ -210,7 +251,19 @@ Ennemy.prototype.distanceTo = function(_x,_y) {
 Ennemy.prototype.render = function() {
 
     // dessin du sprite;
-    this.game.drawImage(this.game.spritesheet, this.sprite.srcX, this.sprite.srcY, this.sprite.srcW, this.sprite.srcH, this.x - this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
-    
-    this.game.context.fillRect(this.x - this.width/2, this.y- this.height/2 - 10, this.width * this.life / this.game.gameRules.ennemies.life.get(this.indexRules), 5);
+    if (this.state != 3) {
+        this.game.drawImage(this.game.spritesheet, 
+                            this.sprite.srcX[this.state], 
+                            this.sprite.srcY[this.state], 
+                            this.sprite.srcW[this.state], 
+                            this.sprite.srcH[this.state], 
+                            this.x - this.width/2, 
+                            this.y-this.height/2, 
+                            this.sprite.destW, 
+                            this.sprite.destH(this.sprite.destW), 
+                            this.inclinaison, 
+                            this.direction==1); // todo modifier pour etat = 4;
+         
+    }    
+    this.game.context.fillRect(this.x - this.width/2, this.y- this.height/2 - 10, this.width * this.life / this.game.gameRules.ennemies.life.get(this.image), 5);
 };

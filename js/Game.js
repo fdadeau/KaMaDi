@@ -202,7 +202,7 @@ var Game = (function () {
                 
             }
             
-            this.ennemies[this.ennemies.length] = new Ennemy(this, posX, posY);  
+            this.ennemies[this.ennemies.length] = new Ennemy(this, posX, posY, Math.random()*12|0);  
             this.audio.playSoundF(3);
         }
     }
@@ -276,6 +276,7 @@ var Game = (function () {
     Game.prototype.endLevel = function() { 
         this.victoire = true; 
         this.pause = true; 
+        this.audio.pauseSoundT();
     }; 
     
     
