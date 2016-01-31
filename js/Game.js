@@ -275,6 +275,8 @@ var Game = (function () {
             }
         } while (modification != 0);
        
+    // this.drawImage(this.spritesheet, 1070, 3410, 332, 205, this.width/2 - 332/2, this.height/2 - 205/2, 332, 205);    
+        
        // Affichage du tableau
        for(var i in this.tabAffichage)
            if(this.tabAffichage[i] != null)
