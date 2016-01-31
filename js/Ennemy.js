@@ -72,6 +72,8 @@ function Ennemy(_game, _x, _y, _i) {
     this.width = this.sprite.destW; 
     this.height = this.sprite.destH;
     
+    this.animation = { state: 0, delay: 500, lastUpdate: 0 };
+    
     // speed
     this.speed = this.game.gameRules.ennemies.speed.get(this.image);
     this.escapeSpeed = this.game.gameRules.ennemies.escapSpeed.get(this.image);
@@ -157,14 +159,20 @@ Ennemy.prototype.update = function(time) {
                 this.state = 2;
             }
             if (distanceToShaman < 200) {
-                this.state = 4;
+                this.state = 3;
             }
         }
         else if (this.state == 3) {
             this.moveX = 0;
             this.moveY = 0;
             this.inclinaison = 0;
-            this.state = 4; // TODO MODIFIER
+            if (time.time - this.animation.lastUpdate > this.animation.delay) {
+                this.animation.state++;
+                this.animation.lastUpdate = time.time;
+            }
+            if (this.animation.state > 9) {
+                this.state = 4; 
+            }
             return;
         }
     }
@@ -254,7 +262,7 @@ Ennemy.prototype.distanceTo = function(_x,_y) {
 Ennemy.prototype.render = function() {
 
     // dessin du sprite;
-    if (this.state != 5) {
+    if (this.state != 3) {
         this.game.drawImage(this.game.spritesheet, 
                             this.sprite.srcX[this.state], 
                             this.sprite.srcY[this.state], 
@@ -265,8 +273,35 @@ Ennemy.prototype.render = function() {
                             this.sprite.destW, 
                             this.sprite.destH(this.sprite,this.state), 
                             this.inclinaison, 
-                            this.direction==1); // todo modifier pour etat = 4;
-         
-    }    
+                            this.direction==1);      
+    }   
+    else {
+        console.log("animation state = " + this.animation.state);
+        if (this.animation.state < 2) {
+            // dessin perso       
+            this.game.drawImage(this.game.spritesheet, this.sprite.srcX[3], this.sprite.srcY[3], this.sprite.srcW[3], this.sprite.srcH[3], this.x - this.sprite.destW/2, this.y - this.sprite.destH(this.sprite,3)/2, this.sprite.destW, this.sprite.destH(this.sprite,3), this.inclinaison, this.direction==1); 
+        }
+        else if (this.animation.state > 3) {
+            // dessin Q
+            this.game.drawImage(this.game.spritesheet, this.sprite.srcX[4], this.sprite.srcY[4], this.sprite.srcW[4], this.sprite.srcH[4], this.x - this.sprite.destW/2, this.y - this.sprite.destH(this.sprite,4)/2, this.sprite.destW, this.sprite.destH(this.sprite,4), this.inclinaison, this.direction==1); 
+        }
+        switch (this.animation.state) {
+            case 0:
+                this.game.drawImage(this.game.spritesheet, 1773, 3675, 93, 97, this.x - 30/2, this.y - 32/2, 30, 32, 0, false);
+                break;
+            case 1:
+                this.game.drawImage(this.game.spritesheet, 830, 3478, 223, 232, this.x - 50/2, this.y - 52/2, 60, 62, 0, false);
+                break;
+            case 2:
+                this.game.drawImage(this.game.spritesheet, 486, 3436, 290, 308, this.x - 60/2, this.y - 62/2, 70, 72, 0, false);
+                break;
+            case 3:
+                this.game.drawImage(this.game.spritesheet, 22, 3384, 414, 423, this.x - 70/2, this.y - 72/2, 70, 72, 0, false);
+                break;
+                
+        }
+    }
+    
+    
     this.game.context.fillRect(this.x - this.width/2, this.y- this.height/2 - 10, this.width * this.life / this.game.gameRules.ennemies.life.get(this.image), 5);
 };

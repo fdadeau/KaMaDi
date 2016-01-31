@@ -101,10 +101,11 @@ function Shaman(_g) {
         game.context.fillRect(this.x - this.width/2|0, (this.y - this.height/2 | 0) - 10, this.width * this.life / game.gameRules.shaman.life.get(game.level) | 0, 5);
         
         // dessin du cercle où se trouve le shaman
+        /*
         game.context.beginPath();
         game.context.arc(altarX, altarY, altarRadius, 0, 2*Math.PI);
         game.context.stroke();
-        
+        */
     };
     
 }
