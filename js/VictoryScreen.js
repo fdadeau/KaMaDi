@@ -22,8 +22,8 @@ VictoryScreen.prototype.init = function () {
 
     this.initialized = true;
 
-    this.button[0] = new Button(this, 600, 510, 300, 70, "niveau_suivant");
-    this.button[1] = new Button(this, 600, 610, 300, 70, "lien_menu");
+    this.button[0] = new Button(this, 650, 540, 300, 70, "niveau_suivant");
+    this.button[1] = new Button(this, 650, 640, 300, 70, "lien_menu");
     return this;
 };
 

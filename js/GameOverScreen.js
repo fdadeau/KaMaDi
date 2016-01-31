@@ -10,8 +10,8 @@ function GameOverScreen(context) {
     this.lauchMenu = false;
     this.levelSelect = 0;
     
-    this.imageTitre = new Image();
-    this.imageTitre.src = "images/image_game_over.png";
+    this.imageFond = new Image();
+    this.imageFond.src = "images/game_over.png";
     
     this.button = [];
 }
@@ -22,8 +22,8 @@ GameOverScreen.prototype.init = function () {
 
     this.initialized = true;
 
-    this.button[0] = new Button(this, 600, 450, 300, 70, "bouton_test");
-    this.button[1] = new Button(this, 600, 550, 300, 70, "bouton_menu_test");
+    this.button[0] = new Button(this, 650, 540, 300, 70, "recommencer");
+    this.button[1] = new Button(this, 650, 640, 300, 70, "lien_menu");
     return this;
 };
 
@@ -63,7 +63,7 @@ GameOverScreen.prototype.render = function () {
     if(this.pause)
         return;
     
-    this.context.drawImage(this.imageTitre, 0, 0, 600, 120, 350, 60, 600, 120);
+    this.context.drawImage(this.imageFond, 0, 0, 1300, 700, 0, 0, 1300, 700);
     
     for(var i in this.button)
         this.button[i].render();
