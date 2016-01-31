@@ -201,6 +201,7 @@ var Game = (function () {
                 
             }
             
+            var rnd = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
             this.ennemies[this.ennemies.length] = new Ennemy(this, posX, posY);  
             this.audio.playSoundF(3);
         }
