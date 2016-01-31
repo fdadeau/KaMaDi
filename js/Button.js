@@ -10,15 +10,8 @@ function Button(_menu, _x, _y, _width, _height, nom_image) {
     this.height = _height;
     
     this.spritesheet = new Image();
-    
     this.spritesheet.src = "images/" + nom_image + ".png";
     
-    /*
-    if(nom_image == "menu")
-        this.spritesheet.src = "images/bouton_menu_test.png";
-    else
-        this.spritesheet.src = "images/bouton_test.png";
-    */
 }
 
 Button.prototype.checkMousePosition = function(mousePosition) {
@@ -30,12 +23,5 @@ Button.prototype.checkMousePosition = function(mousePosition) {
 
 Button.prototype.render = function () {
     
-    
-    /*
-    this.menu.context.fillStyle = "#FF0000";
-    this.menu.context.fillRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height);
-    */
-   
-   //this.drawImage(this.spritesheet, 0, 0, 300, 70, this.x - this.width/2, this.y-this.height/2, this.width, this.height, 0, 1);
    this.menu.context.drawImage(this.spritesheet, 0, 0, this.width, this.height, this.x -this.width/2, this.y-this.height/2, this.width, this.height);
 };

@@ -12,44 +12,66 @@ function Sound() {
     var soundAudioT = new Audio();
     var soundAudioC = new Audio();
     
+    var actif = true;
+    
     this.playBacking = function(n) {
-        backingAudio.src = "sounds/" + backingFiles[n];
-        backingAudio.loop = true;
-        backingAudio.play();
+        if(this.actif) {
+            backingAudio.src = "sounds/" + backingFiles[n];
+            backingAudio.loop = true;
+            backingAudio.play();
+        }
     }     
     
     this.playSoundF = function(n) {
-        if (soundAudioF.ended || soundAudioF.paused) {
-            soundAudioF.src = "sounds/" + soundFilesF[n];
-            soundAudioF.volume = 0.4;
-            soundAudioF.play();
+        if(this.actif) {
+            if (soundAudioF.ended || soundAudioF.paused) {
+                soundAudioF.src = "sounds/" + soundFilesF[n];
+                soundAudioF.volume = 0.4;
+                soundAudioF.play();
+            }
         }
     }
 
     this.playSoundM = function(n) {
-        if (soundAudioM.ended || soundAudioM.paused) {
-            soundAudioM.src = "sounds/" + soundFilesM[n];
-            soundAudioM.volume = 0.5;
-            soundAudioM.play();
+        if(this.actif) {
+            if (soundAudioM.ended || soundAudioM.paused) {
+                soundAudioM.src = "sounds/" + soundFilesM[n];
+                soundAudioM.volume = 0.5;
+                soundAudioM.play();
+            }
         }
     }
 
     this.playSoundC = function(n) {
-        soundAudioC.src = "sounds/" + soundFilesM[n];
-        soundAudioC.volume = 0.5;
-        soundAudioC.play();
+        if(this.actif) {
+            soundAudioC.src = "sounds/" + soundFilesM[n];
+            soundAudioC.volume = 0.5;
+            soundAudioC.play();
+        }
     }
 
     this.playSoundT = function(n) {
-        if (soundAudioT.ended || soundAudioT.paused) {
-            soundAudioT.src = "sounds/the.mp3";
-            soundAudioT.loop = true;
-            soundAudioT.volume = 0.6;
-            soundAudioT.play();
+        if(this.actif) {
+            if (soundAudioT.ended || soundAudioT.paused) {
+                soundAudioT.src = "sounds/the.mp3";
+                soundAudioT.loop = true;
+                soundAudioT.volume = 0.6;
+                soundAudioT.play();
+            }
         }
     }
+    
     this.pauseSoundT = function(n) {
         soundAudioT.pause();
+    }
+    
+    // Ne fonctionne pas
+    this.stopSound = function() {
+        soundAudioT = new Audio();
+        soundAudioC = new Audio();
+        soundAudioM = new Audio();
+        soundAudioF = new Audio();
+        this.actif = false;
     }
 
 }

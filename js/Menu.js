@@ -11,6 +11,10 @@ function Menu(context, audio) {
     this.levelSelect = 0;
     
     this.level_button = [];
+    
+    this.audio.actif = true;
+
+    this.buttonAudio = null;
 }
 
 Menu.prototype.init = function () {
@@ -18,13 +22,13 @@ Menu.prototype.init = function () {
     console.log("Menu::init");
 
     this.initialized = true;
-
+    
     this.level_button[0] = new Button(this, 200, 200, 70, 70, "menu_1");
     this.level_button[1] = new Button(this, 350, 200, 70, 70, "menu_2");
     this.level_button[2] = new Button(this, 500, 200, 70, 70, "menu_3");
     this.level_button[3] = new Button(this, 650, 200, 70, 70, "menu_4");
     this.level_button[4] = new Button(this, 800, 200, 70, 70, "menu_5");
-
+    
     return this;
 };
 
@@ -36,9 +40,21 @@ Menu.prototype.start = function () {
     this.lauchGame = false;
 
     this.audio.playBacking(0);
-
+    
+    if(this.audio.actif) {
+        this.buttonAudio = new Button(this, 1250, 10, 34, 34, "son_actif");
+    }
+    else {
+        this.buttonAudio = new Button(this, 1250, 10, 34, 34, "son_inactif");
+    }
+    
     return this;
 };
+
+Menu.prototype.gestionClickImageAudio = function()
+{
+    
+}
 
 Menu.prototype.update = function (time, mousePosition) {
 
@@ -52,12 +68,28 @@ Menu.prototype.update = function (time, mousePosition) {
             this.pause = true;
         }
     }
+    
+    // MOUSE POSITION != null
+    if(mousePosition != null && this.buttonAudio.checkMousePosition(mousePosition)) {
+        
+        if(this.audio.actif) {
+            
+            this.audio.stopSound();
+            this.buttonAudio = new Button(this, 1250, 10, 34, 34, "son_inactif");
+        }
+        else {
+            this.buttonAudio = new Button(this, 1250, 10, 34, 34, "son_actif");
+            this.audio.actif = true;
+        }
+    }
 };
 
 Menu.prototype.render = function () {
     
     if(this.pause)
         return;
+    
+    this.buttonAudio.render();
     
     for(var i in this.level_button)
         this.level_button[i].render();
