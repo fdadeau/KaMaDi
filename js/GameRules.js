@@ -91,11 +91,11 @@ function GameRules() {
         },
         attackDamage: {
             value: [2, 2, 2, 2],
-            get: function() { return this.value[numtype]; }
+            get: function(numtype) { return this.value[numtype]; }
         },
         attackSpeed: {
             value: [10, 10, 10, 10],
-            get: function() { return this.value[numtype]; }
+            get: function(numtype) { return this.value[numtype]; }
         }
     }
 
