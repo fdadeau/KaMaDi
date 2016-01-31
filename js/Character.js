@@ -22,18 +22,19 @@ function Character(_game, _x, _y, _t) {
     
     switch (this.type) {
         case 0: 
-            this.sprite = { srcX: [614,612], srcY: [2746,3090], srcW: 190, srcH: 324, destW: 50, destH: 0 };
+            this.sprite = { srcX: [614,612], srcY: [2746,3090], srcW: 190, srcH: 324, destW: 60, destH: 0 };
             break;
         case 1: 
-            this.sprite = { srcX: [837,844], srcY: [2700,3070], srcW: 215, srcH: 375, destW: 50, destH: 0 };
+            this.sprite = { srcX: [837,844], srcY: [2700,3070], srcW: 215, srcH: 375, destW: 60, destH: 0 };
             break;
         case 2: 
-            this.sprite = { srcX: [1076,1104], srcY: [2715,3069], srcW: 258, srcH: 341, destW: 55, destH: 0 };
+            this.sprite = { srcX: [1076,1104], srcY: [2715,3069], srcW: 258, srcH: 341, destW: 65, destH: 0 };
             break;
         default: 
-            this.sprite = { srcX: [1422,1443], srcY: [2712,3060], srcW: 207, srcH: 346, destW: 50, destH: 0 };
+            this.sprite = { srcX: [1422,1443], srcY: [2712,3060], srcW: 207, srcH: 346, destW: 60, destH: 0 };
             break;
     }
+    this.sprite.kind = 0;
     this.sprite.destH =  this.sprite.srcH/this.sprite.srcW*this.sprite.destW;
     this.width = this.sprite.destW;
     this.height = this.sprite.destH;
@@ -72,6 +73,7 @@ Character.prototype.update = function(time) {
     
     if(this.isStun())
     {
+        this.sprite.kind = 1;
         this.life = 0;
         this.timeStun += time.tick;
         console.log("timeStun Charact : " + this.game.gameRules.character.timeStun.get());
@@ -86,6 +88,7 @@ Character.prototype.update = function(time) {
         }
     }
     
+    this.sprite.kind = 0;
     if (this.state == 1) { // MOVING
         this.distToTarget = Math.sqrt(Math.pow(this.x - this.destX,2) + Math.pow(this.y - this.destY,2));
         if (this.distToTarget < this.speed) {
@@ -116,6 +119,7 @@ Character.prototype.update = function(time) {
     else { // IDLE
         // is it performing the shaman ritual ?
         if (this.game.shaman.isInShamanCircle(this.x, this.y)) {
+            this.sprite.kind = 1;
             return;
         }
         
@@ -173,7 +177,7 @@ Character.prototype.render = function() {
         this.game.context.globalAlpha = 1;
     }
 
-    this.game.drawImage(this.game.spritesheet,1980, 1677, 357, 626, this.x-this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
+    this.game.drawImage(this.game.spritesheet, this.sprite.srcX[this.sprite.kind], this.sprite.srcY[this.sprite.kind], this.sprite.srcW, this.sprite.srcH, this.x-this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
     this.game.context.fillStyle = "#000000";
     this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2 - 10, this.width * this.life / this.game.gameRules.character.life.get(), 5)
     
