@@ -43,7 +43,8 @@ var Game = (function () {
         
         this.characters = [];
         for (var i=0; i < this.gameRules.character.nbStartCharacter.get(); i++) {
-            this.characters[this.characters.length] = new Character(this, this.width*0.5*Math.random() + this.width*0.25, this.height*0.5*Math.random() + this.height*0.25);
+            var rnd = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+            this.characters[this.characters.length] = new Character(this, this.width*0.5*Math.random() + this.width*0.25, this.height*0.5*Math.random() + this.height*0.25, rnd);
         }
         this.projectiles = [];
         
@@ -201,7 +202,6 @@ var Game = (function () {
                 
             }
             
-            var rnd = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
             this.ennemies[this.ennemies.length] = new Ennemy(this, posX, posY);  
             this.audio.playSoundF(3);
         }
