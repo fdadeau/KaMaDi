@@ -42,10 +42,10 @@ Menu.prototype.start = function () {
     this.audio.playBacking(0);
     
     if(this.audio.actif) {
-        this.buttonAudio = new Button(this, 1250, 10, 34, 34, "son_actif");
+        this.buttonAudio = new Button(this, 1250, 25, 34, 34, "son_actif");
     }
     else {
-        this.buttonAudio = new Button(this, 1250, 10, 34, 34, "son_inactif");
+        this.buttonAudio = new Button(this, 1250, 25, 34, 34, "son_inactif");
     }
     
     return this;
@@ -61,7 +61,7 @@ Menu.prototype.update = function (time, mousePosition) {
     if (this.pause) return;
     
     for(var i in this.level_button) {
-        if(mousePosition != null && this.level_button[i].checkMousePosition(mousePosition))
+        if(mousePosition.x != null && this.level_button[i].checkMousePosition(mousePosition))
         {
             this.lauchGame = true;
             this.levelSelect = i;
@@ -70,17 +70,20 @@ Menu.prototype.update = function (time, mousePosition) {
     }
     
     // MOUSE POSITION != null
-    if(mousePosition != null && this.buttonAudio.checkMousePosition(mousePosition)) {
+    if(mousePosition.x != null && this.buttonAudio.checkMousePosition(mousePosition)) {
         
         if(this.audio.actif) {
             
-            this.audio.stopSound();
-            this.buttonAudio = new Button(this, 1250, 10, 34, 34, "son_inactif");
+            //this.audio.stopSound();
+            this.audio.muteSound();
+            this.buttonAudio = new Button(this, 1250, 25, 34, 34, "son_inactif");
         }
         else {
-            this.buttonAudio = new Button(this, 1250, 10, 34, 34, "son_actif");
-            this.audio.actif = true;
+            this.buttonAudio = new Button(this, 1250, 25, 34, 34, "son_actif");
+            //this.audio.actif = true;
+            this.audio.unMuteSound();
         }
+        mousePosition.raz();
     }
 };
 

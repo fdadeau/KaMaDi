@@ -65,13 +65,22 @@ function Sound() {
         soundAudioT.pause();
     }
     
-    // Ne fonctionne pas
-    this.stopSound = function() {
-        soundAudioT = new Audio();
-        soundAudioC = new Audio();
-        soundAudioM = new Audio();
-        soundAudioF = new Audio();
+    this.muteSound = function() {
+        backingAudio.muted = true;
+        soundAudioT.muted = true;
+        soundAudioC.muted = true;
+        soundAudioM.muted = true;
+        soundAudioF.muted = true;
         this.actif = false;
+    }
+    
+    this.unMuteSound = function() {
+        backingAudio.muted = false;
+        soundAudioT.muted = false;
+        soundAudioC.muted = false;
+        soundAudioM.muted = false;
+        soundAudioF.muted = false;
+        this.actif = true;
     }
 
 }

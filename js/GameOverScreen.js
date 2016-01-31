@@ -42,12 +42,12 @@ GameOverScreen.prototype.update = function (time, mousePosition) {
 
     if (this.pause) return;
     
-    if(mousePosition != null && this.button[0].checkMousePosition(mousePosition))
+    if(mousePosition.x != null && this.button[0].checkMousePosition(mousePosition))
     {
         this.lauchGame = true;
         this.pause = true;
     }
-    else if(mousePosition != null && this.button[1].checkMousePosition(mousePosition))
+    else if(mousePosition.x != null && this.button[1].checkMousePosition(mousePosition))
     {
         this.lauchMenu = true;
         this.pause = true;
