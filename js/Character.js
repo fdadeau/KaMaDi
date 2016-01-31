@@ -1,18 +1,11 @@
 
-function Character(_game, _x, _y) {
+function Character(_game, _x, _y, _t) {
 
     this.game = _game;
 
     // position
     this.x = _x;
     this.y = _y;
-
-    // size
-    this.width = 50;
-    this.height = this.width/0.57;
-    
-    this.life = this.game.gameRules.character.life.get();
-    this.speed = this.game.gameRules.character.speed.get();
 
     // point de destination lorsqu'il est en mouvement
     this.destX = 0;
@@ -24,13 +17,37 @@ function Character(_game, _x, _y) {
     
     this.state = 0; // 0 : IDLE | 1 : MOVING 
     
+    // size
+    this.type = _t
+    
+    switch (this.type) {
+        case 0: 
+            this.sprite = { srcX: [614,612], srcY: [2746,3090], srcW: 190, srcH: 324, destW: 50, destH: 0 };
+            break;
+        case 1: 
+            this.sprite = { srcX: [837,844], srcY: [2700,3070], srcW: 215, srcH: 375, destW: 50, destH: 0 };
+            break;
+        case 2: 
+            this.sprite = { srcX: [1076,1104], srcY: [2715,3069], srcW: 258, srcH: 341, destW: 55, destH: 0 };
+            break;
+        default: 
+            this.sprite = { srcX: [1422,1443], srcY: [2712,3060], srcW: 207, srcH: 346, destW: 50, destH: 0 };
+            break;
+    }
+    this.sprite.destH =  this.sprite.srcH/this.sprite.srcW*this.sprite.destW;
+    this.width = this.sprite.destW;
+    this.height = this.sprite.destH;
+    
+    this.life = this.game.gameRules.character.life.get(this.type);
+    this.speed = this.game.gameRules.character.speed.get(this.type);
+
     // délai entre deux attaques
-    this.attackDelay = this.game.gameRules.character.attackDelay.get();
+    this.attackDelay = this.game.gameRules.character.attackDelay.get(this.type);
     this.lastAttack = 0;
-    this.attackSpeed = this.game.gameRules.character.attackSpeed.get();
-    this.attackDamage = this.game.gameRules.character.attackDamage.get();
+    this.attackSpeed = this.game.gameRules.character.attackSpeed.get(this.type);
+    this.attackDamage = this.game.gameRules.character.attackDamage.get(this.type);
     // portée de l'attaque
-    this.attackRange = this.game.gameRules.character.attackRange.get();
+    this.attackRange = this.game.gameRules.character.attackRange.get(this.type);
     
     this.timeStun = 0;
 }
