@@ -56,8 +56,7 @@ Projectile.prototype.update = function(time) {
                     return;
                 }
             }
-            if (this.game.shaman.collidesWith(this.x, this.y, this.size, this.size)) {
-                
+            if (this.game.shaman.collidesWith(this.x, this.y, this.size, this.size)) {                
                 this.game.shaman.life -= this.damage;
                 this.active = 0;
                 return;
@@ -70,8 +69,11 @@ Projectile.prototype.update = function(time) {
 
 Projectile.prototype.render = function() {
     
-    this.game.context.beginPath();
-    this.game.context.arc(this.x, this.y, 2, 0, 2*Math.PI);
-    this.game.context.fill();
+    if (this.joueur) {
+        this.game.context.drawImage(this.game.spritesheet,416, 3291, 44, 49, this.x - 44/2, this.y - 50/2, 44, 49);   
+    }
+    else {
+        this.game.context.drawImage(this.game.spritesheet,339, 3294, 43, 42, this.x - 42/2, this.y - 42/2, 43, 42);   
+    }
     
 }

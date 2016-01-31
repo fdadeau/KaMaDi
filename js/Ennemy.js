@@ -333,7 +333,6 @@ Ennemy.prototype.render = function() {
                 break;                
         }
     }
-    
-    
-    this.game.context.fillRect(this.x - this.width/2, this.y- this.height/2 - 10, this.width * this.life / this.game.gameRules.ennemies.life.get(this.image), 5);
+    // corriger
+    this.game.context.fillRect(this.x - this.sprite.destW/2, this.y - this.sprite.destH(this.sprite,this.state)/2, this.sprite.destW * this.life / this.game.gameRules.ennemies.life.get(this.image), 5);
 };

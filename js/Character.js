@@ -76,7 +76,6 @@ Character.prototype.update = function(time) {
         this.sprite.kind = 1;
         this.life = 0;
         this.timeStun += time.tick;
-        console.log("timeStun Charact : " + this.game.gameRules.character.timeStun.get());
         if(this.timeStun >= this.game.gameRules.character.timeStun.get())
         {
             this.timeStun = 0;
