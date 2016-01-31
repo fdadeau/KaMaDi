@@ -112,10 +112,12 @@ var Game = (function () {
                 }
                 else {
                     // clic sur le shaman -> libère sa puissance 
+                    /*
                     if (this.shaman.collidesWith(mousePosition.x, mousePosition.y, 1, 1)) {
                         this.shaman.unleash();
                         this.selectedCharacter = null;
-                    }            
+                    }           
+                    */
                 }
             }
             mousePosition.raz();
