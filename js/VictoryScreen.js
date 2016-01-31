@@ -45,7 +45,10 @@ VictoryScreen.prototype.update = function (time, mousePosition) {
     if(mousePosition.x != null && this.button[0].checkMousePosition(mousePosition))
     {
         this.lauchGame = true;
-        this.levelSelect ++;
+        
+        if(this.levelSelect < 8)
+            this.levelSelect ++;
+        
         this.pause = true;
     }
     else if(mousePosition.x != null && this.button[1].checkMousePosition(mousePosition))

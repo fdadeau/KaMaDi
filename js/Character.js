@@ -179,7 +179,7 @@ Character.prototype.render = function() {
 
     this.game.drawImage(this.game.spritesheet, this.sprite.srcX[this.sprite.kind], this.sprite.srcY[this.sprite.kind], this.sprite.srcW, this.sprite.srcH, this.x-this.width/2, this.y-this.height/2, this.width, this.height, this.inclinaison, this.direction==1);
     this.game.context.fillStyle = "#000000";
-    this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2 - 10, this.width * this.life / this.game.gameRules.character.life.get(), 5)
+    this.game.context.fillRect(this.x-this.width/2, this.y-this.height/2 - 10, this.width * this.life / this.game.gameRules.character.life.get(this.type), 5)
     
 };
 
