@@ -27,7 +27,7 @@ function GameRules() {
         },
         // frequence d'apparition
         delay: {
-            value: [20 * 1000, 20 * 1000, 20 * 1000, 17 * 1000, 17 * 1000, 17 * 1000, 15 * 1000, 15 * 1000, 15 * 1000],
+            value: [23 * 1000, 23 * 1000, 23 * 1000, 20 * 1000, 20 * 1000, 20 * 1000, 17 * 1000, 17 * 1000, 17 * 1000],
             get: function(niveau, time) { return this.value[niveau]; }
         },
         
@@ -65,12 +65,12 @@ function GameRules() {
     this.character = {
         
         nbStartCharacter: {
-            value: [ 4, 6, 4, 4, 6, 4, 4, 6, 4 ],
+            value: [ 5, 7, 5, 5, 7, 5, 5, 7, 5 ],
             get: function(niveau) { return this.value[niveau]; }
         },
         
         life: {
-            value: [30, 30, 30, 50],
+            value: [40, 40, 40, 60],
             get: function(numtype) { return this.value[numtype]; }
         },
         timeStun: {
@@ -90,7 +90,7 @@ function GameRules() {
             get: function(numtype) { return this.value[numtype]; }
         },
         attackDamage: {
-            value: [2, 2, 2, 2],
+            value: [3, 3, 3, 3],
             get: function(numtype) { return this.value[numtype]; }
         },
         attackSpeed: {

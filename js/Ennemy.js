@@ -192,6 +192,7 @@ Ennemy.prototype.update = function(time) {
     }
 
     // Gestion de la collision entre les ennemis
+    /*
     for (var i in this.game.ennemies) {
         if(this.game.ennemies[i] !== null && this.game.ennemies[i] !== this
             && this.game.ennemies[i].collidesWith(this.x+this.moveX, this.y+this.moveY, this.width, this.height)
@@ -202,6 +203,7 @@ Ennemy.prototype.update = function(time) {
 
         }
     }
+    */
     // Gestion de la collision avec le shaman
     for (var i in this.game.characters) {   
         if((!this.game.characters[i].isStun()) && this.calcDistance(this.game.characters[i].getX(), this.game.characters[i].getY()) < this.attackRange) {
