@@ -23,11 +23,17 @@ Menu.prototype.init = function () {
 
     this.initialized = true;
     
-    this.level_button[0] = new Button(this, 200, 200, 70, 70, "menu_1");
-    this.level_button[1] = new Button(this, 350, 200, 70, 70, "menu_2");
-    this.level_button[2] = new Button(this, 500, 200, 70, 70, "menu_3");
-    this.level_button[3] = new Button(this, 650, 200, 70, 70, "menu_4");
-    this.level_button[4] = new Button(this, 800, 200, 70, 70, "menu_5");
+    this.level_button[0] = new Button(this, 400, 200, 70, 70, "menu_1");
+    this.level_button[1] = new Button(this, 600, 200, 70, 70, "menu_2");
+    this.level_button[2] = new Button(this, 800, 200, 70, 70, "menu_3");
+    
+    this.level_button[3] = new Button(this, 400, 350, 70, 70, "menu_4");
+    this.level_button[4] = new Button(this, 600, 350, 70, 70, "menu_5");
+    this.level_button[5] = new Button(this, 800, 350, 70, 70, "menu_5");
+    
+    this.level_button[6] = new Button(this, 400, 500, 70, 70, "menu_5");
+    this.level_button[7] = new Button(this, 600, 500, 70, 70, "menu_5");
+    this.level_button[8] = new Button(this, 800, 500, 70, 70, "menu_5");
     
     return this;
 };

@@ -6,13 +6,15 @@ function GameRules() {
     this.shaman = {
         // temps de recharge
         loadingTime: { 
-            value: 30 * 1000,
-            get: function() { return this.value; } 
+            //value: 30 * 1000,
+            value: [30 * 1000, 30 * 1000, 60 * 1000, 30 * 1000, 30 * 1000, 70 * 1000, 30 * 1000, 30 * 1000, 80 * 1000],
+            get: function(niveau) { return this.value[niveau]; } 
         },
         // points de vie
         life: {
-            value: 100,
-            get: function() { return this.value; }
+            //value: 100,
+            value: [100, 100, 200, 100, 100, 250, 100, 100, 300],
+            get: function(niveau) { return this.value[niveau]; }
         } 
     };
     
@@ -20,14 +22,16 @@ function GameRules() {
         // nombre d'ennemis/vague
         nbEnnemiesByWave: {
             //value: 30,
-            value: [3, 4, 5, 6, 7],
+            value: [3, 5, 3, 5, 7, 5, 7, 10, 7],
             get: function(niveau, time) { return this.value[niveau] * (1 + time / (1000 * 60 * 3)); }
         },
         // frequence d'apparition
         delay: {
-            value: [20 * 1000, 17 * 1000, 15 * 1000, 13 * 1000, 11 * 1000],
+            value: [20 * 1000, 20 * 1000, 20 * 1000, 15 * 1000, 15 * 1000, 15 * 1000, 10 * 1000, 10 * 1000, 10 * 1000],
             get: function(niveau, time) { return this.value[niveau]; }
         },
+        
+        
         life: {
             value: [ 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 ],
             get: function(index) { return this.value[index]; }
@@ -61,9 +65,10 @@ function GameRules() {
     this.character = {
         
         nbStartCharacter: {
-            value: 5,
-            get: function() { return this.value; }
+            value: [ 5, 7, 5, 5, 7, 5, 4, 7, 4 ],
+            get: function(niveau) { return this.value[niveau]; }
         },
+        
         life: {
             value: [30, 30, 30, 60],
             get: function(numtype) { return this.value[numtype]; }

@@ -7,7 +7,7 @@ function Shaman(_g) {
     var game = _g;
     
     // Temps (ms) nécessaire pour qu'il finisse son chargement
-    var loadingTime = game.gameRules.shaman.loadingTime.get();
+    var loadingTime = game.gameRules.shaman.loadingTime.get(game.level);
     
     // Temps de chargement courant
     this.currentLoadingTime = 0; // 0.8 * loadingTime;
@@ -25,7 +25,7 @@ function Shaman(_g) {
     this.height = this.width/542*374;
     
     // points du vie du shaman
-    this.life = game.gameRules.shaman.life.get();
+    this.life = game.gameRules.shaman.life.get(game.level);
     
     // Remise à zéro du temps de chargement
     this.reset = function() {
@@ -79,7 +79,7 @@ function Shaman(_g) {
             return;
         }
         game.audio.playSoundT();
-        this.currentLoadingTime += (time.tick * nbCharactersInPosition / game.gameRules.character.nbStartCharacter.get());
+        this.currentLoadingTime += (time.tick * nbCharactersInPosition / game.gameRules.character.nbStartCharacter.get(game.level));
         if (this.currentLoadingTime >= loadingTime) {
             game.endLevel();
             this.reset();
@@ -98,7 +98,7 @@ function Shaman(_g) {
         
         //barre de vie
         game.context.fillStyle = "#FF5555";
-        game.context.fillRect(this.x - this.width/2|0, (this.y - this.height/2 | 0) - 10, this.width * this.life / game.gameRules.shaman.life.get() | 0, 5);
+        game.context.fillRect(this.x - this.width/2|0, (this.y - this.height/2 | 0) - 10, this.width * this.life / game.gameRules.shaman.life.get(game.level) | 0, 5);
         
         // dessin du cercle où se trouve le shaman
         game.context.beginPath();

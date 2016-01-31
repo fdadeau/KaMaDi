@@ -39,13 +39,7 @@ var Game = (function () {
 
         this.initialized = true;
         
-        this.shaman = new Shaman(this); 
-        
         this.characters = [];
-        for (var i=0; i < this.gameRules.character.nbStartCharacter.get(); i++) {
-            var rnd = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
-            this.characters[this.characters.length] = new Character(this, this.width*0.5*Math.random() + this.width*0.25, this.height*0.5*Math.random() + this.height*0.25, rnd);
-        }
         this.projectiles = [];
         
         this.ennemies = [];
@@ -65,7 +59,14 @@ var Game = (function () {
         this.victoire = false;
         this.defaite = false;
         
+        this.shaman = new Shaman(this); 
+        
         this.audio.playBacking(1);
+        
+        for (var i=0; i < this.gameRules.character.nbStartCharacter.get(this.level); i++) {
+            var rnd = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+            this.characters[this.characters.length] = new Character(this, this.width*0.5*Math.random() + this.width*0.25, this.height*0.5*Math.random() + this.height*0.25, rnd);
+        }
         
         this.AddEnnemisWave(this.level, 0);
         
