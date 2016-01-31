@@ -7,7 +7,7 @@ function IntroScreen(context) {
     this.context = context;
     
     this.lauchMenu = false;
-    this.tempsEcran = 1000 * 5;
+    this.tempsEcran = 1000 * 20;
     this.timeEcran = 0;
     
     this.imageFond = new Image();

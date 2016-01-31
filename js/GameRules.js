@@ -65,12 +65,12 @@ function GameRules() {
     this.character = {
         
         nbStartCharacter: {
-            value: [ 5, 7, 5, 5, 7, 5, 4, 7, 4 ],
+            value: [ 4, 6, 4, 4, 6, 4, 4, 6, 3 ],
             get: function(niveau) { return this.value[niveau]; }
         },
         
         life: {
-            value: [30, 30, 30, 60],
+            value: [30, 30, 30, 50],
             get: function(numtype) { return this.value[numtype]; }
         },
         timeStun: {
@@ -78,24 +78,24 @@ function GameRules() {
            get: function() { return this.value; }  
         },
         speed: {
-            value: [10, 5, 5, 5],
+            value: [8, 5, 5, 5],
             get: function(numtype) { return this.value[numtype]; }
         },
         attackDelay: {
-            value: [1000, 500, 1000, 1000],
+            value: [1000, 750, 1000, 1000],
             get: function(numtype) { return this.value[numtype]; }
         },
         attackRange: {
-            value: [200, 200, 400, 200],
+            value: [200, 200, 300, 200],
             get: function(numtype) { return this.value[numtype]; }
         },
         attackDamage: {
-            value: [6, 6, 6, 6],
-            get: function() { return this.value; }
+            value: [2, 2, 2, 2],
+            get: function() { return this.value[numtype]; }
         },
         attackSpeed: {
             value: [10, 10, 10, 10],
-            get: function() { return this.value; }
+            get: function() { return this.value[numtype]; }
         }
     }
 

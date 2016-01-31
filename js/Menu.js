@@ -15,6 +15,10 @@ function Menu(context, audio) {
     this.audio.actif = true;
 
     this.buttonAudio = null;
+    
+    this.imageFond = new Image();
+    this.imageFond.src = "images/menu.png";
+    
 }
 
 Menu.prototype.init = function () {
@@ -99,6 +103,8 @@ Menu.prototype.render = function () {
     
     if(this.pause)
         return;
+    
+    this.context.drawImage(this.imageFond, 0, 0, 1300, 700, 0, 0, 1300, 700);
     
     this.buttonAudio.render();
     
