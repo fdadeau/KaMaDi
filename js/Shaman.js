@@ -90,6 +90,7 @@ function Shaman(_g) {
     this.render = function() {
         
         // dessin du shaman
+        game.context.drawImage(game.spritesheet, 67, 3255, 88, 14, this.x - this.width/2, this.y + this.height/2-10, this.width, 14);
         game.context.drawImage(game.spritesheet, 54, 2816, 542, 374, this.x - this.width/2, this.y-this.height/2, this.width, this.height);
 
         //barre de chargement

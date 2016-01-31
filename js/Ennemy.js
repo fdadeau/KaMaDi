@@ -333,6 +333,6 @@ Ennemy.prototype.render = function() {
                 break;                
         }
     }
-    // corriger
+    this.game.context.fillStyle = "#000000";
     this.game.context.fillRect(this.x - this.sprite.destW/2, this.y - this.sprite.destH(this.sprite,this.state)/2, this.sprite.destW * this.life / this.game.gameRules.ennemies.life.get(this.image), 5);
 };
