@@ -21,7 +21,8 @@ function Shaman(_g) {
     this.y = altarY;
     
     // largeur, hauteur
-    var width = 150, height = width/1.5;
+    this.width = 150;
+    this.height = this.width/1.5;
     
     // points du vie du shaman
     this.life = game.gameRules.shaman.life.get();
@@ -33,10 +34,10 @@ function Shaman(_g) {
     };
     
     this.collidesWith = function(_x,_y, _w, _h) {
-        return  !(this.x + width / 2 < _x - _w/2 ||
-            this.x - width / 2 > _x + _w/2 ||
-            this.y - height / 2 > _y + _h / 2 ||
-            this.y + height / 2 < _y - _h / 2); 
+        return  !(this.x + this.width / 2 < _x - _w/2 ||
+            this.x - this.width / 2 > _x + _w/2 ||
+            this.y - this.height / 2 > _y + _h / 2 ||
+            this.y + this.height / 2 < _y - _h / 2); 
     };
 
     this.getX = function() {
@@ -46,10 +47,10 @@ function Shaman(_g) {
         return this.y;
     };
     this.getWidth = function() {
-        return width;
+        return this.width;
     };
     this.getHeight = function() {
-        return height;
+        return this.height;
     };
     
     this.isInShamanCircle = function(_x, _y) {
@@ -89,15 +90,15 @@ function Shaman(_g) {
     this.render = function() {
         
         // dessin du shaman
-        game.context.drawImage(game.spritesheet, 8, 1715, 1062, 705, this.x - width/2, this.y-height/2, width, height);
+        game.context.drawImage(game.spritesheet, 8, 1715, 1062, 705, this.x - this.width/2, this.y-this.height/2, this.width, this.height);
 
         //barre de chargement
         game.context.fillStyle = "#000055";
-        game.context.fillRect((this.x - width/2 - 10) | 0, (this.y + height/2 - height * this.currentLoadingTime / loadingTime) | 0, 5, height * this.currentLoadingTime / loadingTime | 0);
+        game.context.fillRect((this.x - this.width/2 - 10) | 0, (this.y + this.height/2 - this.height * this.currentLoadingTime / loadingTime) | 0, 5, this.height * this.currentLoadingTime / loadingTime | 0);
         
         //barre de vie
         game.context.fillStyle = "#FF5555";
-        game.context.fillRect(this.x - width/2|0, (this.y - height/2 | 0) - 10, width * this.life / game.gameRules.shaman.life.get() | 0, 5);
+        game.context.fillRect(this.x - this.width/2|0, (this.y - this.height/2 | 0) - 10, this.width * this.life / game.gameRules.shaman.life.get() | 0, 5);
         
         // dessin du cercle où se trouve le shaman
         game.context.beginPath();

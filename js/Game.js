@@ -27,6 +27,8 @@ var Game = (function () {
         
         this.level = 0;
         
+        this.tabAffichage = [];
+        
         this.spritesheet = new Image();
         this.spritesheet.src = "images/spritesheet.png";
     }
@@ -161,6 +163,8 @@ var Game = (function () {
                 }
             }
         }
+        
+        this.tabAffichage = [];
     };
     
     Game.prototype.AddEnnemisWave = function (time) {
@@ -211,6 +215,7 @@ var Game = (function () {
         if(this.pause)
             return;
         
+        /*
         // dessin du shaman
         this.shaman.render();
         // dessin des personnages
@@ -222,6 +227,46 @@ var Game = (function () {
             this.ennemies[i].render();
         }
         // dessin des projectiles
+        for (var i in this.projectiles) {
+            this.projectiles[i].render();
+        }
+        */
+       
+       // Chargement du tableau d'affichage
+        this.tabAffichage = [];
+        this.tabAffichage.push(this.shaman);
+        for (var i in this.characters) {
+            this.tabAffichage.push(this.characters[i]);
+        }
+        for (var i in this.ennemies) {
+            this.tabAffichage.push(this.ennemies[i]);
+        }
+       
+        // Tri du tableau
+        var modification = 0;
+        do
+        {
+            modification = 0;
+            
+            for(var i = 0; i < this.tabAffichage.length - 1; i++)
+            {
+                if (this.tabAffichage[i].y + this.tabAffichage[i].height / 2 > this.tabAffichage[i + 1].y + this.tabAffichage[i + 1].height / 2)
+                {
+                    var spProvisoir = this.tabAffichage[i];
+                    this.tabAffichage[i] = this.tabAffichage[i + 1];
+                    this.tabAffichage[i + 1] = spProvisoir;
+
+                    modification++;
+                }
+            }
+        } while (modification != 0);
+       
+       // Affichage du tableau
+       for(var i in this.tabAffichage)
+           if(this.tabAffichage[i] != null)
+            this.tabAffichage[i].render();
+       
+       // dessin des projectiles
         for (var i in this.projectiles) {
             this.projectiles[i].render();
         }
