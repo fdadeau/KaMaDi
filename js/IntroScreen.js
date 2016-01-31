@@ -76,6 +76,6 @@ IntroScreen.prototype.render = function () {
     this.context.drawImage(this.imageFond, 0, 0, 1300, 700, 0, 0, 1300, 700);
 
     if (this.rules) {
-        this.context.drawImage(this.imageRules, 910, 60, 380, 600, 0, 0, 1300, 700);
+        this.context.drawImage(this.imageRules, 0, 0, 380, 600, 910, 60, 380, 600);
     }
 };
