@@ -22,7 +22,7 @@ function Shaman(_g) {
     
     // largeur, hauteur
     this.width = 150;
-    this.height = this.width/1.5;
+    this.height = this.width/542*374;
     
     // points du vie du shaman
     this.life = game.gameRules.shaman.life.get();
@@ -90,7 +90,7 @@ function Shaman(_g) {
     this.render = function() {
         
         // dessin du shaman
-        game.context.drawImage(game.spritesheet, 8, 1715, 1062, 705, this.x - this.width/2, this.y-this.height/2, this.width, this.height);
+        game.context.drawImage(game.spritesheet, 54, 2816, 542, 374, this.x - this.width/2, this.y-this.height/2, this.width, this.height);
 
         //barre de chargement
         game.context.fillStyle = "#000055";

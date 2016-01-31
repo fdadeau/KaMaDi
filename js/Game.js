@@ -30,7 +30,7 @@ var Game = (function () {
         this.tabAffichage = [];
         
         this.spritesheet = new Image();
-        this.spritesheet.src = "images/spritesheet.png";
+        this.spritesheet.src = "images/spritesheet2redux.png";
     }
     
     Game.prototype.init = function () {
