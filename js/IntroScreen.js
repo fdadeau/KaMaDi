@@ -10,8 +10,13 @@ function IntroScreen(context) {
     this.tempsEcran = 1000 * 20;
     this.timeEcran = 0;
     
+    this.rules = false;
+    
     this.imageFond = new Image();
     this.imageFond.src = "images/ecran_intro.png";
+    
+    this.imageRules = new Image();
+    this.imageRules.src = "images/regles.png";
     
     this.button = [];
 }
@@ -43,9 +48,14 @@ IntroScreen.prototype.update = function (time, mousePosition) {
     if (this.pause) return;
     
     if (mousePosition.x !== null) {
-         this.timeEcran = 0;
-        this.pause = true;
-        this.lauchMenu = true;
+        if (this.rules) {
+            this.timeEcran = 0;
+            this.pause = true;
+            this.lauchMenu = true;
+        }
+        else {
+            this.rules = true
+        }
         mousePosition.raz();
     }
     
@@ -64,4 +74,8 @@ IntroScreen.prototype.render = function () {
         return;
     
     this.context.drawImage(this.imageFond, 0, 0, 1300, 700, 0, 0, 1300, 700);
+
+    if (this.rules) {
+        this.context.drawImage(this.imageRules, 910, 60, 380, 600, 0, 0, 1300, 700);
+    }
 };

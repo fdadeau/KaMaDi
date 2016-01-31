@@ -76,10 +76,10 @@ Character.prototype.update = function(time) {
         this.sprite.kind = 1;
         this.life = 0;
         this.timeStun += time.tick;
-        if(this.timeStun >= this.game.gameRules.character.timeStun.get())
+        if(this.timeStun >= this.game.gameRules.character.timeStun.get(this.type))
         {
             this.timeStun = 0;
-            this.life = this.game.gameRules.character.life.get();
+            this.life = this.game.gameRules.character.life.get(this.type);
         }
         else
         {
@@ -168,14 +168,6 @@ Character.prototype.render = function() {
 
     // dessin d'un cercle autour du personnage actif pour le repérer
     if (this.game.selectedCharacter == this) {
-    /*
-        this.game.context.globalAlpha = 0.2;
-        this.game.context.fillStyle = "#88FF88";
-        this.game.context.beginPath();
-        this.game.context.arc(this.x, this.y, this.attackRange, 0, 2*Math.PI);
-        this.game.context.fill();
-        this.game.context.globalAlpha = 1;
-    */
         this.game.context.drawImage(this.game.spritesheet, 67, 3255, 88, 14, this.x - this.width/2, this.y + this.height/2-10, this.width, 14);
     }
 

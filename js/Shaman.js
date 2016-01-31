@@ -94,8 +94,10 @@ function Shaman(_g) {
         game.context.drawImage(game.spritesheet, 54, 2816, 542, 374, this.x - this.width/2, this.y-this.height/2, this.width, this.height);
 
         //barre de chargement
-        game.context.fillStyle = "#000055";
-        game.context.fillRect((this.x - this.width/2 - 10) | 0, (this.y + this.height/2 - this.height * this.currentLoadingTime / loadingTime) | 0, 5, this.height * this.currentLoadingTime / loadingTime | 0);
+        game.context.strokeStyle = "#000000";
+        game.context.strokeRect(10,10,300,30);
+        game.context.fillStyle = "#00FF00";
+        game.context.fillRect(11, 11, 298 * this.currentLoadingTime / loadingTime, 28);
         
         //barre de vie
         game.context.fillStyle = "#FF5555";
