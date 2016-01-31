@@ -72,7 +72,7 @@ function Shaman(_g) {
         for (var i in game.characters) {
             if (game.characters[i].state == 0 && game.characters[i].life > 0 && this.isInShamanCircle(game.characters[i].x, game.characters[i].y)) {
                 nbCharactersInPosition++;
-            }
+            }            
         }
         if (nbCharactersInPosition == 0) {
             game.audio.pauseSoundT();
