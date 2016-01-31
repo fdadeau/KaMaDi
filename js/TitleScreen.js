@@ -65,7 +65,5 @@ TitleScreen.prototype.render = function () {
     if(this.pause)
         return;
     
-    this.context.font="20px Verdana";
     this.context.drawImage(this.imageFond, 0, 0, 1300, 700, 0, 0, 1300, 700);
-    this.context.fillText("Programmation : Fred Dadeau, Maxence Martin, Illustrations : Maxime Péroz, Son : Gérard Taiclet", 200, 680);
 };
