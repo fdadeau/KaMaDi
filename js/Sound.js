@@ -2,6 +2,7 @@ function Sound() {
 
     var backingAudio = new Audio();
     var backingFiles = ["GeishaGoesWrong.wav","GeishaInLove.wav","KatanaGitari.wav"];    
+    var backingN = -1;
     
     var soundFilesF = ["cri1.mp3", "cri2.mp3", "cri3.mp3", "cris.mp3"];
     var soundAudioF = new Audio();
@@ -16,10 +17,11 @@ function Sound() {
     
     this.playBacking = function(n) {
       //  if(this.actif) {
+        if (n != backingN) {
             backingAudio.src = "sounds/" + backingFiles[n];
             backingAudio.loop = true;
             backingAudio.play();
-    //    }
+        }
     }     
     
     this.playSoundF = function(n) {

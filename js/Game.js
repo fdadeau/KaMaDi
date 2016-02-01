@@ -163,7 +163,7 @@ var Game = (function () {
                     this.ennemies[i] = null;    // -> Ne libere pas la case de l'ennemis 
                     this.ennemies.splice(i,1);  // -> suppression de la case de l'ennemi.
                     i--;
-                    if (this.ennemies.length < 20) {
+                    if (this.ennemies.length == 19) {
                         this.audio.playBacking(1);
                     }
                 }
