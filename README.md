@@ -1,3 +1,0 @@
-# Kanamara Matsuri Difenda
-
-test
